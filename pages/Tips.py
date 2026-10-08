@@ -36,18 +36,9 @@ class TipsPage(BasePage):
         self.add_separator()
 
         """Начинаем делать заметки"""
-
-        # Создадим пустой QTabWidget
-        self.tab_widget = QTabWidget()
-
-        # Создадим базовую вкладку
-        self.default_tab = QWidget()
-        self.tab_widget.addTab(self.default_tab, "Заметки")
-
         # Лайауты
         self.editors_layout = QHBoxLayout()
-        self.layout.addWidget(self.tab_widget)
-        self.default_tab.setLayout(self.editors_layout)
+        self.layout.addLayout(self.editors_layout, 1)
 
         # Поле для Markdown
         self.md_edit = QTextEdit()
@@ -99,17 +90,3 @@ class TipsPage(BasePage):
                 self.md_edit.setPlainText(f.read())
         except FileNotFoundError:
             pass
-
-    def add_addon_tab(self, widget, title):
-        """Добавляет вкладку от дополнения"""
-        self.tab_widget.addTab(widget, title)
-
-    def rename_default_tab(self, new_title):
-        self.tab_widget.setTabText(0, new_title)
-
-    def remove_addon_tab(self, title):
-        """Удаляет вкладку по названию"""
-        for i in range(self.tab_widget.count()):
-            if self.tab_widget.tabText(i) == title:
-                self.tab_widget.removeTab(i)
-                break

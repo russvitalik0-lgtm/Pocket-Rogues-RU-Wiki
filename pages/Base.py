@@ -19,18 +19,25 @@ class ImageLoader(QThread):
 
     def run(self):
         try:
-            response = requests.get(some_url)
-            response.raise_for_status()  # Проверка на ошибки HTTP
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                            "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
+                "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
+                "Referer": "https://pocketrogues.fandom.com/",
+            }
+            response = requests.get(some_url, headers=headers, timeout=10)
+            response.raise_for_status()
 
             image = QImage()
             image.loadFromData(response.content)
 
-            if image.isNull(): # Проверка переменной на наличие хоть чего-либо
+            if image.isNull():
                 self.error.emit("Отсутствует подключение к сети")
                 return
 
             pixmap = QPixmap.fromImage(image)
-            fixed_size = QSize(150,75)
+            fixed_size = QSize(150, 75)
             scaled_pixmap = pixmap.scaled(
                 fixed_size,
                 Qt.KeepAspectRatio,
