@@ -8,6 +8,8 @@ from PyQt5.QtWidgets import *
 import json
 from random import randint
 
+app = QApplication([])
+
 from pages.Wiki import WikiPage
 from pages.Latest import LatestPage
 from pages.Tips import TipsPage
@@ -16,7 +18,6 @@ from pages.Contacts import ContactPage
 from pages.history_manager import HistoryManager
 
 # Создание и редакция окна и приложения
-app = QApplication([])
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
