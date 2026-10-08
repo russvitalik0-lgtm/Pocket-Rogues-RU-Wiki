@@ -1,6 +1,7 @@
 # WikiPage
 from PyQt5.QtCore import Qt, pyqtSignal, QTimer
 from PyQt5.QtWidgets import *
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 from .Base import BasePage
 from .Base import ImageLoader
 from .Base import load_html
@@ -70,14 +71,14 @@ class WikiPage(BasePage):
             "Goblin Larder",
             "Obsidian Tower"
         ]
-        pages_config = {}
+        self.pages_config = {}
         for page in self.pages_list: # Можно и через генератор словаря, но этот вариант более читаемый
             key = page.replace(' ', '')
             value = page.replace(' ', '').lower() + '.html'
-            pages_config[key] = value
+            self.pages_config[key] = value
 
         # Добавление разделов
-        self.menu = WikiMenu(self, pages_config)
+        self.menu = WikiMenu(self, self.pages_config)
 
         # Создаем метку
         self.image_label = QLabel("Загрузка...")
@@ -100,37 +101,27 @@ class WikiPage(BasePage):
 
         # Разделитель
         self.add_separator()
-        self.add_stretch()
 
         # Создаем stacked widget для окна с контентом
-        self.content_stack = QStackedWidget()
-        self.layout.addWidget(self.content_stack, 1)
+        self.browser = QWebEngineView()
+        self.layout.addWidget(self.browser, 1)
 
-        # Создаем страницы и добавляем в стек
-        self.pages = {}
-        for page_id, file_name in pages_config.items():
-            page = self.create_text_page(file_name)
-            self.content_stack.addWidget(page)
-            self.pages[page_id] = page
-
-        self.content_stack.setCurrentWidget(self.pages["HomePage"]) # По умолчанию показываем Главную страницу
+        self.load_page("HomePage")
 
         # Подключаем сигналы от меню
         self.menu.section_changed.connect(self.change_section)
 
-    def create_text_page(self, html_file):
-        """Создает страницу из HTML файла"""
-        browser = QTextBrowser()
-        html_content = load_html(html_file)
-        browser.setHtml(html_content)
-        browser.setOpenExternalLinks(True)
-        return browser
+    def load_page(self, page_id):
+        """Загружает HTML-файл в браузер"""
+        if page_id in self.pages_config:
+            file_name = self.pages_config[page_id]
+            html_content = load_html(file_name)
+            self.browser.setHtml(html_content)
 
     def change_section(self, section_id):
         """Переключает контент по ID раздела"""
-        if section_id in self.pages:
-            self.content_stack.setCurrentWidget(self.pages[section_id])
-            # Добавляем страницу в историю
+        if section_id in self.pages_config:
+            self.load_page(section_id)
             self.history_manager.add_page(section_id)
 
     def on_image_loaded(self, pixmap):

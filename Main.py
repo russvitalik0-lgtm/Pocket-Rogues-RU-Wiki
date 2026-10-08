@@ -8,6 +8,8 @@ from PyQt5.QtWidgets import *
 import json
 from random import randint
 
+# Ставим флаг до QApplication для корректной работы приложения
+QApplication.setAttribute(Qt.AA_ShareOpenGLContexts)
 app = QApplication([])
 
 from pages.Wiki import WikiPage

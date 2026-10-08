@@ -51,6 +51,7 @@ python Main.py
 
 - Python 3.10+
 - PyQt5
+- PyQtWebEngine
 - markdown
 - requests
 
