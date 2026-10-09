@@ -288,6 +288,11 @@ hr {
     font-size: 0.95em;
 }
 
+.wiki-note {
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+
 .wiki-notes ul { margin: 5px 0; padding-left: 20px; }
 .wiki-notes li { margin-bottom: 4px; }
 
@@ -315,10 +320,18 @@ hr {
 
 /* ===== Акценты по страницам ===== */
 
+/* Главная страница */
+body.page-home {
+    --accent-link: #1c3e79;
+    --accent-link-hover: #3a6bc7;
+    --quote-border: #1c3e79;
+    --quote-bg: #1c3e790D;
+}
+
 /* Некромант */
 body.page-necromancer {
     --accent-link: #8a4fc7;
     --accent-link-hover: #b06ee8;
     --quote-border: #8a4fc7;
-    --quote-bg: #8a4fc70D;
+    --quote-bg: #1c3e791A;
 }
