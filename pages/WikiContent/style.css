@@ -14,6 +14,8 @@
     --quote-border: #00b7e0;         /* Граница Примечаний */
     --quote-bg: #00B7E00D;
     --font-main: sans-serif;         /* Основной шрифт */
+    --bg-row-even: #2a2a2a;
+    --bg-row-odd: #2d2d2d;
 }
 
 body {
@@ -194,30 +196,31 @@ figcaption {
     padding: 8px 10px;
     text-align: left;
     vertical-align: middle;
-    background: var(--bg-table);
+    background: var(--bg-row-odd);
     border: 1px solid var(--border-table);
 }
 
 .wiki-table tr:nth-child(even) td {
-    background: #2a2a2a;
+    background: var(--bg-row-even);
 }
 
-.sticky-first-col th:first-child,
 .sticky-first-col td:first-child {
     position: sticky;
     left: 0;
-    background: var(--bg-table);
+    background: var(--bg-row-odd);
     z-index: 2;
     min-width: 180px;
 }
 
+/* Чётные первые ячейки */
+.sticky-first-col tr:nth-child(even) td:first-child {
+    background: var(--bg-row-even);
+}
+
+/* Шапка — отдельно */
 .sticky-first-col thead th:first-child {
     background: var(--bg-table-head);
     z-index: 3;
-}
-
-.sticky-first-col tr:nth-child(even) td:first-child {
-    background: #2a2a2a;
 }
 
 .wiki-table caption {
@@ -347,6 +350,7 @@ hr {
 }
 
 .wiki-content { overflow: hidden; }
+
 /* Инфобоки */
 .wiki-infobox {
     float: right;
@@ -435,6 +439,7 @@ hr {
     margin-right: 8px;
 }
 
+
 /* ===== Акценты по страницам ===== */
 
 /* Главная страница */
@@ -451,6 +456,9 @@ body.page-necromancer {
     --accent-link-hover: #b06ee8;
     --quote-border: #8a4fc7;
     --quote-bg: #8a4fc70D;
+    --bg-row-odd: #2d2638;
+    --bg-row-even: #221d2b;
+    --bg-table-head: #3a2f4a;
 }
 .necr-infobox {
     background: #3d2a52;   /* тёмно-фиолетовый */
