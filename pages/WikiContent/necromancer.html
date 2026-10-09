@@ -1306,47 +1306,74 @@
     <p>Персонаж имеет возможность получать и прокачивать <strong>Пассивные способности</strong> <em>(перки)</em> за получение <strong>Очков Доблести</strong> и повышения <strong>Уровня Доблести</strong> <em>(Один зачищенный этаж -> Одно очко; Кол-во нужных Очков для повышения Уровня Доблести это и есть следующий Уровень Доблести, либо "текущий Уровень Доблести+1").</em> Помимо обычных перков, каждый класс имеет один или несколько специализированных <em>(классовых)</em> перков.</p>
     <p>На данный момент <strong>Некромант</strong> как класс имеет <em>наибольшее</em> количество специализированных под класс перков, таких перков насчитывается <strong>4 шт.</strong> Ниже они все будут подробно описаны.</p>
 
+    <!-- ========================================== -->
+    <!-- ПЕРК: ТЁМНАЯ ЭНЕРГИЯ                       -->
+    <!-- ========================================== -->
     <details class="wiki-collapsible">
         <summary>Тёмная Энергия</summary>
         <div class="wiki-collapsible-content">
             <div class="wiki-table-wrap">
                 <table class="wiki-table">
-                    <thead>
-                        <tr>
-                            <th colspan="7" class="text-center">
-                                <img src="WikiImages/perk_necr_darkenergy.png" alt="" class="wiki-icon">
-                                <br><strong class="perk-text">Тёмная Энергия</strong>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>"Номер" Эффекта</th>
-                            <th>Эффекты перка</th>
-                            <th colspan="3" class="text-center">Бесплатная версия</th>
-                            <th colspan="2" class="text-center">Ultimate-Версия</th>
-                        </tr>
-                        <tr>
-                            <th>Тип</th>
-                            <th>Описание эффекта</th>
-                            <th>1-й Ур.</th><th>2-й Ур.</th><th>3-й Ур.</th><th>4-й Ур.</th><th>5-й Ур.</th>
-                        </tr>
-                    </thead>
                     <tbody>
+                        <!-- Строка 1: Римские цифры с боковыми отступами -->
                         <tr>
-                            <td><strong>P</strong></td>
-                            <td>Убийство <em><u>живых</u></em> существ <u>проклятым</u> уроном заполн. шкалу Тёмной Энергии на X ед.; след. призыв будет усилен за счет этой энергии</td>
-                            <td>1 ед.</td><td>2 ед.</td><td>3 ед.</td><td>4 ед.</td><td>5 ед.</td>
+                            <td rowspan="7" class="empty-cell"></td>
+                            <th class="text-center">I</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">II</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">III</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">IV</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">V</th>
+                            <td rowspan="7" class="empty-cell"></td>
                         </tr>
+                        <!-- Строка 2: Иконка -->
                         <tr>
-                            <td><strong>S</strong></td>
-                            <td>Максимум Тёмной Энергии ув. до X ед.</td>
-                            <td colspan="2" class="empty-cell">-</td>
-                            <td>30 ед.</td><td>40 ед.</td><td>50 ед.</td>
+                            <td colspan="9" class="text-center">
+                                <img src="WikiImages/perk_necr_darkenergy.png" alt="Тёмная Энергия" class="wiki-icon" draggable="false">
+                            </td>
                         </tr>
+                        <!-- Строка 3: Название -->
                         <tr>
-                            <td><strong>T</strong></td>
-                            <td>Весь проклятый урон ув. на X%, пока шкала Тёмной Энергии заполнена</td>
-                            <td colspan="4" class="empty-cell">-</td>
-                            <td>30%</td>
+                            <td colspan="9" class="text-center">
+                                <strong class="perk-text">Тёмная Энергия</strong>
+                            </td>
+                        </tr>
+                        <!-- Строка 4: Уровни -->
+                        <tr>
+                            <th class="text-center"><strong>1-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>2-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>3-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>4-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>5-й Уровень</strong></th>
+                        </tr>
+                        <!-- Строка 5: Основные эффекты -->
+                        <tr>
+                            <td>Убийство живых существ<br>проклятым уроном заполняет<br>шкалу <strong>Тёмной Энергии</strong> на 1<br>ед.; следующий призыв будет<br>усилен за счет этой энергии</td>
+                            <td>Убийство живых существ<br>проклятым уроном заполняет<br>шкалу <strong>Тёмной Энергии</strong> на 2<br>ед.; следующий призыв будет<br>усилен за счет этой энергии</td>
+                            <td>Убийство живых существ<br>проклятым уроном заполняет<br>шкалу <strong>Тёмной Энергии</strong> на 3<br>ед.; следующий призыв будет<br>усилен за счет этой энергии</td>
+                            <td>Убийство живых существ<br>проклятым уроном заполняет<br>шкалу <strong>Тёмной Энергии</strong> на 4<br>ед.; следующий призыв будет<br>усилен за счет этой энергии</td>
+                            <td>Убийство живых существ<br>проклятым уроном заполняет<br>шкалу <strong>Тёмной Энергии</strong> на 5<br>ед.; следующий призыв будет<br>усилен за счет этой энергии</td>
+                        </tr>
+                        <!-- Строка 6: Дополнительные эффекты -->
+                        <tr>
+                            <td rowspan="2" class="empty-cell"></td>
+                            <td rowspan="2" class="empty-cell"></td>
+                            <td>Максимум <strong>Тёмной Энергии</strong> ув.<br>до 30 ед.</td>
+                            <td>Максимум <strong>Тёмной Энергии</strong> ув.<br>до 40 ед.</td>
+                            <td>Максимум Тёмной Энергии<br>ув. до 50 ед.</td>
+                        </tr>
+                        <!-- Строка 7: Конечный эффект -->
+                        <tr>
+                            <td class="empty-cell"></td>
+                            <td class="empty-cell"></td>
+                            <td>Весь проклятый урон ув. на<br>30%, пока шкала <strong>Тёмной</strong><br><strong>Энергии</strong> заполнена</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1354,47 +1381,67 @@
         </div>
     </details>
 
+    <!-- ========================================== -->
+    <!-- ПЕРК: КРУГ ПРИЗЫВА                         -->
+    <!-- ========================================== -->
     <details class="wiki-collapsible">
         <summary>Круг Призыва</summary>
         <div class="wiki-collapsible-content">
             <div class="wiki-table-wrap">
                 <table class="wiki-table">
-                    <thead>
-                        <tr>
-                            <th colspan="7" class="text-center">
-                                <img src="WikiImages/perk_necr_circleofsummoning.png" alt="" class="wiki-icon">
-                                <br><strong class="perk-text">Круг Призыва</strong>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>"Номер" Эффекта</th>
-                            <th>Эффекты перка</th>
-                            <th colspan="3" class="text-center">Бесплатная версия</th>
-                            <th colspan="2" class="text-center">Ultimate-Версия</th>
-                        </tr>
-                        <tr>
-                            <th>Тип</th>
-                            <th>Описание эффекта</th>
-                            <th>1-й Ур.</th><th>2-й Ур.</th><th>3-й Ур.</th><th>4-й Ур.</th><th>5-й Ур.</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
-                            <td><strong>P</strong></td>
-                            <td>Призываемая нежить получает на X% больше ОЗ</td>
-                            <td>20%</td><td>40%</td><td>60%</td><td>75%</td><td>100%</td>
+                            <td rowspan="7" class="empty-cell"></td>
+                            <th class="text-center">I</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">II</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">III</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">IV</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">V</th>
+                            <td rowspan="7" class="empty-cell"></td>
                         </tr>
                         <tr>
-                            <td><strong>S</strong></td>
-                            <td>Шанс призвать усиленную нежить ув. на X%</td>
-                            <td colspan="2" class="empty-cell">-</td>
-                            <td>15%</td><td>20%</td><td>25%</td>
+                            <td colspan="9" class="text-center">
+                                <img src="WikiImages/perk_necr_circleofsummoning.png" alt="Круг Призыва" class="wiki-icon" draggable="false">
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>T</strong></td>
-                            <td>Призываемая нежить наносит на X% больше урона</td>
-                            <td colspan="4" class="empty-cell">-</td>
-                            <td>25%</td>
+                            <td colspan="9" class="text-center">
+                                <strong class="perk-text">Круг Призыва</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center"><strong>1-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>2-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>3-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>4-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>5-й Уровень</strong></th>
+                        </tr>
+                        <tr>
+                            <td><strong>Призываемая нежить</strong> получает<br>на 20% больше ОЗ</td>
+                            <td><strong>Призываемая нежить</strong> получает<br>на 40% больше ОЗ</td>
+                            <td><strong>Призываемая нежить</strong> получает<br>на 60% больше ОЗ</td>
+                            <td><strong>Призываемая нежить</strong> получает<br>на 75% больше ОЗ</td>
+                            <td><strong>Призываемая нежить</strong> получает<br>на 100% больше ОЗ</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="empty-cell"></td>
+                            <td rowspan="2" class="empty-cell"></td>
+                            <td>Шанс призвать <strong>усиленную<br>нежить</strong> ув. на 15%</td>
+                            <td>Шанс призвать <strong>усиленную<br>нежить</strong> ув. на 20%</td>
+                            <td>Шанс призвать <strong>усиленную<br>нежить</strong> ув. на 25%</td>
+                        </tr>
+                        <tr>
+                            <td class="empty-cell"></td>
+                            <td class="empty-cell"></td>
+                            <td><strong>Призываемая нежить</strong> наносит<br>на 25% больше урона</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1402,47 +1449,67 @@
         </div>
     </details>
 
+    <!-- ========================================== -->
+    <!-- ПЕРК: КОСТЯНОЙ ПЛАЩ                        -->
+    <!-- ========================================== -->
     <details class="wiki-collapsible">
         <summary>Костяной Плащ</summary>
         <div class="wiki-collapsible-content">
             <div class="wiki-table-wrap">
                 <table class="wiki-table">
-                    <thead>
-                        <tr>
-                            <th colspan="7" class="text-center">
-                                <img src="WikiImages/perk_necr_bonecloak.png" alt="" class="wiki-icon">
-                                <br><strong class="perk-text">Костяной Плащ</strong>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>"Номер" Эффекта</th>
-                            <th>Эффекты перка</th>
-                            <th colspan="3" class="text-center">Бесплатная версия</th>
-                            <th colspan="2" class="text-center">Ultimate-Версия</th>
-                        </tr>
-                        <tr>
-                            <th>Тип</th>
-                            <th>Описание эффекта</th>
-                            <th>1-й Ур.</th><th>2-й Ур.</th><th>3-й Ур.</th><th>4-й Ур.</th><th>5-й Ур.</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
-                            <td><strong>P</strong></td>
-                            <td>При убийстве каждого <em>живого</em> врага персонаж получает 1 ед. <em>временных</em> ОЗ <em>(не более X ед.)</em></td>
-                            <td>6 ед.</td><td>8 ед.</td><td>10 ед.</td><td>12 ед.</td><td>15 ед.</td>
+                            <td rowspan="7" class="empty-cell"></td>
+                            <th class="text-center">I</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">II</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">III</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">IV</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">V</th>
+                            <td rowspan="7" class="empty-cell"></td>
                         </tr>
                         <tr>
-                            <td><strong>S</strong></td>
-                            <td>При разрушении Костяного Плаща вокруг персонажа разлетаются кости, наносящие X% урона персонажа</td>
-                            <td colspan="2" class="empty-cell">-</td>
-                            <td>100%</td><td>150%</td><td>200%</td>
+                            <td colspan="9" class="text-center">
+                                <img src="WikiImages/perk_necr_bonecloak.png" alt="Костяной Плащ" class="wiki-icon" draggable="false">
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>T</strong></td>
-                            <td>Атаки по Костяному Плащу в <em>ближнем бою</em> возвращают врагам X% урона</td>
-                            <td colspan="4" class="empty-cell">-</td>
-                            <td>50%</td>
+                            <td colspan="9" class="text-center">
+                                <strong class="perk-text">Костяной Плащ</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center"><strong>1-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>2-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>3-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>4-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>5-й Уровень</strong></th>
+                        </tr>
+                        <tr>
+                            <td>При убийстве каждого <em>живого</em><br>врага персонаж получает 1 ед.<br><em>временных</em> ОЗ <em>(не более 6 ед.)</em></td>
+                            <td>При убийстве каждого <em>живого</em><br>врага персонаж получает 1 ед.<br><em>временных</em> ОЗ <em>(не более 8 ед.)</em></td>
+                            <td>При убийстве каждого<br><em>живого</em> врага персонаж<br>получает 1 ед. <em>временных</em> ОЗ<br><em>(не более 10 ед.)</em></td>
+                            <td>При убийстве каждого<br><em>живого</em> врага персонаж<br>получает 1 ед. <em>временных</em> ОЗ<br><em>(не более 12 ед.)</em></td>
+                            <td>При убийстве каждого<br><em>живого</em> врага персонаж<br>получает 1 ед. <em>временных</em> ОЗ<br><em>(не более 15 ед.)</em></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="empty-cell"></td>
+                            <td rowspan="2" class="empty-cell"></td>
+                            <td>При разрушении <strong>Костяного<br>Плаща</strong> вокруг персонажа<br>разлетаются кости, наносящие<br>100% урона персонажа</td>
+                            <td>При разрушении <strong>Костяного<br>Плаща</strong> вокруг персонажа<br>разлетаются кости, наносящие<br>150% урона персонажа</td>
+                            <td>При разрушении <strong>Костяного<br>Плаща</strong> вокруг персонажа<br>разлетаются кости, наносящие<br>200% урона персонажа</td>
+                        </tr>
+                        <tr>
+                            <td class="empty-cell"></td>
+                            <td class="empty-cell"></td>
+                            <td>Атаки по <strong>Костяному Плащу</strong> в<br><em>ближнем бою</em> возвращают<br>врагам 50% урона</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1450,47 +1517,67 @@
         </div>
     </details>
 
+    <!-- ========================================== -->
+    <!-- ПЕРК: ПОТОК БОЛИ                           -->
+    <!-- ========================================== -->
     <details class="wiki-collapsible">
         <summary>Поток Боли</summary>
         <div class="wiki-collapsible-content">
             <div class="wiki-table-wrap">
                 <table class="wiki-table">
-                    <thead>
-                        <tr>
-                            <th colspan="7" class="text-center">
-                                <img src="WikiImages/perk_necr_streamofpain.png" alt="" class="wiki-icon">
-                                <br><strong class="perk-text">Поток Боли</strong>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th>"Номер" Эффекта</th>
-                            <th>Эффекты перка</th>
-                            <th colspan="3" class="text-center">Бесплатная версия</th>
-                            <th colspan="2" class="text-center">Ultimate-Версия</th>
-                        </tr>
-                        <tr>
-                            <th>Тип</th>
-                            <th>Описание эффекта</th>
-                            <th>1-й Ур.</th><th>2-й Ур.</th><th>3-й Ур.</th><th>4-й Ур.</th><th>5-й Ур.</th>
-                        </tr>
-                    </thead>
                     <tbody>
                         <tr>
-                            <td><strong>P</strong></td>
-                            <td>При получении урона персонажем X% этого урона распределяется между призванными существами</td>
-                            <td>20%</td><td>30%</td><td>35%</td><td>40%</td><td>50%</td>
+                            <td rowspan="7" class="empty-cell"></td>
+                            <th class="text-center">I</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">II</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">III</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">IV</th>
+                            <td class="empty-cell"></td>
+                            <th class="text-center">V</th>
+                            <td rowspan="7" class="empty-cell"></td>
                         </tr>
                         <tr>
-                            <td><strong>S</strong></td>
-                            <td>Распределенный между нежитью урон дополнительно снижается на X%</td>
-                            <td colspan="2" class="empty-cell">-</td>
-                            <td>25%</td><td>35%</td><td>50%</td>
+                            <td colspan="9" class="text-center">
+                                <img src="WikiImages/perk_necr_streamofpain.png" alt="Поток Боли" class="wiki-icon" draggable="false">
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>T</strong></td>
-                            <td>Перк работает со всеми призываемыми сущ., включая призванных через печати или предметы</td>
-                            <td colspan="4" class="empty-cell">-</td>
-                            <td>Да</td>
+                            <td colspan="9" class="text-center">
+                                <strong class="perk-text">Поток Боли</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="text-center"><strong>1-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>2-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>3-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>4-й Уровень</strong></th>
+                            <td rowspan="4" class="empty-cell"></td>
+                            <th class="text-center"><strong>5-й Уровень</strong></th>
+                        </tr>
+                        <tr>
+                            <td>Получаемый урон снижается<br>на 20% и <strong>распределяется</strong><br>между призванной нежитью</td>
+                            <td>Получаемый урон снижается<br>на 30% и <strong>распределяется</strong><br>между призванной нежитью</td>
+                            <td>Получаемый урон снижается<br>на 35% и <strong>распределяется</strong><br>между призванной нежитью</td>
+                            <td>Получаемый урон снижается<br>на 40% и <strong>распределяется</strong><br>между призванной нежитью</td>
+                            <td>Получаемый урон снижается<br>на 50% и <strong>распределяется</strong><br>между призванной нежитью</td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="empty-cell"></td>
+                            <td rowspan="2" class="empty-cell"></td>
+                            <td>Распределенный урон,<br>получаемый призванной<br>нежитью, <strong>снижен</strong> на 25%</td>
+                            <td>Распределенный урон,<br>получаемый призванной<br>нежитью, <strong>снижен</strong> на 35%</td>
+                            <td>Распределенный урон,<br>получаемый призванной<br>нежитью, <strong>снижен</strong> на 50%</td>
+                        </tr>
+                        <tr>
+                            <td class="empty-cell"></td>
+                            <td class="empty-cell"></td>
+                            <td>Перк работает со <strong>всеми<br>призываемыми существами</strong>,<br>включая призванных с<br>помощью предметов и печатей</td>
                         </tr>
                     </tbody>
                 </table>
