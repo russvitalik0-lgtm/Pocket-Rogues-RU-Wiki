@@ -1,11 +1,15 @@
 # WikiPage
-from PyQt5.QtCore import Qt, pyqtSignal, QTimer
+from PyQt5.QtCore import Qt, pyqtSignal, QTimer, QUrl
 from PyQt5.QtWidgets import *
 from PyQt5.QtWebEngineWidgets import QWebEngineView
+import os
+import webbrowser
+
 from .Base import BasePage
 from .Base import ImageLoader
 from .Base import load_html
 from .Base import history_manager
+from .link_interceptor import InterceptingPage
 
 
 class WikiPage(BasePage):
@@ -102,8 +106,11 @@ class WikiPage(BasePage):
         # Разделитель
         self.add_separator()
 
-        # Создаем stacked widget для окна с контентом
+        # Окно с контентом
         self.browser = QWebEngineView()
+        self.browser_page = InterceptingPage(self.browser)
+        self.browser_page.on_external_link = lambda url: webbrowser.open(url.toString())
+        self.browser.setPage(self.browser_page)
         self.layout.addWidget(self.browser, 1)
 
         self.load_page("HomePage")
@@ -116,7 +123,12 @@ class WikiPage(BasePage):
         if page_id in self.pages_config:
             file_name = self.pages_config[page_id]
             html_content = load_html(file_name)
-            self.browser.setHtml(html_content)
+
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            base_path = os.path.join(current_dir, "WikiContent")
+            base_url = QUrl.fromLocalFile(base_path + os.sep)
+
+            self.browser.setHtml(html_content, base_url)
 
     def change_section(self, section_id):
         """Переключает контент по ID раздела"""
