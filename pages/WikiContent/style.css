@@ -148,7 +148,6 @@ figcaption {
 .wiki-toc ol ol { margin-top: 4px; }
 
 .wiki-quote { /* Цитата */
-    clear: both;
     background: var(--bg-content);
     border-left: 4px solid var(--quote-border);
     margin: 15px 0;
@@ -347,6 +346,95 @@ hr {
     text-align: center;
 }
 
+.wiki-content { overflow: hidden; }
+/* Инфобоки */
+.wiki-infobox {
+    float: right;
+    width: 300px;
+    margin: 0 0 15px 20px;
+    background: var(--bg-content);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+    clear: right;
+}
+
+.wiki-infobox__title {
+    background: var(--bg-table-head);
+    color: var(--text-heading);
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    font-size: 1.2em;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.wiki-infobox__image {
+    text-align: center;
+    padding: 10px;
+    background: var(--bg-page);
+}
+
+.wiki-infobox__image img {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.wiki-infobox__caption {
+    text-align: center;
+    font-style: italic;
+    color: var(--text-muted);
+    padding: 5px;
+    font-size: 0.9em;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.wiki-infobox__header {
+    background: var(--bg-table-head);
+    color: var(--text-heading);
+    font-weight: bold;
+    text-align: center;
+    padding: 8px;
+    font-size: 0.95em;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.wiki-infobox__fields {
+    margin: 0;
+    padding: 10px;
+}
+
+.wiki-infobox__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.wiki-infobox__row:last-child {
+    border-bottom: none;
+}
+
+.wiki-infobox__row dt {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    font-size: 0.9em;
+    color: var(--text-main);
+}
+
+.wiki-infobox__row dd {
+    margin: 0;
+    font-weight: bold;
+    color: var(--text-heading);
+}
+
+.wiki-infobox__row dt img {
+    margin-right: 8px;
+}
+
 /* ===== Акценты по страницам ===== */
 
 /* Главная страница */
@@ -363,4 +451,7 @@ body.page-necromancer {
     --accent-link-hover: #b06ee8;
     --quote-border: #8a4fc7;
     --quote-bg: #8a4fc70D;
+}
+.necr-infobox {
+    background: #3d2a52;   /* тёмно-фиолетовый */
 }
