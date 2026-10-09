@@ -1,20 +1,21 @@
 :root {
-    --bg-page: #1a1a1a; /* Задний фон страницы */
-    --bg-content: #262626; /* Задний фон поля с контентом */
-    --bg-table: #2d2d2d; /* Задний фон таблиц */
-    --bg-table-head: #3a3a3a; /* Задний фон заголовка */
-    --bg-hover: #333333; /* Задний фон при наведении */
-    --text-main: #d5d5d5; /* Основной цвет текста */
-    --text-muted: #a0a0a0; /* Затемнённый текст */
-    --text-heading: #ffffff; /* Цвет текста заголовка */
-    --accent-link: #00b7e0; /* Цвет гиперссылок */
-    --accent-link-hover: #4a90e2; /* Цвет гиперссылок при наведении */
-    --border-color: #666666; /* Граница */
-    --border-table: #888888; /* Граница таблиц */
-    --quote-border: #00b7e0; /* Граница Примечаний */
+    --bg-page: #1a1a1a;              /* Задний фон страницы */
+    --bg-content: #262626;           /* Задний фон поля с контентом */
+    --bg-table: #2d2d2d;             /* Задний фон таблиц */
+    --bg-table-head: #3a3a3a;        /* Задний фон заголовка */
+    --bg-hover: #333333;             /* Задний фон при наведении */
+    --text-main: #d5d5d5;            /* Основной цвет текста */
+    --text-muted: #a0a0a0;           /* Затемнённый текст */
+    --text-heading: #ffffff;         /* Цвет текста заголовка */
+    --accent-link: #00b7e0;          /* Цвет гиперссылок */
+    --accent-link-hover: #4a90e2;    /* Цвет гиперссылок при наведении */
+    --border-color: #666666;         /* Граница */
+    --border-table: #888888;         /* Граница таблиц */
+    --quote-border: #00b7e0;         /* Граница Примечаний */
     --quote-bg: #00B7E00D;
-    --font-main: sans-serif; /* Основной шрифт */
+    --font-main: sans-serif;         /* Основной шрифт */
 }
+
 body {
     background-color: var(--bg-page);
     color: var(--text-main);
@@ -26,6 +27,7 @@ body {
     margin: 0 auto;
     font-size: 14px;
 }
+
 h1, h2, h3, h4 {
     color: var(--text-heading);
     border-bottom: 1px solid var(--border-color);
@@ -34,21 +36,26 @@ h1, h2, h3, h4 {
     margin-bottom: 0.5em;
     font-weight: 600;
 }
+
 h1 { font-size: 2em; border-bottom: 2px solid var(--accent-link); }
 h2 { font-size: 1.6em; }
 h3 { font-size: 1.3em; border-bottom: none; }
 h4 { font-size: 1.1em; border-bottom: none; }
+
 a, .wiki-link {
     color: var(--accent-link);
     text-decoration: none;
 }
+
 a:hover, .wiki-link:hover {
     color: var(--accent-link-hover);
     text-decoration: underline;
 }
+
 strong { color: #ffffff; }
 em { color: #e0e0e0; }
 u { text-decoration-color: var(--text-muted); }
+
 .wiki-figure {
     margin: 10px 0;
     background: var(--bg-content);
@@ -57,7 +64,13 @@ u { text-decoration-color: var(--text-muted); }
     display: inline-block;
     max-width: 100%;
 }
-.wiki-figure.thumb { float: right; margin: 0 0 10px 15px; width: 135px; }
+
+.wiki-figure.thumb {
+    float: right;
+    margin: 0 0 10px 15px;
+    width: 135px;
+}
+
 .wiki-img-placeholder {
     background: #111;
     display: flex;
@@ -66,22 +79,26 @@ u { text-decoration-color: var(--text-muted); }
     border: 1px dashed #555;
     position: relative;
 }
+
 .wiki-img-placeholder img {
     display: block;
     width: 100%;
     height: auto;
     opacity: 0;
 }
+
 .wiki-img-placeholder::after {
     content: attr(data-filename);
     color: #666;
     font-size: 10px;
     text-align: center;
-    width: 100%; /* Вся ширина контейнера */
-    padding: 0 4px; 
+    width: 100%;            /* Вся ширина контейнера */
+    padding: 0 4px;
     box-sizing: border-box; /* Не будет прилипать к краям */
 }
+
 .wiki-img-placeholder { height: 125px; width: 125px; }
+
 .wiki-img-placeholder.icon {
     height: 32px;
     width: 32px;
@@ -91,6 +108,7 @@ u { text-decoration-color: var(--text-muted); }
     border: none;
     background: transparent;
 }
+
 .wiki-img-placeholder.icon::after { font-size: 0; }
 
 figcaption {
@@ -99,6 +117,7 @@ figcaption {
     text-align: center;
     padding-top: 5px;
 }
+
 .wiki-toc {
     background: var(--bg-content);
     border: 1px solid var(--border-color);
@@ -108,6 +127,7 @@ figcaption {
     border-radius: 4px;
     min-width: 250px;
 }
+
 .wiki-toc-title {
     font-weight: bold;
     text-align: center;
@@ -116,6 +136,7 @@ figcaption {
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 5px;
 }
+
 .wiki-toc ol { margin: 0; padding-left: 20px; }
 .wiki-toc li { margin: 4px 0; }
 .wiki-toc ol ol { margin-top: 4px; }
@@ -133,6 +154,7 @@ figcaption {
 
 .wiki-quote p { margin: 0 0 10px 0; }
 .wiki-quote p:last-child { margin-bottom: 0; }
+
 .wiki-quote-attr {
     font-style: normal;
     font-size: 0.9em;
@@ -140,16 +162,19 @@ figcaption {
     text-align: right;
     margin-top: 10px;
 }
+
 .wiki-table-wrap {
     overflow-x: auto;
     margin: 15px 0;
 }
+
 .wiki-table {
     background: var(--bg-table);
     font-size: 0.95em;
     border-collapse: collapse;
     width: 100%;
 }
+
 .wiki-table th {
     background: var(--bg-table-head);
     color: var(--text-heading);
@@ -159,6 +184,7 @@ figcaption {
     vertical-align: middle;
     border: 1px solid var(--border-table);
 }
+
 .wiki-table td {
     padding: 8px 10px;
     text-align: left;
@@ -166,6 +192,7 @@ figcaption {
     background: var(--bg-table);
     border: 1px solid var(--border-table);
 }
+
 .wiki-table tr:nth-child(even) td {
     background: #2a2a2a;
 }
@@ -178,13 +205,16 @@ figcaption {
     z-index: 2;
     min-width: 180px;
 }
+
 .sticky-first-col thead th:first-child {
     background: var(--bg-table-head);
     z-index: 3;
 }
+
 .sticky-first-col tr:nth-child(even) td:first-child {
     background: #2a2a2a;
 }
+
 .wiki-table caption {
     caption-side: top;
     text-align: left;
@@ -193,17 +223,20 @@ figcaption {
     background: var(--bg-table-head);
     color: var(--text-heading);
 }
+
 .empty-cell {
     color: #666;
     text-align: center;
     font-style: italic;
 }
+
 .wiki-collapsible {
     margin: 15px 0;
     border: 1px solid var(--border-color);
     border-radius: 4px;
     overflow: hidden;
 }
+
 .wiki-collapsible summary {
     background: var(--bg-table-head);
     padding: 10px 15px;
@@ -216,29 +249,37 @@ figcaption {
     user-select: none;
     border-bottom: 1px solid var(--border-color);
 }
+
 .wiki-collapsible summary::-webkit-details-marker { display: none; }
+
 .wiki-collapsible summary::before {
     content: '▶';
     font-size: 0.8em;
     margin-right: 10px;
     color: var(--accent-link);
 }
+
 .wiki-collapsible[open] summary::before {
     content: '▼';
 }
+
 .wiki-collapsible summary:hover {
     background: #444;
 }
+
 .wiki-collapsible-content {
     padding: 0;
 }
+
 ul, ol { padding-left: 25px; }
 li { margin-bottom: 6px; }
+
 hr {
     border: 0;
     border-top: 1px solid var(--border-color);
     margin: 25px 0;
 }
+
 .wiki-notes {
     background: var(--quote-bg);
     border-left: 3px solid var(--accent-link);
@@ -246,8 +287,10 @@ hr {
     margin: 15px 0;
     font-size: 0.95em;
 }
+
 .wiki-notes ul { margin: 5px 0; padding-left: 20px; }
 .wiki-notes li { margin-bottom: 4px; }
+
 .text-center { text-align: center; }
 
 /* Скроллбар у таблиц */
@@ -255,14 +298,17 @@ hr {
     height: 8px;
     width: 8px;
 }
+
 .wiki-table-wrap::-webkit-scrollbar-track { /* Дорожка */
     background: #1a1a1a;
     border-radius: 4px;
 }
+
 .wiki-table-wrap::-webkit-scrollbar-thumb { /* Ползунок */
     background: #444;
     border-radius: 4px;
 }
+
 .wiki-table-wrap::-webkit-scrollbar-thumb:hover {
     background: #666;
 }
@@ -274,5 +320,5 @@ body.page-necromancer {
     --accent-link: #8a4fc7;
     --accent-link-hover: #b06ee8;
     --quote-border: #8a4fc7;
-    --quote-bg: #201D23;
+    --quote-bg: #8a4fc70D;
 }
