@@ -64,6 +64,12 @@ u { text-decoration-color: var(--text-muted); }
     display: inline-block;
     max-width: 100%;
 }
+.wiki-figure img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    height: auto;
+}
 
 .wiki-figure.thumb {
     float: right;
@@ -298,6 +304,10 @@ hr {
 
 .text-center { text-align: center; }
 
+.att-icon { width:32px; height: 32px; }
+.att-icon--sm { width: 20px; height: 20px; }
+.skill-icon { width: 125px; height: 125px; }
+
 /* Скроллбар у таблиц */
 .wiki-table-wrap::-webkit-scrollbar { /* Полоса */
     height: 8px;
@@ -316,6 +326,25 @@ hr {
 
 .wiki-table-wrap::-webkit-scrollbar-thumb:hover {
     background: #666;
+}
+
+/* Центрирование */
+
+.wiki-collapsible th .wiki-icon,
+.wiki-collapsible th .wiki-icon-lg {
+    display: block;
+    margin: 0 auto;
+}
+.wiki-icon-lg {
+    width: 64px;
+    height: 64px;
+    vertical-align: middle;
+    object-fit: contain;
+}
+
+.perk-text {
+    display: block;
+    text-align: center;
 }
 
 /* ===== Акценты по страницам ===== */
