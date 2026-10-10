@@ -43,18 +43,23 @@ class MainWindow(QWidget):
         self.latest_page.page_opened.connect(self.open_wiki_page)
 
         # Добавление панелей
-        left_panel = QVBoxLayout()
-        left_panel.addWidget(QLabel("- Вкладки -"), alignment=Qt.AlignCenter)
-        left_panel.addWidget(self.list_widget)
-        left_panel.addStretch()
+        self.left_panel = QWidget()
+        left_panel_inner = QVBoxLayout(self.left_panel)
+        left_panel_inner.setContentsMargins(0, 0, 0, 0)
+        left_panel_inner.addWidget(QLabel("- Вкладки -"), alignment=Qt.AlignCenter)
+        left_panel_inner.addWidget(self.list_widget)
+        left_panel_inner.addStretch()
 
-        content_layout.addLayout(left_panel)
+        content_layout.addWidget(self.left_panel)
         content_layout.addWidget(self.stacked, 1)
 
         main_layout.addWidget(content_widget)
 
         # По умолчанию выбираем Вики
         self.list_widget.setCurrentRow(0)
+
+        # Сигналы
+        self.wiki_page.fullscreen_requested.connect(self.toggle_fullscreen)
 
     def add_page(self):
         """Добавляет вкладки страниц"""
@@ -86,6 +91,15 @@ class MainWindow(QWidget):
 
         # Переключаем страницу внутри WikiPage
         self.wiki_page.change_section(page_id)
+
+    def toggle_fullscreen(self):
+        """Переключает полноэкранный режим главного окна"""
+        if self.left_panel.isVisible():
+            self.left_panel.hide()
+            self.wiki_page.set_reading_mode(True)
+        else:
+            self.left_panel.show()
+            self.wiki_page.set_reading_mode(False)
 
 
 window = MainWindow()

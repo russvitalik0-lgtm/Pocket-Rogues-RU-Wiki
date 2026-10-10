@@ -24,8 +24,8 @@ body {
     font-family: var(--font-main);
     line-height: 1.6;
     margin: 0;
-    padding: 20px;
-    max-width: 1200px;
+    padding: 5px;
+    max-width: 80%;
     margin: 0 auto;
     font-size: 14px;
 }
@@ -39,7 +39,7 @@ h1, h2, h3, h4 {
     font-weight: 600;
 }
 
-h1 { font-size: 2em; border-bottom: 2px solid var(--accent-link); }
+h1 { font-size: 2em; border-bottom: 2px solid var(--accent-link); margin-top: 0.4em;}
 h2 { font-size: 1.6em; }
 h3 { font-size: 1.3em; border-bottom: none; }
 h4 { font-size: 1.1em; border-bottom: none; }
@@ -439,6 +439,26 @@ hr {
     margin-right: 8px;
 }
 
+/* Полноэкранный режим */
+.fullscreen-btn {
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+}
+.fullscreen-btn img {
+    position: fixed;
+    top: 30px;
+    left: calc(10vw - 56px);
+    font-size: 32px;
+    padding: 3px 3px;
+    border: 1px solid #F3F3F3;
+    border-radius: 8px;
+}
+
+.fullscreen-btn .icon-exit { display: none; }
+body.is-fullscreen .fullscreen-btn .icon-enter { display: none; }
+body.is-fullscreen .fullscreen-btn .icon-exit  { display: block; }
 
 /* ===== Акценты по страницам ===== */
 
@@ -460,7 +480,17 @@ body.page-necromancer {
     --bg-row-even: #221d2b;
     --bg-table-head: #3a2f4a;
     --bg-table: #251f2f;
+    --skill-icon-border: #3a1e57;
 }
+
+body.page-necromancer .wiki-figure {
+    background: var(--quote-bg);
+    border: 1px solid var(--quote-border);
+}
+body.page-necromancer .skill-icon {
+    border: 1px solid var(--skill-icon-border);
+}
+
 .necr-infobox {
     background: #3d2a52;   /* тёмно-фиолетовый */
 }
@@ -475,7 +505,17 @@ body.page-warrior {
     --bg-row-even: #221618;
     --bg-table-head: #3a2427;
     --bg-table: #241a1c;
+    --skill-icon-border: #421219;
 }
+
+body.page-warrior .wiki-figure {
+    background: var(--quote-bg);
+    border: 1px solid var(--quote-border);
+}
+body.page-warrior .skill-icon {
+    border: 1px solid var(--skill-icon-border);
+}
+
 .warrior-infobox {
     background: #2d1d1f;
 }
@@ -490,7 +530,17 @@ body.page-archer {
     --bg-row-even: #1d2b22;
     --bg-table-head: #2f4a3a;
     --bg-table: #1f2d24;
+    --skill-icon-border: #0e3a21;
 }
+
+body.page-archer .wiki-figure {
+    background: var(--quote-bg);
+    border: 1px solid var(--quote-border);
+}
+body.page-archer .skill-icon {
+    border: 1px solid var(--skill-icon-border);
+}
+
 .archer-infobox {
     background: #2a4a35;
 }
@@ -505,6 +555,15 @@ body.page-berserker {
     --bg-row-even: #292415;
     --bg-table-head: #4a3f1a;
     --bg-table: #2a2517;
+    --skill-icon-border: #493a05;
+}
+
+body.page-berserker .wiki-figure {
+    background: var(--quote-bg);
+    border: 1px solid var(--quote-border);
+}
+body.page-berserker .skill-icon {
+    border: 1px solid var(--skill-icon-border);
 }
 
 .berserker-infobox {
@@ -521,6 +580,15 @@ body.page-hunter {
     --bg-row-odd: #2d2418;           /* Тёмно-коричневый */
     --bg-row-even: #241e14;          /* Чуть темнее */
     --bg-table-head: #3d2e1a;        /* Заголовок таблицы */
+    --skill-icon-border: #492a0d;
+}
+
+body.page-hunter .wiki-figure {
+    background: var(--quote-bg);
+    border: 1px solid var(--quote-border);
+}
+body.page-hunter .skill-icon {
+    border: 1px solid var(--skill-icon-border);
 }
 
 .hunter-infobox {

@@ -13,6 +13,8 @@ from .link_interceptor import InterceptingPage
 
 
 class WikiPage(BasePage):
+    fullscreen_requested = pyqtSignal()
+
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -88,6 +90,12 @@ class WikiPage(BasePage):
         self.image_label = QLabel("Загрузка...")
         self.image_label.setAlignment(Qt.AlignRight | Qt.AlignTop)
 
+        # Контейнер шапки
+        self.header_widget = QWidget()
+        header_layout = QVBoxLayout(self.header_widget)
+        header_layout.setContentsMargins(0, 0, 0, 0)
+        header_layout.setSpacing(0)
+
         # Верхняя панель
         Hlayout = QHBoxLayout()
         Hlayout.addWidget(self.menu, alignment=Qt.AlignLeft | Qt.AlignBottom)
@@ -95,7 +103,15 @@ class WikiPage(BasePage):
         Hlayout.setContentsMargins(0,0,0,0)
 
         # Крепим к основному лайауту
-        self.layout.addLayout(Hlayout)
+        header_layout.addLayout(Hlayout)
+
+        # Разделитель - Делаем отдельный (иначе не попадет в контейнер)
+        separator = QFrame()
+        separator.setFrameShape(QFrame.HLine)
+        separator.setStyleSheet("background-color: #3c3c3c; height: 1px;")
+        header_layout.addWidget(separator)
+
+        self.layout.addWidget(self.header_widget)
 
         # Запуск загрузки картинки в отедльном потоке
         self.loader = ImageLoader()
@@ -103,15 +119,24 @@ class WikiPage(BasePage):
         self.loader.error.connect(self.on_image_error)
         self.loader.start()
 
-        # Разделитель
-        self.add_separator()
-
         # Окно с контентом
         self.browser = QWebEngineView()
         self.browser_page = InterceptingPage(self.browser)
+        self.browser_page.on_fullscreen_toggle = self.fullscreen_requested.emit
         self.browser_page.on_external_link = lambda url: webbrowser.open(url.toString())
         self.browser.setPage(self.browser_page)
+        self.browser.loadFinished.connect(self._on_page_loaded)
         self.layout.addWidget(self.browser, 1)
+
+
+        # Заготовка для фуллскрина
+        self.FULLSCREEN_BTN = (
+            '<button class="fullscreen-btn" '
+            'onclick="console.log(\'__FULLSCREEN_TOGGLE__\')">'
+            '<img draggable="false" src="WikiImages/fullscreen_icon_enter.png" class="icon-enter" alt="">'
+            '<img draggable="false" src="WikiImages/fullscreen_icon_exit.png" class="icon-exit" alt="">'
+            '</button>'
+        )
 
         self.load_page("HomePage")
 
@@ -123,6 +148,8 @@ class WikiPage(BasePage):
         if page_id in self.pages_config:
             file_name = self.pages_config[page_id]
             html_content = load_html(file_name)
+
+            html_content = inject_fullscreen_btn(html_content, self.FULLSCREEN_BTN)
 
             current_dir = os.path.dirname(os.path.abspath(__file__))
             base_path = os.path.join(current_dir, "WikiContent")
@@ -150,6 +177,25 @@ class WikiPage(BasePage):
         """Отправляет кол-во существующих страниц"""
         pages_count = len(self.pages_list)
         return pages_count
+
+    def set_reading_mode(self, on):
+        """Скрывает/показывает шапку"""
+        if on:
+            self.header_widget.hide()
+        else:
+            self.header_widget.show()
+
+        action = "add" if on else "remove"
+        self.browser.page().runJavaScript(
+            f"document.body.classList.{action}('is-fullscreen')"
+        )
+
+    def _on_page_loaded(self, ok):
+        """Восстанавливает класс is-fullscreen после загрузки страницы"""
+        if ok and self.header_widget.isHidden():
+            self.browser.page().runJavaScript(
+                "document.body.classList.add('is-fullscreen')"
+            )
 
 class WikiMenu(QWidget):
     section_changed = pyqtSignal(str) # Будем переключать страницы используя их текстовой ID
@@ -324,3 +370,13 @@ class WikiMenu(QWidget):
             action.triggered.connect(
                 lambda checked, pid=page_id: self.on_section_clicked(pid)
             )
+
+def inject_fullscreen_btn(html, btn_html):
+    """Вставляет кнопку полноэкранного режима сразу после открывающего тега <body ...>"""
+    idx_body = html.find("<body")
+    if idx_body == -1:
+        return html # На случай, если body нет
+    idx_end = html.find(">", idx_body)
+    if idx_end == -1:
+        return html
+    return html[:idx_end + 1] + btn_html + html[idx_end +1:]
