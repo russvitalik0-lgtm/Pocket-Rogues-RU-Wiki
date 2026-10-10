@@ -178,7 +178,8 @@ class PreviewCard(QFrame):
         # Превью текста со страницы
         self.preview_label = QLabel(preview_text)
         self.preview_label.setWordWrap(True)
-        self.preview_label.setStyleSheet("color: #888; font-size: 12px;")
+        self.preview_label.setTextInteractionFlags(Qt.NoTextInteraction)
+        self.preview_label.setStyleSheet("color: #888; font-size: 11px;")
 
         # Крепим к лайауту
         layout.addWidget(self.title_label)

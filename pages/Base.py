@@ -110,19 +110,46 @@ def get_page_preview(page_id):
     # Загружаем HTML
     html_content = load_html(file_name)
 
-    # Удаляем style и script блоки
+    """А теперь чистка"""
+
+    # 1. Удаляем style и script блоки
     html_content = re.sub(r'<style[^>]*>.*?</style>', '', html_content, flags=re.DOTALL)
     html_content = re.sub(r'<script[^>]*>.*?</script>', '', html_content, flags=re.DOTALL)
 
-    # Убираем HTML-теги
-    text = re.sub(r'<[^>]+>', '', html_content) 
+    # 2. Отрезаем всё до <h1>
+    idx = html_content.find("<h1")
+    if idx != -1:
+        html_content = html_content[idx:]
 
-    # Убираем лишние пробелы и переносы
-    text = re.sub(r'\s+', ' ', text)
+    # 3. Убираем aside/nav/table/details, если они ниже <h1>
+    html_content = re.sub(r'<aside[^>]*>.*?</aside>', '', html_content, flags=re.DOTALL)
+    html_content = re.sub(r'<nav[^>]*>.*?</nav>', '', html_content, flags=re.DOTALL)
+    html_content = re.sub(r'<table[^>]*>.*?</table>', '', html_content, flags=re.DOTALL)
+    html_content = re.sub(r'<details[^>]*>.*?</details>', '', html_content, flags=re.DOTALL)
+
+    # 4. Каждый тег -> перевод строки
+    # Сначала инлайновые - удаляем без следа
+    inline_tags = r'</?(b|i|u|a|strong|em|span|small|sup|sub|code|abbr)[^>]*>'
+    text = re.sub(inline_tags, '', html_content)
+
+    # Потом блочные - заменяем на \n
+    block_tags = r'</?(h[1-6]|p|li|ul|ol|div|br|tr|td|th|blockquote|figure|figcaption|aside|nav|header|footer|section|article)[^>]*>'
+    text = re.sub(block_tags, '\n', text)
+
+    # И на всякий случай - все оставшиеся теги удаляем без замены
+    text = re.sub(r'<[^>]+>', '', text)
+
+    # 5. Схлопываем подряд идущие пробелы и переводы строк, но не одиночные \n
+    text = re.sub(r'[ \t]+', ' ', text)       # много пробелов - один
+    text = re.sub(r' *\n *', '\n', text)      # пробелы вокруг \n убираем
+    text = re.sub(r'\n{2,}', '\n', text)      # двойные \n - один
     text = text.strip()
 
-    # Обрезаем до 100 символов
-    if len(text) > 210:
-        text = text[:207] + "..."
+    # 6. Обрезка
+    lines = [line for line in text.split('\n') if line.strip()]
+    if len(lines) >= 2:
+        text = lines[0] + '\n' + lines[1]
+    else:
+        text = lines[0] if lines else ''
 
     return text
