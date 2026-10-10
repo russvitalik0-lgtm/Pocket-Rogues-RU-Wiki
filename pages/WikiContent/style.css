@@ -513,6 +513,7 @@ body.page-warrior {
     --bg-table-head: #3a2427;
     --bg-table: #241a1c;
     --skill-icon-border: #421219;
+    --border-color: #5a151f;
 }
 
 body.page-warrior .wiki-figure {
@@ -538,6 +539,7 @@ body.page-archer {
     --bg-table-head: #2f4a3a;
     --bg-table: #1f2d24;
     --skill-icon-border: #0e3a21;
+    --border-color: #135a32;
 }
 
 body.page-archer .wiki-figure {
@@ -563,6 +565,7 @@ body.page-berserker {
     --bg-table-head: #4a3f1a;
     --bg-table: #2a2517;
     --skill-icon-border: #493a05;
+    --border-color: #725b08;
 }
 
 body.page-berserker .wiki-figure {
@@ -588,6 +591,7 @@ body.page-hunter {
     --bg-row-even: #241e14;          /* Чуть темнее */
     --bg-table-head: #3d2e1a;        /* Заголовок таблицы */
     --skill-icon-border: #492a0d;
+    --border-color: #5c320c;
 }
 
 body.page-hunter .wiki-figure {
@@ -638,8 +642,5 @@ body.page-camp {
     --bg-row-even: #2a1f15;
     --bg-table-head: #4a3520;
     --bg-table: #251b10;
-}
-
-.camp-infobox {
-    background: #4a3520;
+    --border-color: #522f0c;
 }
