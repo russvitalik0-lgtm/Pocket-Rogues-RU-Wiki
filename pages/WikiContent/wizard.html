@@ -1,10 +1,1007 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>wizard.html</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Маг - Pocket Rogues Wiki</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>wizard</h1>
-    <p>Страница в разработке...</p>
+<body class="page-mage">
+
+    <h1>Маг</h1>
+
+    <!-- ========================================== -->
+    <!-- ИНФОБОКС                                   -->
+    <!-- ========================================== -->
+    <aside class="wiki-infobox">
+        <div class="wiki-infobox__title mage-infobox">Маг</div>
+        <div class="wiki-infobox__image">
+            <img draggable="false" src="WikiImages/koldovskaya_laboratoriya.jpg" alt="Колдовская лаборатория">
+        </div>
+        <div class="wiki-infobox__caption">Колдовская лаборатория</div>
+        <div class="wiki-infobox__header mage-infobox">Характеристики Класса</div>
+        <dl class="wiki-infobox__fields">
+            <div class="wiki-infobox__row">
+                <dt>Классовое оружие:</dt>
+                <dd>Посох</dd>
+            </div>
+            <div class="wiki-infobox__row">
+                <dt>Классовая характеристика:</dt>
+                <dd>Разум</dd>
+            </div>
+            <div class="wiki-infobox__row">
+                <dt><img draggable="false" src="WikiImages/atticon_hp.jpg" alt="" class="att-icon"> Очки Здоровья:</dt>
+                <dd>20</dd>
+            </div>
+            <div class="wiki-infobox__row">
+                <dt><img draggable="false" src="WikiImages/atticon_mp.jpg" alt="" class="att-icon"> Очки Маны:</dt>
+                <dd>30</dd>
+            </div>
+            <div class="wiki-infobox__row">
+                <dt><img draggable="false" src="WikiImages/atticon_damage.jpg" alt="" class="att-icon"> Урон:</dt>
+                <dd>3</dd>
+            </div>
+            <div class="wiki-infobox__row">
+                <dt><img draggable="false" src="WikiImages/atticon_defence.jpg" alt="" class="att-icon"> Защита:</dt>
+                <dd>0</dd>
+            </div>
+        </dl>
+    </aside>
+
+    <!-- ========================================== -->
+    <!-- ВВЕДЕНИЕ И ЦИТАТА                          -->
+    <!-- ========================================== -->
+    <p><strong>Маг</strong> - один из <a href="#" class="wiki-link">игровых классов</a>, доступен при выборе стартовым после обучения, либо после строительства Колдовской лаборатории в <a href="#" class="wiki-link">Крепости</a>. Ориентирован на дальний бой.</p>
+
+    <div class="wiki-content">
+        <blockquote class="wiki-quote">
+            <p>Маг взывает к древним силам из недр мироздания, направляя их на уничтожение целых групп врагов.</p>
+            <p>Также он способен подчинять слабых противников и лечить себя.</p>
+            <footer class="wiki-quote-attr">— <a href="#" class="wiki-link">Внутриигровое описание</a></footer>
+        </blockquote>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ОГЛАВЛЕНИЕ                                 -->
+    <!-- ========================================== -->
+    <nav class="wiki-toc">
+        <div class="wiki-toc-title">Содержание</div>
+        <ol>
+            <li>
+                <a href="#Быстрые_атаки">Быстрые атаки</a>
+                <ol>
+                    <li><a href="#Огненный_шар">Огненный шар</a></li>
+                    <li><a href="#Шаровая_Молния">Шаровая Молния</a></li>
+                    <li><a href="#Клинок_Света">Клинок Света</a></li>
+                </ol>
+            </li>
+            <li>
+                <a href="#Силовые_навыки">Силовые навыки</a>
+                <ol>
+                    <li><a href="#Огненное_дыхание">Огненное дыхание</a></li>
+                    <li><a href="#Ледяной_шип">Ледяной шип</a></li>
+                    <li><a href="#Силовая_волна">Силовая волна</a></li>
+                </ol>
+            </li>
+            <li>
+                <a href="#Особые_навыки">Особые навыки</a>
+                <ol>
+                    <li><a href="#Барьер">Барьер</a></li>
+                    <li><a href="#Подчинение">Подчинение</a></li>
+                    <li><a href="#Восстановление">Восстановление</a></li>
+                </ol>
+            </li>
+            <li><a href="#Интересные_факты">Интересные факты</a></li>
+        </ol>
+    </nav>
+
+    <!-- ========================================== -->
+    <!-- БЫСТРЫЕ АТАКИ                              -->
+    <!-- ========================================== -->
+    <h2 id="Быстрые_атаки">Быстрые атаки</h2>
+
+    <figure class="wiki-figure thumb">
+        <img draggable="false" src="WikiImages/skills_wiz_main_1.jpg" alt="Огненный шар" class="skill-icon">
+        <figcaption><strong>Огненный шар</strong></figcaption>
+    </figure>
+
+    <h3 id="Огненный_шар"><strong>Огненный шар</strong></h3>
+    <p><strong><u>Описание</u>:</strong> <em>"Сгусток маны, принявший форму пламени. Наносит урон огнем и имеет шанс поджечь врага. Освоив лучше этот навык, персонаж сможет создавать огненные шары, которые будут взрываться, нанося урон всем ближайшим целям."</em></p>
+    <ul>
+        <li>Как и любой огненный урон, при попадании по противнику может <a href="#" class="wiki-link">поджечь</a> его. К тому же, огненный урон наносит на 50% больше урона зверям, но не эффективен против демонов</li>
+    </ul>
+
+    <details class="wiki-collapsible">
+        <summary><strong>Огненный шар</strong> — значения по уровням</summary>
+        <div class="wiki-collapsible-content">
+            <div class="wiki-table-wrap">
+                <table class="wiki-table sticky-first-col">
+                    <thead>
+                        <tr>
+                            <th>Эффект/Уровень</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                            <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
+                            <th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+                            <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_vampmp.jpg" alt="" class="att-icon"> Стоимость ОМ</td>
+                            <td colspan="2"><strong>2,3</strong></td>
+                            <td><strong>2,4</strong></td><td><strong>2,5</strong></td><td><strong>2,6</strong></td>
+                            <td><strong>2,7</strong></td><td><strong>2,8</strong></td><td><strong>2,9</strong></td><td><strong>3,0</strong></td><td><strong>3,1</strong></td>
+                            <td colspan="2"><strong>3,2</strong></td>
+                            <td><strong>3,3</strong></td><td><strong>3,4</strong></td><td><strong>3,5</strong></td>
+                            <td><strong>3,6</strong></td><td><strong>3,7</strong></td><td><strong>3,8</strong></td><td><strong>3,9</strong></td><td><strong>4,0</strong></td>
+                            <td colspan="2"><strong>4,1</strong></td>
+                            <td><strong>4,2</strong></td><td><strong>4,3</strong></td><td><strong>4,4</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage.jpg" alt="" class="att-icon"> Наносимый урон</td>
+                            <td>100%</td><td>105%</td><td>110%</td><td>115%</td><td>120%</td>
+                            <td>125%</td><td>130%</td><td>135%</td><td>140%</td><td>145%</td>
+                            <td>150%</td><td>155%</td><td>160%</td><td>165%</td><td>170%</td>
+                            <td>175%</td><td>180%</td><td>185%</td><td>190%</td><td>195%</td>
+                            <td>200%</td><td>205%</td><td>210%</td><td>215%</td><td>220%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_elemmagic.jpg" alt="" class="att-icon"> Урон оружия<br><small>(<a href="#" class="wiki-link">магический</a>)</small></td>
+                            <td>+6%</td><td>+12%</td><td>+18%</td><td>+24%</td><td>+30%</td>
+                            <td>+36%</td><td>+42%</td><td>+48%</td><td>+54%</td><td>+60%</td>
+                            <td>+66%</td><td>+72%</td><td>+78%</td><td>+84%</td><td>+90%</td>
+                            <td>+96%</td><td>+102%</td><td>+108%</td><td>+114%</td><td>+120%</td>
+                            <td>+126%</td><td>+132%</td><td>+138%</td><td>+144%</td><td>+150%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_elemfire.jpg" alt="" class="att-icon"> При исп. навыка <strong><u>X</u></strong>% урона преобр. в <a href="#" class="wiki-link">огненный</a></td>
+                            <td colspan="25" class="text-center"><strong>50%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_explosion.jpg" alt="" class="att-icon"> Создает область взрыва, наносящую ближ. врагам <strong><u>X</u></strong>% урона</td>
+                            <td colspan="11" class="empty-cell">—</td>
+                            <td colspan="7" class="text-center"><strong>50%</strong></td>
+                            <td colspan="6" class="text-center"><strong>65%</strong></td>
+                            <td><strong>80%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damagecrit.jpg" alt="" class="att-icon"> Шанс крит. удара по цели <a href="#" class="wiki-link">в средней броне</a></td>
+                            <td colspan="24" class="empty-cell">—</td>
+                            <td>+25%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <hr>
+
+    <figure class="wiki-figure thumb">
+        <img draggable="false" src="WikiImages/skills_wiz_main_2.jpg" alt="Шаровая Молния" class="skill-icon">
+        <figcaption><strong>Шаровая Молния</strong></figcaption>
+    </figure>
+
+    <h3 id="Шаровая_Молния"><strong>Шаровая Молния</strong></h3>
+    <p><strong><u>Описание</u>:</strong> <em>"Разряд маны, напитанный силой молний. После удара по врагу с некоторым шансом дополнительные разряды ударят и по соседним существам, что особенно полезно против противников, которые стоят в воде. Крайне эффективно против мутантов."</em></p>
+    <ul>
+        <li>Молниевый урон имеет шанс создать электрический разряд, который мгновенно нанесет урон одному или нескольким другим противникам рядом с целью. Молниевый урон наносит на 50% больше повреждений мутантам, но неэффективен против элементалей. Эффективность и область действия электрического разряда существенно увеличена, если цель находится в воде</li>
+    </ul>
+
+    <details class="wiki-collapsible">
+        <summary><strong>Шаровая молния</strong> — значения по уровням</summary>
+        <div class="wiki-collapsible-content">
+            <div class="wiki-table-wrap">
+                <table class="wiki-table sticky-first-col">
+                    <thead>
+                        <tr>
+                            <th>Эффект/Уровень</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                            <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
+                            <th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+                            <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_vampmp.jpg" alt="" class="att-icon"> Стоимость ОМ</td>
+                            <td colspan="2"><strong>2,3</strong></td>
+                            <td><strong>2,4</strong></td><td><strong>2,5</strong></td><td><strong>2,6</strong></td>
+                            <td><strong>2,7</strong></td><td><strong>2,8</strong></td><td><strong>2,9</strong></td><td><strong>3,0</strong></td><td><strong>3,1</strong></td>
+                            <td colspan="2"><strong>3,2</strong></td>
+                            <td><strong>3,3</strong></td><td><strong>3,4</strong></td><td><strong>3,5</strong></td>
+                            <td><strong>3,6</strong></td><td><strong>3,7</strong></td><td><strong>3,8</strong></td><td><strong>3,9</strong></td><td><strong>4,0</strong></td>
+                            <td colspan="2"><strong>4,1</strong></td>
+                            <td><strong>4,2</strong></td><td><strong>4,3</strong></td><td><strong>4,4</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage.jpg" alt="" class="att-icon"> Наносимый урон</td>
+                            <td>100%</td><td>105%</td><td>110%</td><td>115%</td><td>120%</td>
+                            <td>125%</td><td>130%</td><td>135%</td><td>140%</td><td>145%</td>
+                            <td>150%</td><td>155%</td><td>160%</td><td>165%</td><td>170%</td>
+                            <td>175%</td><td>180%</td><td>185%</td><td>190%</td><td>195%</td>
+                            <td>200%</td><td>205%</td><td>210%</td><td>215%</td><td>220%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_elemmagic.jpg" alt="" class="att-icon"> Урон оружия<br><small>(<a href="#" class="wiki-link">магический</a>)</small></td>
+                            <td>+6%</td><td>+12%</td><td>+18%</td><td>+24%</td><td>+30%</td>
+                            <td>+36%</td><td>+42%</td><td>+48%</td><td>+54%</td><td>+60%</td>
+                            <td>+66%</td><td>+72%</td><td>+78%</td><td>+84%</td><td>+90%</td>
+                            <td>+96%</td><td>+102%</td><td>+108%</td><td>+114%</td><td>+120%</td>
+                            <td>+126%</td><td>+132%</td><td>+138%</td><td>+144%</td><td>+150%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_elemelectr.jpg" alt="" class="att-icon"> При исп. навыка <strong><u>X</u></strong>% урона преобр. в <a href="#" class="wiki-link">молниевый</a></td>
+                            <td colspan="25" class="text-center"><strong>50%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_maxneighbours.jpg" alt="" class="att-icon"> Снаряд отскочит <strong><u>X</u></strong> раз(-а) от цели</td>
+                            <td colspan="11" class="empty-cell">—</td>
+                            <td colspan="7" class="text-center"><strong>1 раз</strong></td>
+                            <td colspan="6" class="text-center"><strong>2 раз</strong></td>
+                            <td><strong>3 раз</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damagecrit.jpg" alt="" class="att-icon"> Шанс крит. удара по цели <a href="#" class="wiki-link">в тяжелой броне</a></td>
+                            <td colspan="24" class="empty-cell">—</td>
+                            <td>+25%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <hr>
+
+    <figure class="wiki-figure thumb">
+        <img draggable="false" src="WikiImages/skills_wiz_main_3.jpg" alt="Клинок Света" class="skill-icon">
+        <figcaption><strong>Клинок Света</strong></figcaption>
+    </figure>
+
+    <h3 id="Клинок_Света"><strong>Клинок Света</strong></h3>
+    <p><strong><u>Описание</u>:</strong> <em>"Луч слепяще чистого света, какой редко можно увидеть в подземном мире. Он пронзает плоть и сжигает кости, причиняя невыносимые страдания тем, кому они, казалось бы, давно чужды - нежити и демонам."</em></p>
+    <ul>
+        <li>Святой урон наносит на 25% больше повреждений нежити, демонам и любым призванным существам, а также восстанавливает персонажу немного ОМ при их убийстве. Однако, все остальные существа получают на 20% меньше этого урона</li>
+    </ul>
+
+    <details class="wiki-collapsible">
+        <summary><strong>Клинок Света</strong> — значения по уровням</summary>
+        <div class="wiki-collapsible-content">
+            <div class="wiki-table-wrap">
+                <table class="wiki-table sticky-first-col">
+                    <thead>
+                        <tr>
+                            <th>Эффект/Уровень</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                            <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
+                            <th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+                            <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_vampmp.jpg" alt="" class="att-icon"> Стоимость ОМ</td>
+                            <td colspan="2"><strong>2,3</strong></td>
+                            <td><strong>2,4</strong></td><td><strong>2,5</strong></td><td><strong>2,6</strong></td>
+                            <td><strong>2,7</strong></td><td><strong>2,8</strong></td><td><strong>2,9</strong></td><td><strong>3,0</strong></td><td><strong>3,1</strong></td>
+                            <td colspan="2"><strong>3,2</strong></td>
+                            <td><strong>3,3</strong></td><td><strong>3,4</strong></td><td><strong>3,5</strong></td>
+                            <td><strong>3,6</strong></td><td><strong>3,7</strong></td><td><strong>3,8</strong></td><td><strong>3,9</strong></td><td><strong>4,0</strong></td>
+                            <td colspan="2"><strong>4,1</strong></td>
+                            <td><strong>4,2</strong></td><td><strong>4,3</strong></td><td><strong>4,4</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage.jpg" alt="" class="att-icon"> Наносимый урон</td>
+                            <td>100%</td><td>105%</td><td>110%</td><td>115%</td><td>120%</td>
+                            <td>125%</td><td>130%</td><td>135%</td><td>140%</td><td>145%</td>
+                            <td>150%</td><td>155%</td><td>160%</td><td>165%</td><td>170%</td>
+                            <td>175%</td><td>180%</td><td>185%</td><td>190%</td><td>195%</td>
+                            <td>200%</td><td>205%</td><td>210%</td><td>215%</td><td>220%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_elemmagic.jpg" alt="" class="att-icon"> Урон оружия<br><small>(<a href="#" class="wiki-link">магический</a>)</small></td>
+                            <td>+6%</td><td>+12%</td><td>+18%</td><td>+24%</td><td>+30%</td>
+                            <td>+36%</td><td>+42%</td><td>+48%</td><td>+54%</td><td>+60%</td>
+                            <td>+66%</td><td>+72%</td><td>+78%</td><td>+84%</td><td>+90%</td>
+                            <td>+96%</td><td>+102%</td><td>+108%</td><td>+114%</td><td>+120%</td>
+                            <td>+126%</td><td>+132%</td><td>+138%</td><td>+144%</td><td>+150%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_elemlight.jpg" alt="" class="att-icon"> При исп. навыка <strong><u>X</u></strong>% урона преобр. в <a href="#" class="wiki-link">святой</a></td>
+                            <td colspan="9" class="text-center"><strong>30%</strong></td>
+                            <td colspan="10" class="text-center"><strong>40%</strong></td>
+                            <td colspan="6" class="text-center"><strong>50%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_maxthrow.jpg" alt="" class="att-icon"> Пробивает <strong><u>X</u></strong> цель(-и) насквозь</td>
+                            <td colspan="11" class="text-center"><strong>1 цель</strong></td>
+                            <td colspan="13" class="text-center"><strong>2 цель</strong></td>
+                            <td><strong>3 цель</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damagesec.jpg" alt="" class="att-icon"> Урон за каждую пробитую цель</td>
+                            <td colspan="11" class="empty-cell">—</td>
+                            <td>+10%</td><td>+11%</td><td>+12%</td><td>+13%</td><td>+14%</td>
+                            <td>+15%</td><td>+16%</td><td>+17%</td><td>+18%</td><td>+19%</td>
+                            <td>+20%</td><td>+21%</td><td>+22%</td><td>+23%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damagecrit.jpg" alt="" class="att-icon"> Шанс крит. удара по цели <a href="#" class="wiki-link">в легкой броне</a></td>
+                            <td colspan="24" class="empty-cell">—</td>
+                            <td>+25%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- ========================================== -->
+    <!-- СИЛОВЫЕ НАВЫКИ                             -->
+    <!-- ========================================== -->
+    <h2 id="Силовые_навыки">Силовые навыки</h2>
+
+    <figure class="wiki-figure thumb">
+        <img draggable="false" src="WikiImages/skills_wiz_power_1.jpg" alt="Огненное дыхание" class="skill-icon">
+        <figcaption><strong>Огненное дыхание</strong></figcaption>
+    </figure>
+
+    <h3 id="Огненное_дыхание"><strong>Огненное дыхание</strong></h3>
+    <p><strong><u>Описание</u>:</strong> <em>"Персонаж призывает волну пламени, которая испепеляет перед ним все, до чего может дотянуться. Как и любой огненный урон - крайне опасно для зверей и неэффективно против демонов."</em></p>
+    <ul>
+        <li>Навык активен, пока удерживается кнопка</li>
+        <li>Пламя, создаваемое на месте убитых врагов, не наносит урона самому персонажу и его союзникам</li>
+        <li>Перед первым "тиком" урона есть небольшая задержка, из-за чего не получится наносить урон, быстро кликая по кнопке навыка (до обновления 1.37 это было возможно)</li>
+    </ul>
+
+    <details class="wiki-collapsible">
+        <summary><strong>Огненное дыхание</strong> — значения по уровням</summary>
+        <div class="wiki-collapsible-content">
+            <div class="wiki-table-wrap">
+                <table class="wiki-table sticky-first-col">
+                    <thead>
+                        <tr>
+                            <th>Эффект/Уровень</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                            <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
+                            <th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+                            <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_vampmp.jpg" alt="" class="att-icon"> Стоимость ОМ</td>
+                            <td colspan="3"><strong>0,5</strong></td>
+                            <td colspan="5"><strong>0,6</strong></td>
+                            <td colspan="5"><strong>0,7</strong></td>
+                            <td colspan="5"><strong>0,8</strong></td>
+                            <td colspan="5"><strong>0,9</strong></td>
+                            <td colspan="2"><strong>1,0</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage.jpg" alt="" class="att-icon"> Наносимый урон</td>
+                            <td>45%</td><td>48%</td><td>51%</td><td>54%</td><td>57%</td>
+                            <td>60%</td><td>63%</td><td>66%</td><td>69%</td><td>72%</td>
+                            <td>75%</td><td>78%</td><td>81%</td><td>84%</td><td>87%</td>
+                            <td>90%</td><td>93%</td><td>96%</td><td>99%</td><td>102%</td>
+                            <td>105%</td><td>108%</td><td>111%</td><td>114%</td><td>117%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_elemmagic.jpg" alt="" class="att-icon"> Урон оружия<br><small>(<a href="#" class="wiki-link">магический</a>)</small></td>
+                            <td>+7%</td><td>+14%</td><td>+21%</td><td>+28%</td><td>+35%</td>
+                            <td>+42%</td><td>+49%</td><td>+56%</td><td>+63%</td><td>+70%</td>
+                            <td>+77%</td><td>+84%</td><td>+91%</td><td>+98%</td><td>+105%</td>
+                            <td>+112%</td><td>+119%</td><td>+126%</td><td>+133%</td><td>+140%</td>
+                            <td>+147%</td><td>+154%</td><td>+161%</td><td>+168%</td><td>+175%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_elemfire.jpg" alt="" class="att-icon"> При исп. навыка <strong><u>X</u></strong>% урона преобр. в <a href="#" class="wiki-link">огненный</a></td>
+                            <td colspan="4" class="text-center"><strong>50%</strong></td>
+                            <td colspan="7" class="text-center"><strong>60%</strong></td>
+                            <td colspan="9" class="text-center"><strong>70%</strong></td>
+                            <td colspan="5" class="text-center"><strong>80%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_attackrange.jpg" alt="" class="att-icon"> Область действия</td>
+                            <td colspan="11" class="empty-cell">—</td>
+                            <td>110%</td><td>115%</td><td>120%</td><td>125%</td><td>130%</td>
+                            <td>135%</td><td>140%</td><td>145%</td><td>150%</td><td>155%</td>
+                            <td>160%</td><td>165%</td><td>170%</td><td>175%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_spawnobject.jpg" alt="" class="att-icon"> Создает Пламя, кот. наносит <strong><u>X</u></strong>% урона персонажа за каждого убитого врага с шансом в 40%</td>
+                            <td colspan="24" class="empty-cell">—</td>
+                            <td><strong>50%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <hr>
+
+    <figure class="wiki-figure thumb">
+        <img draggable="false" src="WikiImages/skills_wiz_power_2.jpg" alt="Ледяной шип" class="skill-icon">
+        <figcaption><strong>Ледяной шип</strong></figcaption>
+    </figure>
+
+    <h3 id="Ледяной_шип"><strong>Ледяной шип</strong></h3>
+    <p><strong><u>Описание</u>:</strong> <em>"Мощная атака, которая сосредотачивает магическую энергию в убийственно острой глыбе льда, рассекающей плоть врагов, как бумагу. Лед настолько холодный, что может заморозить врага, по которому ударит, что особенно полезно в бою с демонами. Если влить в эту ледышку достаточно сил, она даже сможет прошибить врага насквозь."</em></p>
+    <ul>
+        <li>Ледяной урон имеет шанс наложить <a href="#" class="wiki-link">Обморожение</a> на противника. Он наносит на 50% больше повреждений демонам, но менее эффективен против механизмов</li>
+    </ul>
+
+    <details class="wiki-collapsible">
+        <summary><strong>Ледяной шип</strong> — значения по уровням</summary>
+        <div class="wiki-collapsible-content">
+            <div class="wiki-table-wrap">
+                <table class="wiki-table sticky-first-col">
+                    <thead>
+                        <tr>
+                            <th>Эффект/Уровень</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                            <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
+                            <th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+                            <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_vampmp.jpg" alt="" class="att-icon"> Стоимость ОМ</td>
+                            <td><strong>3,0</strong></td><td><strong>3,1</strong></td><td><strong>3,2</strong></td><td><strong>3,4</strong></td><td><strong>3,5</strong></td>
+                            <td><strong>3,6</strong></td><td><strong>3,7</strong></td><td><strong>3,8</strong></td><td><strong>4,0</strong></td><td><strong>4,1</strong></td>
+                            <td><strong>4,2</strong></td><td><strong>4,3</strong></td><td><strong>4,4</strong></td><td><strong>4,6</strong></td><td><strong>4,7</strong></td>
+                            <td><strong>4,8</strong></td><td><strong>4,9</strong></td><td><strong>5,0</strong></td><td><strong>5,2</strong></td><td><strong>5,3</strong></td>
+                            <td><strong>5,4</strong></td><td><strong>5,5</strong></td><td><strong>5,6</strong></td><td><strong>5,8</strong></td><td><strong>5,9</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage.jpg" alt="" class="att-icon"> Наносимый урон</td>
+                            <td>125%</td><td>132%</td><td>139%</td><td>146%</td><td>153%</td>
+                            <td>160%</td><td>167%</td><td>174%</td><td>181%</td><td>188%</td>
+                            <td>195%</td><td>202%</td><td>209%</td><td>216%</td><td>223%</td>
+                            <td>230%</td><td>237%</td><td>244%</td><td>251%</td><td>258%</td>
+                            <td>265%</td><td>272%</td><td>279%</td><td>286%</td><td>293%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_elemmagic.jpg" alt="" class="att-icon"> Урон оружия<br><small>(<a href="#" class="wiki-link">магический</a>)</small></td>
+                            <td>+6%</td><td>+12%</td><td>+18%</td><td>+24%</td><td>+30%</td>
+                            <td>+36%</td><td>+42%</td><td>+48%</td><td>+54%</td><td>+60%</td>
+                            <td>+66%</td><td>+72%</td><td>+78%</td><td>+84%</td><td>+90%</td>
+                            <td>+96%</td><td>+102%</td><td>+108%</td><td>+114%</td><td>+120%</td>
+                            <td>+126%</td><td>+132%</td><td>+138%</td><td>+144%</td><td>+150%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_elemice.jpg" alt="" class="att-icon"> При исп. навыка <strong><u>X</u></strong>% урона преобр. в <a href="#" class="wiki-link">ледяной</a></td>
+                            <td colspan="25" class="text-center"><strong>50%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <details class="wiki-collapsible">
+        <summary><strong>Ледяной шип</strong> — заряженная версия</summary>
+        <div class="wiki-collapsible-content">
+            <div class="wiki-table-wrap">
+                <table class="wiki-table sticky-first-col">
+                    <thead>
+                        <tr>
+                            <th>Эффект/Уровень</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                            <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
+                            <th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+                            <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_movespeed.jpg" alt="" class="att-icon"> Скор. передвижения</td>
+                            <td colspan="25" class="text-center"><strong>-50%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_vampmp.jpg" alt="" class="att-icon"> Реген. ОМ</td>
+                            <td colspan="25" class="text-center"><strong>-120%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage.jpg" alt="" class="att-icon"> Наносимый урон</td>
+                            <td>135%</td><td>143%</td><td>151%</td><td>159%</td><td>167%</td>
+                            <td>175%</td><td>183%</td><td>191%</td><td>199%</td><td>207%</td>
+                            <td>215%</td><td>223%</td><td>231%</td><td>239%</td><td>247%</td>
+                            <td>255%</td><td>263%</td><td>271%</td><td>279%</td><td>287%</td>
+                            <td>295%</td><td>303%</td><td>311%</td><td>319%</td><td>327%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_elemmagic.jpg" alt="" class="att-icon"> Урон оружия<br><small>(<a href="#" class="wiki-link">магический</a>)</small></td>
+                            <td>+7%</td><td>+14%</td><td>+21%</td><td>+28%</td><td>+35%</td>
+                            <td>+42%</td><td>+49%</td><td>+56%</td><td>+63%</td><td>+70%</td>
+                            <td>+77%</td><td>+84%</td><td>+91%</td><td>+98%</td><td>+105%</td>
+                            <td>+112%</td><td>+119%</td><td>+126%</td><td>+133%</td><td>+140%</td>
+                            <td>+147%</td><td>+154%</td><td>+161%</td><td>+168%</td><td>+175%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_elemice.jpg" alt="" class="att-icon"> При исп. навыка <strong><u>X</u></strong>% урона преобр. в <a href="#" class="wiki-link">ледяной</a></td>
+                            <td colspan="25" class="text-center"><strong>75%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_maxthrow.jpg" alt="" class="att-icon"> Пробивает <strong><u>X</u></strong> цель(-и) насквозь</td>
+                            <td colspan="5" class="empty-cell">—</td>
+                            <td colspan="9" class="text-center"><strong>1 цель</strong></td>
+                            <td colspan="10" class="text-center"><strong>2 цели</strong></td>
+                            <td><strong>3 цель</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damagesec.jpg" alt="" class="att-icon"> Урон за каждую пробитую цель</td>
+                            <td colspan="11" class="empty-cell">—</td>
+                            <td>+20%</td><td>+23%</td><td>+26%</td><td>+29%</td><td>+32%</td>
+                            <td>+35%</td><td>+38%</td><td>+41%</td><td>+44%</td><td>+47%</td>
+                            <td>+50%</td><td>+53%</td><td>+56%</td><td>+59%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_projectilespeed.jpg" alt="" class="att-icon"> Скорость снаряда</td>
+                            <td colspan="25" class="text-center">180%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_projectilesize.jpg" alt="" class="att-icon"> Размер снаряда</td>
+                            <td colspan="25" class="text-center">125%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_explosion.jpg" alt="" class="att-icon"> <strong>[Заряд (II)]:</strong> Создает область взрыва, наносящую ближ. врагам <strong><u>X</u></strong>% урона</td>
+                            <td colspan="24" class="empty-cell">—</td>
+                            <td><strong>50%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <hr>
+
+    <figure class="wiki-figure thumb">
+        <img draggable="false" src="WikiImages/skills_wiz_power_3.jpg" alt="Силовая волна" class="skill-icon">
+        <figcaption><strong>Силовая волна</strong></figcaption>
+    </figure>
+
+    <h3 id="Силовая_волна"><strong>Силовая волна</strong></h3>
+    <p><strong><u>Описание</u>:</strong> <em>"Персонаж накапливает заряд чистой силы и выплескивает его вокруг себя, отталкивая всех врагов. Подготовившись и вложив дополнительную ману в этот навык, можно нанести дробящий урон каждому врагу в зоне досягаемости."</em></p>
+
+    <details class="wiki-collapsible">
+        <summary><strong>Силовая волна</strong> — значения по уровням</summary>
+        <div class="wiki-collapsible-content">
+            <div class="wiki-table-wrap">
+                <table class="wiki-table sticky-first-col">
+                    <thead>
+                        <tr>
+                            <th>Эффект/Уровень</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                            <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
+                            <th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+                            <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_vampmp.jpg" alt="" class="att-icon"> Стоимость ОМ</td>
+                            <td colspan="2"><strong>2,3</strong></td>
+                            <td><strong>2,4</strong></td><td><strong>2,5</strong></td><td><strong>2,6</strong></td>
+                            <td><strong>2,7</strong></td><td><strong>2,8</strong></td><td><strong>2,9</strong></td><td><strong>3,0</strong></td><td><strong>3,1</strong></td>
+                            <td colspan="2"><strong>3,2</strong></td>
+                            <td><strong>3,3</strong></td><td><strong>3,4</strong></td><td><strong>3,5</strong></td>
+                            <td><strong>3,6</strong></td><td><strong>3,7</strong></td><td><strong>3,8</strong></td><td><strong>3,9</strong></td><td><strong>4,0</strong></td>
+                            <td colspan="2"><strong>4,1</strong></td>
+                            <td><strong>4,2</strong></td><td><strong>4,3</strong></td><td><strong>4,4</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage.jpg" alt="" class="att-icon"> Наносимый урон</td>
+                            <td colspan="25" class="text-center">0%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_pushtarget.jpg" alt="" class="att-icon"> Отталкивание</td>
+                            <td>300</td><td>302</td><td>304</td><td>306</td><td>308</td>
+                            <td>310</td><td>312</td><td>314</td><td>316</td><td>318</td>
+                            <td>320</td><td>322</td><td>324</td><td>326</td><td>328</td>
+                            <td>330</td><td>332</td><td>334</td><td>336</td><td>338</td>
+                            <td>340</td><td>342</td><td>344</td><td>346</td><td>348</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_attackrange.jpg" alt="" class="att-icon"> Область действия</td>
+                            <td>400%</td><td>403%</td><td>406%</td><td>409%</td><td>412%</td>
+                            <td>415%</td><td>418%</td><td>421%</td><td>424%</td><td>427%</td>
+                            <td>430%</td><td>433%</td><td>436%</td><td>439%</td><td>442%</td>
+                            <td>445%</td><td>448%</td><td>451%</td><td>454%</td><td>457%</td>
+                            <td>460%</td><td>463%</td><td>466%</td><td>469%</td><td>472%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_adddebuff.jpg" alt="" class="att-icon"> Цель на <strong><u>N</u></strong> с. получ. эффект с шансом в <strong><u>X</u></strong>%: <a href="#" class="wiki-link">Замедление</a> (50%)</td>
+                            <td colspan="11" class="empty-cell">—</td>
+                            <td><strong>20%</strong><br><strong>5 с.</strong></td>
+                            <td><strong>21%</strong><br><strong>5,2 с.</strong></td>
+                            <td><strong>22%</strong><br><strong>5,4 с.</strong></td>
+                            <td><strong>23%</strong><br><strong>5,6 с.</strong></td>
+                            <td><strong>24%</strong><br><strong>5,8 с.</strong></td>
+                            <td><strong>25%</strong><br><strong>6 с.</strong></td>
+                            <td><strong>26%</strong><br><strong>6,2 с.</strong></td>
+                            <td><strong>27%</strong><br><strong>6,4 с.</strong></td>
+                            <td><strong>28%</strong><br><strong>6,6 с.</strong></td>
+                            <td><strong>29%</strong><br><strong>6,8 с.</strong></td>
+                            <td><strong>30%</strong><br><strong>7 с.</strong></td>
+                            <td><strong>31%</strong><br><strong>7,2 с.</strong></td>
+                            <td><strong>32%</strong><br><strong>7,4 с.</strong></td>
+                            <td><strong>33%</strong><br><strong>7,6 с.</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_adddebuff.jpg" alt="" class="att-icon"> Цель на 4 с. получ. эффект с шансом в <strong><u>X</u></strong>%: <a href="#" class="wiki-link">Оглушение</a></td>
+                            <td colspan="24" class="empty-cell">—</td>
+                            <td><strong>20%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <details class="wiki-collapsible">
+        <summary><strong>Силовая волна</strong> — заряженная версия</summary>
+        <div class="wiki-collapsible-content">
+            <div class="wiki-table-wrap">
+                <table class="wiki-table sticky-first-col">
+                    <thead>
+                        <tr>
+                            <th>Эффект/Уровень</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                            <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
+                            <th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+                            <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_movespeed.jpg" alt="" class="att-icon"> Скор. передвижения</td>
+                            <td colspan="25" class="text-center"><strong>-20%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_vampmp.jpg" alt="" class="att-icon"> Реген. ОМ</td>
+                            <td colspan="25" class="text-center"><strong>-110%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_elemmagic.jpg" alt="" class="att-icon"> Урон оружия<br><small>(<a href="#" class="wiki-link">магический</a>)</small></td>
+                            <td>+52%</td><td>+54%</td><td>+56%</td><td>+58%</td><td>+60%</td>
+                            <td>+62%</td><td>+64%</td><td>+66%</td><td>+68%</td><td>+70%</td>
+                            <td>+72%</td><td>+74%</td><td>+76%</td><td>+78%</td><td>+80%</td>
+                            <td>+82%</td><td>+84%</td><td>+86%</td><td>+88%</td><td>+90%</td>
+                            <td>+92%</td><td>+94%</td><td>+96%</td><td>+98%</td><td>+100%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_pushtarget.jpg" alt="" class="att-icon"> Отталкивание</td>
+                            <td>353</td><td>356</td><td>359</td><td>362</td><td>365</td>
+                            <td>368</td><td>371</td><td>374</td><td>377</td><td>380</td>
+                            <td>383</td><td>386</td><td>389</td><td>392</td><td>395</td>
+                            <td>398</td><td>401</td><td>404</td><td>407</td><td>410</td>
+                            <td>413</td><td>416</td><td>419</td><td>422</td><td>425</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_physblunge.jpg" alt="" class="att-icon"> При исп. навыка <strong><u>X</u></strong>% урона преобр. в <a href="#" class="wiki-link">дробящий</a></td>
+                            <td colspan="25" class="text-center"><strong>50%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_attackrange.jpg" alt="" class="att-icon"> Область действия</td>
+                            <td>454%</td><td>458%</td><td>462%</td><td>466%</td><td>470%</td>
+                            <td>474%</td><td>478%</td><td>482%</td><td>486%</td><td>490%</td>
+                            <td>494%</td><td>498%</td><td>502%</td><td>506%</td><td>510%</td>
+                            <td>514%</td><td>518%</td><td>522%</td><td>526%</td><td>530%</td>
+                            <td>534%</td><td>538%</td><td>542%</td><td>546%</td><td>550%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_adddebuff.jpg" alt="" class="att-icon"> Цель на <strong><u>N</u></strong> с. получ. эффект с шансом в <strong><u>X</u></strong>%: <a href="#" class="wiki-link">Замедление</a> (50%)</td>
+                            <td colspan="11" class="empty-cell">—</td>
+                            <td><strong>25%</strong><br><strong>5 с.</strong></td>
+                            <td><strong>27%</strong><br><strong>5,2 с.</strong></td>
+                            <td><strong>29%</strong><br><strong>5,4 с.</strong></td>
+                            <td><strong>31%</strong><br><strong>5,6 с.</strong></td>
+                            <td><strong>33%</strong><br><strong>5,8 с.</strong></td>
+                            <td><strong>35%</strong><br><strong>6 с.</strong></td>
+                            <td><strong>37%</strong><br><strong>6,2 с.</strong></td>
+                            <td><strong>39%</strong><br><strong>6,4 с.</strong></td>
+                            <td><strong>41%</strong><br><strong>6,6 с.</strong></td>
+                            <td><strong>43%</strong><br><strong>6,8 с.</strong></td>
+                            <td><strong>45%</strong><br><strong>7 с.</strong></td>
+                            <td><strong>47%</strong><br><strong>7,2 с.</strong></td>
+                            <td><strong>49%</strong><br><strong>7,4 с.</strong></td>
+                            <td><strong>51%</strong><br><strong>7,6 с.</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_adddebuff.jpg" alt="" class="att-icon"> Цель на 4 с. получ. эффект с шансом в <strong><u>X</u></strong>%: <a href="#" class="wiki-link">Оглушение</a></td>
+                            <td colspan="24" class="empty-cell">—</td>
+                            <td><strong>28%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- ========================================== -->
+    <!-- ОСОБЫЕ НАВЫКИ                              -->
+    <!-- ========================================== -->
+    <h2 id="Особые_навыки">Особые навыки</h2>
+
+    <figure class="wiki-figure thumb">
+        <img draggable="false" src="WikiImages/skills_wiz_spec_1.jpg" alt="Барьер" class="skill-icon">
+        <figcaption><strong>Барьер</strong></figcaption>
+    </figure>
+
+    <h3 id="Барьер"><strong>Барьер</strong></h3>
+    <p><strong><u>Описание</u>:</strong> <em>"Персонаж окутывает себя защитным сиянием, поглощающим часть получаемого урона за счет маны."</em></p>
+    <ul>
+        <li>Переключаемый навык: после первого нажатия он активен, и прерывается, если повторно нажать на кнопку</li>
+    </ul>
+
+    <details class="wiki-collapsible">
+        <summary><strong>Барьер</strong> — значения по уровням</summary>
+        <div class="wiki-collapsible-content">
+            <div class="wiki-table-wrap">
+                <table class="wiki-table sticky-first-col">
+                    <thead>
+                        <tr>
+                            <th>Эффект/Уровень</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                            <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
+                            <th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+                            <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_vampmp.jpg" alt="" class="att-icon"> Стоимость ОМ</td>
+                            <td><strong>3,0</strong></td><td><strong>3,1</strong></td><td><strong>3,2</strong></td><td><strong>3,4</strong></td><td><strong>3,5</strong></td>
+                            <td><strong>3,6</strong></td><td><strong>3,7</strong></td><td><strong>3,8</strong></td><td><strong>4,0</strong></td><td><strong>4,1</strong></td>
+                            <td><strong>4,2</strong></td><td><strong>4,3</strong></td><td><strong>4,4</strong></td><td><strong>4,6</strong></td><td><strong>4,7</strong></td>
+                            <td><strong>4,8</strong></td><td><strong>4,9</strong></td><td><strong>5,0</strong></td><td><strong>5,2</strong></td><td><strong>5,3</strong></td>
+                            <td><strong>5,4</strong></td><td><strong>5,5</strong></td><td><strong>5,6</strong></td><td><strong>5,8</strong></td><td><strong>5,9</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_vampmp.jpg" alt="" class="att-icon"> Реген. ОМ</td>
+                            <td colspan="25" class="text-center"><strong>-4/с.</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_mpreduceongetdamage.jpg" alt="" class="att-icon"> Каждый получ. удар снижает ОМ</td>
+                            <td>150%</td><td>146%</td><td>142%</td><td>138%</td><td>134%</td>
+                            <td>130%</td><td>126%</td><td>122%</td><td>118%</td><td>114%</td>
+                            <td>110%</td><td>106%</td><td>102%</td><td>98%</td><td>94%</td>
+                            <td>90%</td><td>86%</td><td>82%</td><td>78%</td><td>74%</td>
+                            <td>70%</td><td>66%</td><td>62%</td><td>58%</td><td>54%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_resistphysdamage.jpg" alt="" class="att-icon"> Получ. <a href="#" class="wiki-link">физ.</a> урон снижен на</td>
+                            <td>76%</td><td>77%</td><td>78%</td><td>79%</td><td>80%</td>
+                            <td>81%</td><td>82%</td><td>83%</td><td>84%</td><td>85%</td>
+                            <td>86%</td><td>87%</td><td>88%</td><td>89%</td><td>90%</td>
+                            <td>91%</td><td>92%</td><td>93%</td><td>94%</td><td>95%</td>
+                            <td>96%</td><td>97%</td><td>98%</td><td>99%</td><td>100%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_shieldblock_magic.jpg" alt="" class="att-icon"> Получ. <a href="#" class="wiki-link">маг.</a> урон снижен на</td>
+                            <td colspan="7" class="empty-cell">—</td>
+                            <td colspan="4" class="text-center">30%</td>
+                            <td colspan="4" class="text-center">35%</td>
+                            <td colspan="4" class="text-center">40%</td>
+                            <td colspan="5" class="text-center">45%</td>
+                            <td>50%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_shieldblock_elemental.jpg" alt="" class="att-icon"> Получ. <a href="#" class="wiki-link">стих.</a> урон снижен на</td>
+                            <td colspan="13" class="empty-cell">—</td>
+                            <td colspan="4" class="text-center">30%</td>
+                            <td colspan="4" class="text-center">35%</td>
+                            <td colspan="3" class="text-center">40%</td>
+                            <td>50%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_mirror.jpg" alt="" class="att-icon"> Получ. урон отражается врагу</td>
+                            <td colspan="11" class="empty-cell">—</td>
+                            <td>50%</td><td>60%</td><td>70%</td><td>80%</td><td>90%</td>
+                            <td>100%</td><td>110%</td><td>120%</td><td>130%</td><td>140%</td>
+                            <td>150%</td><td>160%</td><td>170%</td><td>180%</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_elemmagic.jpg" alt="" class="att-icon"> [При деакт-ии]: Создает область взрыва, наносящую ближ. врагам <strong><u>X</u></strong> урона</td>
+                            <td colspan="24" class="empty-cell">—</td>
+                            <td><strong>125%</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <hr>
+
+    <figure class="wiki-figure thumb">
+        <img draggable="false" src="WikiImages/skills_wiz_spec_2.jpg" alt="Подчинение" class="skill-icon">
+        <figcaption><strong>Подчинение</strong></figcaption>
+    </figure>
+
+    <h3 id="Подчинение"><strong>Подчинение</strong></h3>
+    <p><strong><u>Описание</u>:</strong> <em>"Персонаж на время подчиняет сопоставимого с собой по силе монстра, заставляя его сражаться на своей стороне. Чем выше уровень навыка - тем выше шанс подчинить монстра, чей уровень выше уровня мага."</em></p>
+
+    <details class="wiki-collapsible">
+        <summary><strong>Подчинение</strong> — значения по уровням</summary>
+        <div class="wiki-collapsible-content">
+            <div class="wiki-table-wrap">
+                <table class="wiki-table sticky-first-col">
+                    <thead>
+                        <tr>
+                            <th>Эффект/Уровень</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                            <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
+                            <th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+                            <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_vampmp.jpg" alt="" class="att-icon"> Стоимость ОМ</td>
+                            <td><strong>6,0</strong></td><td><strong>6,2</strong></td><td><strong>6,5</strong></td><td><strong>6,7</strong></td><td><strong>7,0</strong></td>
+                            <td><strong>7,2</strong></td><td><strong>7,4</strong></td><td><strong>7,7</strong></td><td><strong>7,9</strong></td><td><strong>8,2</strong></td>
+                            <td><strong>8,4</strong></td><td><strong>8,6</strong></td><td><strong>8,9</strong></td><td><strong>9,1</strong></td><td><strong>9,4</strong></td>
+                            <td><strong>9,6</strong></td><td><strong>9,8</strong></td><td><strong>10,1</strong></td><td><strong>10,3</strong></td><td><strong>10,6</strong></td>
+                            <td><strong>10,8</strong></td><td><strong>11,0</strong></td><td><strong>11,3</strong></td><td><strong>11,5</strong></td><td><strong>11,8</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="26" class="text-center"><img draggable="false" src="WikiImages/atticon_controloff.jpg" alt="" class="att-icon"> <strong>[УДЕРЖАНИЕ]:</strong> Отпустить подчиненное существо</td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_addbuff.jpg" alt="" class="att-icon"> Персонаж на <strong><u>N</u></strong> с. получает эффект: <a href="#" class="wiki-link">Подчинение</a></td>
+                            <td><strong>9 с.</strong></td><td><strong>10 с.</strong></td><td><strong>11 с.</strong></td><td><strong>12 с.</strong></td><td><strong>13 с.</strong></td>
+                            <td><strong>14 с.</strong></td><td><strong>15 с.</strong></td><td><strong>16 с.</strong></td><td><strong>17 с.</strong></td><td><strong>18 с.</strong></td>
+                            <td><strong>19 с.</strong></td><td><strong>20 с.</strong></td><td><strong>21 с.</strong></td><td><strong>22 с.</strong></td><td><strong>23 с.</strong></td>
+                            <td><strong>24 с.</strong></td><td><strong>25 с.</strong></td><td><strong>26 с.</strong></td><td><strong>27 с.</strong></td><td><strong>28 с.</strong></td>
+                            <td><strong>29 с.</strong></td><td><strong>30 с.</strong></td><td><strong>31 с.</strong></td><td><strong>32 с.</strong></td><td><strong>33 с.</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_summonlvl.jpg" alt="" class="att-icon"> Модиф-р уровня подчинения</td>
+                            <td>+7</td><td>+9</td><td>+11</td><td>+13</td><td>+15</td>
+                            <td>+17</td><td>+19</td><td>+21</td><td>+23</td><td>+25</td>
+                            <td>+27</td><td>+29</td><td>+31</td><td>+33</td><td>+35</td>
+                            <td>+37</td><td>+39</td><td>+41</td><td>+43</td><td>+45</td>
+                            <td>+47</td><td>+49</td><td>+51</td><td>+53</td><td>+55</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <hr>
+
+    <figure class="wiki-figure thumb">
+        <img draggable="false" src="WikiImages/skills_wiz_spec_3.jpg" alt="Восстановление" class="skill-icon">
+        <figcaption><strong>Восстановление</strong></figcaption>
+    </figure>
+
+    <h3 id="Восстановление"><strong>Восстановление</strong></h3>
+    <p><strong><u>Описание</u>:</strong> <em>"Персонаж тратит значительное количество маны, восстанавливая часть собственного здоровья. После улучшения навыка появится возможность вложить в него еще больше магии, чтобы вылечить всех ближайших союзников."</em></p>
+
+    <details class="wiki-collapsible">
+        <summary><strong>Восстановление</strong> — значения по уровням</summary>
+        <div class="wiki-collapsible-content">
+            <div class="wiki-table-wrap">
+                <table class="wiki-table sticky-first-col">
+                    <thead>
+                        <tr>
+                            <th>Эффект/Уровень</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                            <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
+                            <th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+                            <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_vampmp.jpg" alt="" class="att-icon"> Стоимость ОМ</td>
+                            <td><strong>3,8</strong></td><td><strong>3,9</strong></td><td><strong>4,1</strong></td><td><strong>4,2</strong></td><td><strong>4,4</strong></td>
+                            <td><strong>4,5</strong></td><td><strong>4,7</strong></td><td><strong>4,8</strong></td><td><strong>5,0</strong></td><td><strong>5,1</strong></td>
+                            <td><strong>5,3</strong></td><td><strong>5,4</strong></td><td><strong>5,6</strong></td><td><strong>5,7</strong></td><td><strong>5,9</strong></td>
+                            <td><strong>6,0</strong></td><td><strong>6,2</strong></td><td><strong>6,3</strong></td><td><strong>6,5</strong></td><td><strong>6,6</strong></td>
+                            <td><strong>6,8</strong></td><td><strong>6,9</strong></td><td><strong>7,1</strong></td><td><strong>7,2</strong></td><td><strong>7,4</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_hp.jpg" alt="" class="att-icon"> Мгновенно восст. ОЗ</td>
+                            <td colspan="4" class="text-center"><strong>2</strong></td>
+                            <td colspan="5" class="text-center"><strong>3</strong></td>
+                            <td colspan="5" class="text-center"><strong>4</strong></td>
+                            <td colspan="5" class="text-center"><strong>5</strong></td>
+                            <td colspan="5" class="text-center"><strong>6</strong></td>
+                            <td><strong>7</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_addbuff.jpg" alt="" class="att-icon"> Время действия всех актив-х негативных эффектов снижено на <strong><u>N</u></strong> с.</td>
+                            <td colspan="24" class="empty-cell">—</td>
+                            <td>-1 с.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <details class="wiki-collapsible">
+        <summary><strong>Восстановление</strong> — заряженная версия</summary>
+        <div class="wiki-collapsible-content">
+            <div class="wiki-table-wrap">
+                <table class="wiki-table sticky-first-col">
+                    <thead>
+                        <tr>
+                            <th>Эффект/Уровень</th>
+                            <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                            <th>6</th><th>7</th><th>8</th><th>9</th><th>10</th>
+                            <th>11</th><th>12</th><th>13</th><th>14</th><th>15</th>
+                            <th>16</th><th>17</th><th>18</th><th>19</th><th>20</th>
+                            <th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_movespeed.jpg" alt="" class="att-icon"> Скор. передвижения</td>
+                            <td colspan="25" class="text-center"><strong>-50%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_vampmp.jpg" alt="" class="att-icon"> Реген. ОМ</td>
+                            <td colspan="25" class="text-center"><strong>-120%</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_hp.jpg" alt="" class="att-icon"> Мгновенно восст. ОЗ</td>
+                            <td><strong>6</strong></td><td><strong>7</strong></td><td><strong>8</strong></td><td><strong>9</strong></td><td><strong>10</strong></td>
+                            <td><strong>11</strong></td><td><strong>12</strong></td><td><strong>13</strong></td><td><strong>14</strong></td><td><strong>15</strong></td>
+                            <td><strong>16</strong></td><td><strong>17</strong></td><td><strong>18</strong></td><td><strong>19</strong></td><td><strong>20</strong></td>
+                            <td><strong>21</strong></td><td><strong>22</strong></td><td><strong>23</strong></td><td><strong>24</strong></td><td><strong>25</strong></td>
+                            <td><strong>26</strong></td><td><strong>27</strong></td><td><strong>28</strong></td><td><strong>29</strong></td><td><strong>30</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_groupbuff.jpg" alt="" class="att-icon"> <strong>[Заряд (II)]:</strong> Восст. ОЗ всем ближайшим живым союзникам</td>
+                            <td colspan="11" class="empty-cell">—</td>
+                            <td><strong>19</strong></td><td><strong>20</strong></td><td><strong>21</strong></td><td><strong>22</strong></td><td><strong>23</strong></td>
+                            <td><strong>24</strong></td><td><strong>25</strong></td><td><strong>26</strong></td><td><strong>27</strong></td><td><strong>28</strong></td>
+                            <td><strong>29</strong></td><td><strong>30</strong></td><td><strong>31</strong></td><td><strong>32</strong></td>
+                        </tr>
+                        <tr>
+                            <td><img draggable="false" src="WikiImages/atticon_damage_addbuff.jpg" alt="" class="att-icon"> <strong>[Заряд (II)]:</strong> Время действия всех актив-х негативных эффектов снижено на <strong><u>N</u></strong> с.</td>
+                            <td colspan="24" class="empty-cell">—</td>
+                            <td>-3 с.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </details>
+
+    <!-- ========================================== -->
+    <!-- ИНТЕРЕСНЫЕ ФАКТЫ                           -->
+    <!-- ========================================== -->
+    <h2 id="Интересные_факты">Интересные факты</h2>
+    <div class="wiki-notes">
+        <ul>
+            <li>Классовое оружие Мага - посохи, но он может без штрафов использовать и жезлы (классовое оружие Некроманта)</li>
+            <li>Фолианты повышают запас ОМ и снижают ее расход на применение навыков. Некромант может использовать фолианты Мага, но Маг не может использовать его гримуары - так как те влияют только на призываемую нежить</li>
+            <li>В обновлении 1.37 часть навыков Мага была изменена: вместо Силовой волны он обладал навыком Инферно (этот навык просто наносил урон в области), а вместо Ледяного шипа - Чума (навык превращал всю кровь рядом с персонажем в яд и наоборот; этот навык обосновано считался самым бесполезным в игре)</li>
+            <li>До обновления 1.37 "Огненное дыхание" называлось "Адское пламя", а сам навык не имел пиксельной стилизации, из-за чего заметно выбивался из общего стиля</li>
+            <li>Чистый магический урон - основной для всех навыков Мага, не считая доп. типы - наносит на 20% больше урона механизмам и элементалям</li>
+        </ul>
+    </div>
+
 </body>
 </html>

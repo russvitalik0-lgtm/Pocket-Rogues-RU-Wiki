@@ -594,3 +594,28 @@ body.page-hunter .skill-icon {
 .hunter-infobox {
     background: #3d2e1a;             /* Тёмный фон для заголовков инфобокса */
 }
+
+/* Маг */
+body.page-mage {
+    --accent-link: #4a7fb5;          /* Синий магический */
+    --accent-link-hover: #6ba3d6;    /* Светлее при наведении */
+    --quote-border: #4a7fb5;
+    --quote-bg: #4a7fb50D;
+    --skill-icon-border: #243f5c;    /* Темнее quote-bg */
+    --bg-table: #0f1a24;             /* Очень тёмный синий (тусклее строк) */
+    --bg-row-odd: #1a2d3d;           /* Тёмно-синий */
+    --bg-row-even: #152533;          /* Чуть темнее */
+    --bg-table-head: #243f5c;        /* Заголовок таблицы */
+}
+
+body.page-mage .wiki-figure {
+    background: var(--quote-bg);
+    border: 1px solid var(--quote-border);
+}
+body.page-mage .skill-icon {
+    border: 1px solid var(--skill-icon-border);
+}
+
+.mage-infobox {
+    background: #243f5c;             /* Тёмный фон для заголовков инфобокса */
+}
