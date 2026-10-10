@@ -16,6 +16,7 @@
     --font-main: sans-serif;         /* Основной шрифт */
     --bg-row-even: #2a2a2a;
     --bg-row-odd: #2d2d2d;
+    --glow-color: #0085a3;
 }
 
 body {
@@ -481,6 +482,7 @@ body.page-necromancer {
     --bg-table-head: #3a2f4a;
     --bg-table: #251f2f;
     --skill-icon-border: #3a1e57;
+    --border-color: #4b2274;
 }
 
 body.page-necromancer .wiki-figure {
@@ -596,16 +598,22 @@ body.page-hunter .skill-icon {
 }
 
 /* Маг */
+/* ===== Маг ===== */
 body.page-mage {
-    --accent-link: #4a7fb5;          /* Синий магический */
-    --accent-link-hover: #6ba3d6;    /* Светлее при наведении */
-    --quote-border: #4a7fb5;
-    --quote-bg: #4a7fb50D;
-    --skill-icon-border: #243f5c;    /* Темнее quote-bg */
-    --bg-table: #0f1a24;             /* Очень тёмный синий (тусклее строк) */
-    --bg-row-odd: #1a2d3d;           /* Тёмно-синий */
-    --bg-row-even: #152533;          /* Чуть темнее */
-    --bg-table-head: #243f5c;        /* Заголовок таблицы */
+    --accent-link: #006994;          /* Глубокий океанический синий */
+    --accent-link-hover: #0088b4;    /* Светлее при наведении */
+    --quote-border: #006994;
+    --quote-bg: #0069940D;
+    --skill-icon-border: #0d1b2a;    /* Очень темный океанический для рамок иконок */
+    --border-color: #1a335e;         /* Чуть светлее для границ */
+    --bg-table: #0f243f;             /* Почти черный с синим отливом (тусклее строк) */
+    --bg-row-odd: #1b263b;           /* Темно-океанический */
+    --bg-row-even: #152030;          /* Чуть темнее */
+    --bg-table-head: #243b55;        /* Заголовок таблицы */
+}
+
+.mage-infobox {
+    background: #243b55;             /* Тёмный фон для заголовков инфобокса */
 }
 
 body.page-mage .wiki-figure {
@@ -614,8 +622,4 @@ body.page-mage .wiki-figure {
 }
 body.page-mage .skill-icon {
     border: 1px solid var(--skill-icon-border);
-}
-
-.mage-infobox {
-    background: #243f5c;             /* Тёмный фон для заголовков инфобокса */
 }
