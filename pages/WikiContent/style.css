@@ -459,6 +459,7 @@ body.page-necromancer {
     --bg-row-odd: #2d2638;
     --bg-row-even: #221d2b;
     --bg-table-head: #3a2f4a;
+    --bg-table: #251f2f;
 }
 .necr-infobox {
     background: #3d2a52;   /* тёмно-фиолетовый */
@@ -473,6 +474,7 @@ body.page-warrior {
     --bg-row-odd: #2d1d1f;
     --bg-row-even: #221618;
     --bg-table-head: #3a2427;
+    --bg-table: #241a1c;
 }
 .warrior-infobox {
     background: #2d1d1f;
@@ -487,7 +489,24 @@ body.page-archer {
     --bg-row-odd: #26382d;
     --bg-row-even: #1d2b22;
     --bg-table-head: #2f4a3a;
+    --bg-table: #1f2d24;
 }
 .archer-infobox {
     background: #2a4a35;
+}
+
+/* Берсерк */
+body.page-berserker {
+    --accent-link: #c49a00;          /* Приглушённый тёмно-жёлтый */
+    --accent-link-hover: #e0b400;    /* Чуть светлее при наведении */
+    --quote-border: #c49a00;
+    --quote-bg: #c49a000D;
+    --bg-row-odd: #332d1a;           /* Тёмно-коричневый с желтинкой */
+    --bg-row-even: #292415;
+    --bg-table-head: #4a3f1a;
+    --bg-table: #2a2517;
+}
+
+.berserker-infobox {
+    background: #4a3a10;             /* Тёмный фон для заголовков инфобокса */
 }
