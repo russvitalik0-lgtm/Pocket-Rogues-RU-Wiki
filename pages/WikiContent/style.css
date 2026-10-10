@@ -477,3 +477,17 @@ body.page-warrior {
 .warrior-infobox {
     background: #2d1d1f;
 }
+
+/* Лучник */
+body.page-archer {
+    --accent-link: #2e8b57;
+    --accent-link-hover: #3cb371;
+    --quote-border: #2e8b57;
+    --quote-bg: #2e8b570D;
+    --bg-row-odd: #26382d;
+    --bg-row-even: #1d2b22;
+    --bg-table-head: #2f4a3a;
+}
+.archer-infobox {
+    background: #2a4a35;
+}
