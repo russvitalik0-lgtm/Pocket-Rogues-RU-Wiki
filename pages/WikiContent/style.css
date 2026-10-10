@@ -510,3 +510,19 @@ body.page-berserker {
 .berserker-infobox {
     background: #4a3a10;             /* Тёмный фон для заголовков инфобокса */
 }
+
+/* Охотник */
+body.page-hunter {
+    --accent-link: #b87333;          /* Медный/коричнево-оранжевый */
+    --accent-link-hover: #d4893f;    /* Чуть светлее при наведении */
+    --quote-border: #b87333;
+    --quote-bg: #b873330D;
+    --bg-table: #1a1510;             /* Очень тёмный коричневый (тусклее строк) */
+    --bg-row-odd: #2d2418;           /* Тёмно-коричневый */
+    --bg-row-even: #241e14;          /* Чуть темнее */
+    --bg-table-head: #3d2e1a;        /* Заголовок таблицы */
+}
+
+.hunter-infobox {
+    background: #3d2e1a;             /* Тёмный фон для заголовков инфобокса */
+}
