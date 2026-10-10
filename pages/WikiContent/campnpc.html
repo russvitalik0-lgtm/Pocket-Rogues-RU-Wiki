@@ -1,10 +1,349 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>campnpc.html</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лагерная Обитель - Pocket Rogues Wiki</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>campnpc</h1>
-    <p>Страница в разработке...</p>
+<body class="page-camp">
+
+    <h1>Лагерная Обитель</h1>
+
+    <p>В <a href="#" class="wiki-link">Лагере</a> можно встретить различных жителей (НИПов), каждый из которых имеет собственное предназначение и специальность. Большая часть из них появится лишь после разблокировки определенных зданий в <a href="#" class="wiki-link">Крепости</a>. Снизу вам будет приведён полный список НИПов, которых вы можете встретить. Также, каждый из них имеет свою категорию, в которой вы сможете узнать больше требуемой информации.</p>
+
+    <!-- ========================================== -->
+    <!-- ТАБЛИЦА НИПОВ                              -->
+    <!-- ========================================== -->
+    <h2 id="Таблица_НИПов">Таблица НИПов</h2>
+
+    <div class="wiki-table-wrap">
+        <table class="wiki-table">
+            <thead>
+                <tr>
+                    <th colspan="8" class="text-center">НИПы, которых можно встретить в Лагере или Аванпосте</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Наставник -->
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <img draggable="false" src="WikiImages/npc_mentor.png" alt="Наставник" class="wiki-icon" width="128px" height="128px">
+                        <br><strong><em>Наставник</em></strong>
+                    </td>
+                    <td rowspan="5" class="empty-cell"></td>
+                    <!-- Торговец -->
+                    <td colspan="2" class="text-center">
+                        <img draggable="false" src="WikiImages/npc_trader.png" alt="Торговец" class="wiki-icon" width="128px" height="128px">
+                        <br><strong><em>Торговец</em></strong>
+                    </td>
+                    <td rowspan="5" class="empty-cell"></td>
+                    <!-- Кузнец -->
+                    <td colspan="2" class="text-center">
+                        <img draggable="false" src="WikiImages/npc_blacksmith.png" alt="Кузнец" class="wiki-icon" width="128px" height="128px">
+                        <br><strong><em>Кузнец</em></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Раса</strong></td>
+                    <td>Человек</td>
+                    <td><strong>Раса</strong></td>
+                    <td>Человек</td>
+                    <td><strong>Раса</strong></td>
+                    <td>Человек</td>
+                </tr>
+                <tr>
+                    <td><strong>Специальность</strong></td>
+                    <td>Обучение, возвращение в <a href="#" class="wiki-link">Лагерь</a></td>
+                    <td><strong>Специальность</strong></td>
+                    <td>Торговля и продажа</td>
+                    <td><strong>Специальность</strong></td>
+                    <td>Слияние и ковка предметов</td>
+                </tr>
+                <tr>
+                    <td><strong>Доп. Нахождение</strong></td>
+                    <td>Нельзя встретить в Аванпосте (спец. <a href="#" class="wiki-link">Локация</a>)</td>
+                    <td><strong>Доп. Нахождение</strong></td>
+                    <td>Встречается в Аванпосте (спец. <a href="#" class="wiki-link">Локация</a>)</td>
+                    <td><strong>Доп. Нахождение</strong></td>
+                    <td>Нельзя встретить в Аванпосте (спец. <a href="#" class="wiki-link">Локация</a>)</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-center"><a href="#Наставник"><strong><em>Узнать больше</em></strong></a></td>
+                    <td colspan="2" class="text-center"><a href="#Торговец"><strong><em>Узнать больше</em></strong></a></td>
+                    <td colspan="2" class="text-center"><a href="#Кузнец"><strong><em>Узнать больше</em></strong></a></td>
+                </tr>
+                <tr>
+                    <td colspan="8" class="empty-cell"></td>
+                </tr>
+                <!-- Зверолов -->
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <img draggable="false" src="WikiImages/npc_trapper.png" alt="Зверолов" class="wiki-icon" width="128px" height="128px">
+                        <br><strong><em>Зверолов</em></strong>
+                    </td>
+                    <td rowspan="5" class="empty-cell"></td>
+                    <!-- Мистик -->
+                    <td colspan="2" class="text-center">
+                        <img draggable="false" src="WikiImages/npc_mystic.png" alt="Мистик" class="wiki-icon" width="128px" height="128px">
+                        <br><strong><em>Мистик</em></strong>
+                    </td>
+                    <td rowspan="5" class="empty-cell"></td>
+                    <!-- Наёмники -->
+                    <td colspan="2" class="text-center">
+                        <img draggable="false" src="WikiImages/mercenary_archer.jpg" alt="Наёмник-Лучник" class="wiki-icon" width="96px" height="96px">
+                        <img draggable="false" src="WikiImages/mercenary_warrior.jpg" alt="Наёмник-Воин" class="wiki-icon" width="96px" height="96px">
+                        <img draggable="false" src="WikiImages/mercenary_berserker.jpg" alt="Наёмник-Берсерк" class="wiki-icon" width="96px" height="96px">
+                        <img draggable="false" src="WikiImages/mercenary_wizard.jpg" alt="Наёмник-Маг" class="wiki-icon" width="96px" height="96px">
+                        <br><br><strong><em>Наёмники</em></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Раса</strong></td>
+                    <td>Человек</td>
+                    <td><strong>Раса</strong></td>
+                    <td>Человек</td>
+                    <td><strong>Раса</strong></td>
+                    <td>Человек</td>
+                </tr>
+                <tr>
+                    <td><strong>Специальность</strong></td>
+                    <td>Смена и улучшение питомцев прямо в <a href="#" class="wiki-link">Лагере</a></td>
+                    <td><strong>Специальность</strong></td>
+                    <td>Удаление/"забывание" <a href="#" class="wiki-link">перков</a></td>
+                    <td><strong>Специальность</strong></td>
+                    <td>Найм, помощь в зачистке этажей</td>
+                </tr>
+                <tr>
+                    <td><strong>Доп. Нахождение</strong></td>
+                    <td>Нельзя встретить в Аванпосте (спец. <a href="#" class="wiki-link">Локация</a>)</td>
+                    <td><strong>Доп. Нахождение</strong></td>
+                    <td>Нельзя встретить в Аванпосте (спец. <a href="#" class="wiki-link">Локация</a>)</td>
+                    <td><strong>Доп. Нахождение</strong></td>
+                    <td>Сопровожд. Торговца в Аванпосте, но не интерактивны</td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="text-center"><a href="#Зверолов"><strong><em>Узнать больше</em></strong></a></td>
+                    <td colspan="2" class="text-center"><a href="#Мистик"><strong><em>Узнать больше</em></strong></a></td>
+                    <td colspan="2" class="text-center"><a href="#Наёмники"><strong><em>Узнать больше</em></strong></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- ПОДРОБНАЯ ИНФОРМАЦИЯ                       -->
+    <!-- ========================================== -->
+    <h2 id="Подробная_Информация">Подробная Информация</h2>
+
+    <h3 id="Наставник">Наставник</h3>
+    <p>Впервые появляется в тренировочной комнате, ознакамливая игрока с основами игры и проводя Обучение. Позже появляется в <a href="#" class="wiki-link">Лагере</a>, при взаимодействии предлагает игроку вернутся в <a href="#" class="wiki-link">Лагерь</a> вместе с Караваном, продавая всё снаряжение в инвентаре <em>(кроме надетого и <a href="#" class="wiki-link">Пассивных Предметов</a>)</em></p>
+
+    <hr>
+
+    <h3 id="Торговец">Торговец</h3>
+    <p>Появляется в <a href="#" class="wiki-link">Лагере</a> только после постройки здания "<a href="#" class="wiki-link">Приют Торговца</a>". Если здание не построено - оставляет соответствующую табличку с надписью. Также встречается в Аванпосте.</p>
+
+    <h4>Торговля</h4>
+    <p><strong>Торговцу</strong> можно продавать любые предметы <em>(кроме предметов с нулевой стоимостью)</em>. По мере улучшения "<a href="#" class="wiki-link">Приюта Торговца</a>" цена продажи предметов определенных категорий становится <em>выгоднее</em>, а также появляется возможность <em>быстрой продажи</em> и покупки <em>расходников</em>.</p>
+    <p>Стоимость предметов у <strong>Торговца</strong> зависит от этажа и уровня "<a href="#" class="wiki-link">Приюта Торговца</a>". Базовая цена — от 500 золотых, растёт на 50 монет за этаж <em>(макс. прибавка — 500–12 000 золотых)</em>. На 5‑м уровне Приюта база — 750 золотых, надбавка — 75 монет за этаж. При недостаточном уровне Приюта цена продажи снижается вдвое: для артефактов и материалов нужен 1‑й уровень, для используемых предметов — 2‑й, для экипировки — 3‑й. В обычных условиях предметы продаются на 50 % дешевле базы, экипировка — на 60 %, пассивные предметы — втрое дороже.</p>
+    <p>После улучшения "<a href="#" class="wiki-link">Приюта Торговца</a>" до 4-го уровня, <strong>Торговец</strong> начинает продавать следующие предметы:</p>
+    <ul>
+        <li>Точильный камень</li>
+        <li>Банан | Хлеб | Сыр | Мясо | Гриб</li>
+        <li>Метательный нож | Факел</li>
+        <li>Пузырек Здоровья | Малое Зелье Здоровья | Отвар Здоровья | Крепкий Отвар Здоровья</li>
+        <li>Пузырек Маны | Малое Зелье Маны | Отвар Выносливости | Крепкий Отвар Выносливости</li>
+    </ul>
+    <p>Улучшение "<a href="#" class="wiki-link">Приюта Торговца</a>" до 5-го уровня расширяет ассортимент <strong>Торговца</strong>, добавляя следующие предметы:</p>
+    <ul>
+        <li>Качественный Точильный Камень</li>
+        <li>Конфета | Леденец</li>
+        <li>Старая Кость | Клык</li>
+        <li>Зелье Здоровья | Большой Отвар Здоровья</li>
+        <li>Зелье Маны | Большой Отвар Выносливости</li>
+    </ul>
+
+    <h4>Нападение</h4>
+    <p>Рядом с <strong>Торговцем</strong> находится принадлежащий ему Сундук. С этажами качество этого сундука также возрастает. Если повредить Сундук - <strong>Торговец</strong> сообщит вам, что не стоит этого делать. Если вы сломаете Сундук - <strong>Торговец</strong> нападет на вас, при этом обычно он не убивает членов Гильдии, потому прекратит сражение если ваше ОЗ упадет до критического уровня <em>(15% от макс. ОЗ +5 ед.)</em>. Итог битвы может быть различным:</p>
+    <ol>
+        <li>Игрок убивает <strong>Торговца</strong>. В этом случае тот больше не появится в <a href="#" class="wiki-link">Лагере</a> до завершения текущего забега.</li>
+        <li><strong>Торговец</strong> нанёс критический урон игроку и прекратил сражение. В таком случае он заберет все свои предметы назад, независимо от того, в каком состоянии они находятся.</li>
+        <li>Потеряв три четверти своего ОЗ <strong>Торговец</strong> попытается сбежать из <a href="#" class="wiki-link">Лагеря</a> и исчезнет, как только добежит до лестницы.</li>
+    </ol>
+    <p>Почти во всех случаях после нападения на Игрока, тот получает штраф к стоимости покупаемых и продаваемых товаров. Штраф снимается лишь при завершении забега, а также в ситуации, когда <strong>Торговец</strong> вообще не получил урона и вернул все свои предметы обратно.</p>
+
+    <h4>Примечания</h4>
+    <ul>
+        <li>В бой против <strong>Торговца</strong> могут вступить остальные НИПы, находящиеся в <a href="#" class="wiki-link">Лагере</a>, если в них попадёт хотя бы один из его метательных ножей.</li>
+        <li>Штраф за каждое нападение на <strong>Торговца</strong> увеличивается на 8,3%</li>
+        <li>Если <strong>Торговец</strong> не получил урона и вернул свои предметы обратно, будет показано соответствующее сообщение: <em>"Торговец забрал свои вещи"</em>, если же ему был нанесен урон, он произнесет другие слова: <em>"Торговец расстроен вашим поведением"</em>, означающие получение штрафа</li>
+    </ul>
+
+    <hr>
+
+    <h3 id="Кузнец">Кузнец</h3>
+    <p>Появляется в <a href="#" class="wiki-link">Лагере</a> только после постройки здания "<a href="#" class="wiki-link">Кузня</a>". Если здание не построено - на его должном месте останется лишь неотапливаемая Печь. Не встречается в Аванпосте.</p>
+
+    <h4>Кузня: Улучшение Здания</h4>
+    <p>Изначально <strong>Кузнец</strong> сможет только совмещать два Обычных предмета в один Особый, без слияния некоторых артефактов и зелий. Прокачка "<a href="#" class="wiki-link">Кузни</a>" повышает макс. качество, до которого можно совмещать предметы. Остальные улучшения <strong>Кузнеца</strong> происходят при разблокировке других зданий, ознакомится с которыми можно на страницах: <a href="#" class="wiki-link">Крепости</a>; <a href="#" class="wiki-link">Лагеря</a>; <a href="#" class="wiki-link">Кузни</a></p>
+
+    <h4>Ковка и слияние: Описание</h4>
+    <p><strong>Кузнец</strong> может совмещать и заковывать разные предметы. Для слияния используется снаряжение одного типа <em>(не выше Легендарного качества)</em>, а для ковки нужны предметы выше Обычного качества. Ковка позволяет убрать эффект с предмета или наложить.</p>
+    <ul>
+        <li><strong>Наложение:</strong> Необходимы Драгоценные Камни и пустые ячейки на самом предмете, а также оплата монетами или кристаллами. В зависимости от Драгоценного Камня на предмет наложится разное зачарование</li>
+        <li><strong>Снятие:</strong> Необходима оплата монетами или кристаллами, а также сам предмет с каким-либо эффектом. С предметов также нельзя снять их изначальные эффекты</li>
+    </ul>
+    <p>Оплата монетами зачастую выгоднее, чем оплата кристаллами.</p>
+
+    <h4>Ковка и слияние: Подробности</h4>
+    <p>Полные подробности о <strong>Кузне</strong> вы можете увидеть <a href="#" class="wiki-link">здесь</a>.</p>
+
+    <h4>Примечания</h4>
+    <ul>
+        <li>Рядом с <strong>Кузнецом</strong> находится его Верстак. Его можно сломать также, как Сундук <a href="#Торговец">Торговца</a>, но при этом <strong>Кузнец</strong> лишь сопроводит действия саркастическими фразами, но не будет нападать на игрока</li>
+        <li>Слияние на самом деле имело много секретных крафтов, которые комьюнити изучало и находило самостоятельно</li>
+    </ul>
+
+    <hr>
+
+    <h3 id="Зверолов">Зверолов</h3>
+    <p>Появляется в Лагере после постройки здания "<a href="#" class="wiki-link">Лачуга Зверолова</a>" в <a href="#" class="wiki-link">Крепости</a>. Не встречается в Аванпосте.</p>
+
+    <h4>Функционал</h4>
+    <p><strong>Зверолов</strong> позволяет менять, улучшать и разблокировать новые навыки питомцев прямо в Лагере. Помимо этого, вместе с ним появляется загон, в котором находятся все купленные персонажем питомцы, к каждому из которых можно проявить ласку.</p>
+
+    <h4>Питомцы</h4>
+    <p>Информацию о всех питомцах вы можете узнать <a href="#" class="wiki-link">здесь</a>.</p>
+
+    <hr>
+
+    <h3 id="Мистик">Мистик</h3>
+    <p>Появляется в Лагере только после того, как любой персонаж впервые получит 6 перков одновременно (4 в бесплатной версии). Нельзя встретить в Аванпосте.</p>
+
+    <h4>Функционал</h4>
+    <p><strong>Мистик</strong> помогает персонажу "Забывать" любой ранее полученный перк за 100 кристаллов. Каждое последующее "забывание" будет стоить на 100 кристаллов дороже.</p>
+
+    <hr>
+
+    <h3 id="Наёмники">Наёмники</h3>
+    <p>С определенным шансом в <a href="#" class="wiki-link">Лагере</a> можно встретить не только <a href="#Торговец">Торговца</a>, <a href="#Кузнец">Кузнеца</a> или <a href="#Наставник">Наставника</a>, но еще и <a href="#Наёмники">Наёмников</a>, они нанимаются за монеты или кристаллы <em>(монеты, зачастую, выгоднее)</em> и всего их 4 разновидности. Сопровождают Торговца в Аванпосте, но не имеют интерактива.</p>
+
+    <h4>Краткое описание</h4>
+    <ul>
+        <li><strong>Наёмник-Воин</strong> - ориентирован на ближний бой, имеет щит, которым может блокировать входящий урон.</li>
+        <li><strong>Наёмник-Лучник</strong> - ориентирован на дальний бой, старается соблюдать дистанцию с противником.</li>
+        <li><strong>Наёмник-Берсерк</strong> - ориентирован на ближний бой, имеет по оружию в обоих руках, встречается только после 15 этажа.</li>
+        <li><strong>Наёмник-Маг</strong> - ориентирован на дальний бой, старается соблюдать дистанцию с противником, использует посох и встречается только после 15 этажа.</li>
+    </ul>
+
+    <h4>Полные характеристики</h4>
+    <div class="wiki-table-wrap">
+        <table class="wiki-table">
+            <tbody>
+                <tr>
+                    <th colspan="2" class="text-center">
+                        <img draggable="false" src="WikiImages/mercenary_warrior.jpg" alt="Наёмник-Воин" class="wiki-icon">
+                        <br><strong>Наёмник-Воин</strong>
+                    </th>
+                    <td rowspan="8" class="empty-cell"></td>
+                    <th colspan="2" class="text-center">
+                        <img draggable="false" src="WikiImages/mercenary_archer.jpg" alt="Наёмник-Лучник" class="wiki-icon">
+                        <br><strong>Наёмник-Лучник</strong>
+                    </th>
+                    <td rowspan="8" class="empty-cell"></td>
+                    <th colspan="2" class="text-center">
+                        <img draggable="false" src="WikiImages/mercenary_berserker.jpg" alt="Наёмник-Берсерк" class="wiki-icon">
+                        <br><strong>Наёмник-Берсерк</strong>
+                    </th>
+                    <td rowspan="8" class="empty-cell"></td>
+                    <th colspan="2" class="text-center">
+                        <img draggable="false" src="WikiImages/mercenary_wizard.jpg" alt="Наёмник-Маг" class="wiki-icon">
+                        <br><strong>Наёмник-Маг</strong>
+                    </th>
+                </tr>
+                <tr>
+                    <td><strong>Уровень</strong></td>
+                    <td>15</td>
+                    <td><strong>Уровень</strong></td>
+                    <td>15</td>
+                    <td><strong>Уровень</strong></td>
+                    <td>30</td>
+                    <td><strong>Уровень</strong></td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td><img draggable="false" src="WikiImages/atticon_hp.jpg" alt="" class="att-icon"> <strong>ОЗ</strong></td>
+                    <td></td>
+                    <td><img draggable="false" src="WikiImages/atticon_hp.jpg" alt="" class="att-icon"> <strong>ОЗ</strong></td>
+                    <td></td>
+                    <td><img draggable="false" src="WikiImages/atticon_hp.jpg" alt="" class="att-icon"> <strong>ОЗ</strong></td>
+                    <td></td>
+                    <td><img draggable="false" src="WikiImages/atticon_hp.jpg" alt="" class="att-icon"> <strong>ОЗ</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img draggable="false" src="WikiImages/atticon_mp.jpg" alt="" class="att-icon"> <strong>ОМ</strong></td>
+                    <td></td>
+                    <td><img draggable="false" src="WikiImages/atticon_mp.jpg" alt="" class="att-icon"> <strong>ОМ</strong></td>
+                    <td></td>
+                    <td><img draggable="false" src="WikiImages/atticon_mp.jpg" alt="" class="att-icon"> <strong>ОМ</strong></td>
+                    <td></td>
+                    <td><img draggable="false" src="WikiImages/atticon_mp.jpg" alt="" class="att-icon"> <strong>ОМ</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img draggable="false" src="WikiImages/atticon_damage.jpg" alt="" class="att-icon"> <strong>Урон</strong></td>
+                    <td></td>
+                    <td><img draggable="false" src="WikiImages/atticon_damage.jpg" alt="" class="att-icon"> <strong>Урон</strong></td>
+                    <td></td>
+                    <td><img draggable="false" src="WikiImages/atticon_damage.jpg" alt="" class="att-icon"> <strong>Урон</strong></td>
+                    <td></td>
+                    <td><img draggable="false" src="WikiImages/atticon_damage.jpg" alt="" class="att-icon"> <strong>Урон</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><img draggable="false" src="WikiImages/atticon_defence.jpg" alt="" class="att-icon"> <strong>Защита</strong></td>
+                    <td></td>
+                    <td><img draggable="false" src="WikiImages/atticon_defence.jpg" alt="" class="att-icon"> <strong>Защита</strong></td>
+                    <td></td>
+                    <td><img draggable="false" src="WikiImages/atticon_defence.jpg" alt="" class="att-icon"> <strong>Защита</strong></td>
+                    <td></td>
+                    <td><img draggable="false" src="WikiImages/atticon_defence.jpg" alt="" class="att-icon"> <strong>Защита</strong></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Ближний бой:</strong></td>
+                    <td><em>Существо может сражаться врукопашную</em></td>
+                    <td><strong>Дальний бой:</strong></td>
+                    <td><em>Существо может вести бой на расстоянии</em></td>
+                    <td><strong>Ближний бой:</strong></td>
+                    <td><em>Существо может сражаться врукопашную</em></td>
+                    <td><strong>Дальний бой:</strong></td>
+                    <td><em>Существо может вести бой на расстоянии</em></td>
+                </tr>
+                <tr>
+                    <td><strong>Страж:</strong></td>
+                    <td><em>Может блокировать удары</em></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h4>Примечания</h4>
+    <ul>
+        <li>Всего в отряде можно иметь одновременно не более двух <strong>Наёмников</strong></li>
+        <li>Примерно к 100 этажу <strong>Наёмники</strong> повысят свой уровень уже до 200</li>
+        <li>Покупка <strong>Наёмников</strong> за монеты, а не кристаллы, действительно выгоднее, учитывая курс кристаллов к монетам <em>(1 Кристалл = 100 Монет)</em></li>
+        <li><strong>Наёмники</strong> дальнего боя <em>(Лучник и Маг)</em> зачастую полезнее, чем <strong>Наёмники</strong> ближнего боя, ведь первые живут дольше, хоть и могут уступать в Уроне, ОЗ и Защите</li>
+        <li><strong>Наёмников</strong> нельзя встретить в <a href="#" class="wiki-link">Лагере</a>, вход в который был найден в виде Врат на этаже</li>
+        <li><strong>Наёмники</strong> в Аванпосте атакуют врагов, находящихся в их поле зрения</li>
+    </ul>
 </body>
 </html>

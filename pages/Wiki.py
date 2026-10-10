@@ -203,6 +203,17 @@ class WikiMenu(QWidget):
     def __init__(self, parent=None, pages_config=None):
         super().__init__(parent)
 
+        self.READY_PAGES = {
+            "HomePage",
+            "Warrior",
+            "Archer",
+            "Berserker",
+            "Necromancer",
+            "Hunter",
+            "Wizard",
+            "CampNPC",
+        }
+
         self.pages_config = pages_config or {}
 
         self.menubar = QMenuBar()
@@ -370,6 +381,8 @@ class WikiMenu(QWidget):
             action.triggered.connect(
                 lambda checked, pid=page_id: self.on_section_clicked(pid)
             )
+            if page_id.replace(' ', '') not in self.READY_PAGES:
+                action.setEnabled(False)
 
 def inject_fullscreen_btn(html, btn_html):
     """Вставляет кнопку полноэкранного режима сразу после открывающего тега <body ...>"""

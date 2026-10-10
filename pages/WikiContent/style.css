@@ -201,6 +201,11 @@ figcaption {
     border: 1px solid var(--border-table);
 }
 
+.wiki-table td.text-center,
+.wiki-table th.text-center {
+    text-align: center;
+}
+
 .wiki-table tr:nth-child(even) td {
     background: var(--bg-row-even);
 }
@@ -598,7 +603,6 @@ body.page-hunter .skill-icon {
 }
 
 /* Маг */
-/* ===== Маг ===== */
 body.page-mage {
     --accent-link: #006994;          /* Глубокий океанический синий */
     --accent-link-hover: #0088b4;    /* Светлее при наведении */
@@ -622,4 +626,20 @@ body.page-mage .wiki-figure {
 }
 body.page-mage .skill-icon {
     border: 1px solid var(--skill-icon-border);
+}
+
+/* Лагерная Обитель */
+body.page-camp {
+    --accent-link: #c96f2c;          /* тёплый оранжево-коричневый */
+    --accent-link-hover: #e08a45;    /* светлее */
+    --quote-border: #c96f2c;
+    --quote-bg: #c96f2c0D;
+    --bg-row-odd: #33261a;
+    --bg-row-even: #2a1f15;
+    --bg-table-head: #4a3520;
+    --bg-table: #251b10;
+}
+
+.camp-infobox {
+    background: #4a3520;
 }
