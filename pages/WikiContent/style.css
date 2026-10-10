@@ -463,3 +463,17 @@ body.page-necromancer {
 .necr-infobox {
     background: #3d2a52;   /* тёмно-фиолетовый */
 }
+
+/* Воин */
+body.page-warrior {
+    --accent-link: #8b2532;
+    --accent-link-hover: #b8394a;
+    --quote-border: #8b2532;
+    --quote-bg: #8b25320D;
+    --bg-row-odd: #2d1d1f;
+    --bg-row-even: #221618;
+    --bg-table-head: #3a2427;
+}
+.warrior-infobox {
+    background: #2d1d1f;
+}
