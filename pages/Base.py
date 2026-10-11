@@ -70,7 +70,6 @@ class BasePage(QWidget):
         line = QFrame()
         line.setObjectName("pageSeparator")
         line.setFrameShape(QFrame.HLine)
-        line.setStyleSheet("background-color: #3c3c3c; height: 1px;")
         self.layout.addWidget(line)
     
     def add_stretch(self):

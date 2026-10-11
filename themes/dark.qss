@@ -1,0 +1,501 @@
+/* ============================================================
+   Pocket Rogues RU-Wiki -- Тёмная тема QSS (по умолчанию)
+   Палитра:
+     Фон окна/приложения:  #2a2a2a
+     Фон панелей/виджетов: #333333
+     Фон полей ввода:      #1f1f1f
+     Границы:              #444444
+     Текст основной:       #d5d5d5
+     Текст заголовков:     #ffffff
+     Текст приглушённый:   #888888
+     Accent:               #00b7e0
+     Accent hover:         #4a90e2
+     Disabled:             #666666
+   ============================================================ */
+
+/* ============================================================
+   1. БАЗОВЫЕ ЭЛЕМЕНТЫ
+   ============================================================ */
+
+/* Главное окно и все дочерние QWidget по умолчанию */
+QWidget {
+    background-color: #2a2a2a;
+    color: #d5d5d5;
+    font-family: sans-serif;
+    font-size: 13px;
+}
+
+/* ============================================================
+   2. ЛЕВАЯ ПАНЕЛЬ (Main.py)
+   ============================================================ */
+
+/* Контейнер левой панели -- светлее фона окна */
+#leftPanel {
+    background-color: transparent;
+    border-right: none;
+    border-radius: 4px;
+}
+
+/* Заголовок "- Вкладки -" над списком */
+#leftPanelTitle {
+    color: #00b7e0;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 8px 0;
+    border-bottom: 1px solid #00b7e0;
+    margin-bottom: 4px;
+}
+
+/* Список вкладок */
+#mainTabsList {
+    background-color: #2f2f2f;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    padding: 5px;
+    font-size: 13px;
+}
+
+/* Отдельный пункт в списке */
+#mainTabsList::item {
+    padding: 8px 12px;
+    border-radius: 3px;
+    margin-bottom: 2px;
+}
+
+/* Пункт при наведении */
+#mainTabsList::item:hover {
+    background-color: #3a3a3a;
+}
+
+/* Активный (выбранный) пункт -- accent-подсветка */
+#mainTabsList::item:selected {
+    background-color: #3a3a3a;
+    color: #ffffff;
+    border-left: 3px solid #00b7e0;
+}
+
+/* ============================================================
+   3. ВЕРХНЕЕ МЕНЮ (WikiMenu)
+   ============================================================ */
+
+#mainMenuBar {
+    background-color: #333333;
+    border: 1px solid #444444;
+    border-radius: 6px;
+    padding: 3px;
+    font-size: 14px;
+}
+
+/* Пункты меню */
+#mainMenuBar::item {
+    background: transparent;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 3px;
+    color: #d5d5d5;
+}
+
+#mainMenuBar::item:selected {
+    background-color: #3a3a3a;
+    color: #00b7e0;
+}
+
+#mainMenuBar::item:pressed {
+    background-color: #444444;
+}
+
+/* Выпадающие подменю */
+QMenu {
+    background-color: #2f2f2f;
+    border: 1px solid #444444;
+    padding: 4px;
+}
+
+QMenu::item {
+    padding: 6px 20px;
+    border-radius: 3px;
+    color: #d5d5d5;
+}
+
+QMenu::item:selected {
+    background-color: #3a3a3a;
+    color: #00b7e0;
+}
+
+/* Отключённый (недоступный) пункт меню */
+QMenu::item:disabled {
+    color: #666666;
+}
+
+/* Разделители внутри подменю */
+QMenu::separator {
+    height: 1px;
+    background: #444444;
+    margin: 4px 8px;
+}
+
+/* ============================================================
+   4. ШАПКА СТРАНИЦЫ (WikiPage)
+   ============================================================ */
+
+/* Контейнер шапки */
+#wikiHeader {
+    background-color: #2a2a2a;
+}
+
+/* Разделитель шапки */
+#wikiHeaderSeparator {
+    background-color: #00b7e0;
+    max-height: 1px;
+    border: none;
+}
+
+/* Логотип Pocket Rogues -- без фона, просто картинка */
+#pageLogo {
+    background: transparent;
+}
+
+/* ============================================================
+   4. БРАУЗЕР (WikiPage)
+   ============================================================ */
+
+#wikiBrowserFrame{
+    border: 1px solid #444444;
+    border-radius: 4px;
+    background-color: #1a1a1a;
+}
+
+/* ============================================================
+   5. ЗАГОЛОВОК И ОПИСАНИЕ СТРАНИЦЫ (BasePage)
+   ============================================================ */
+
+/* Заголовок страницы (например, "История просмотра") */
+#pageTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ffffff;
+    padding: 5px 0;
+    background: transparent;
+}
+
+/* Описание страницы (под заголовком) */
+#pageDescription {
+    color: #888888;
+    font-size: 13px;
+    background: transparent;
+}
+
+/* Разделитель страницы */
+#pageSeparator {
+    background-color: #00b7e0;
+    max-height: 1px;
+    border: none;
+}
+
+/* ============================================================
+   6. КНОПКИ
+   ============================================================ */
+
+/* Базовая кнопка (QPushButton везде) */
+QPushButton {
+    background-color: #3a3a3a;
+    color: #d5d5d5;
+    border: 1px solid #444444;
+    border-radius: 3px;
+    padding: 5px 12px;
+    font-size: 13px;
+}
+
+QPushButton:hover {
+    background-color: #444444;
+    border-color: #555555;
+}
+
+QPushButton:pressed {
+    background-color: #2f2f2f;
+}
+
+QPushButton:disabled {
+    color: #666666;
+    background-color: #2a2a2a;
+    border-color: #333333;
+}
+
+/* Кнопка "Настройки" на вкладке "Недавние" */
+#settingsButton {
+    background-color: #3a3a3a;
+    color: #d5d5d5;
+    border: 1px solid #444444;
+    border-radius: 3px;
+    padding: 5px 15px;
+}
+
+#settingsButton:hover {
+    background-color: #444444;
+    border-color: #00b7e0;
+    color: #ffffff;
+}
+
+/* Кнопки в диалоге настроек */
+#settingsSaveBtn {
+    background-color: #00b7e0;
+    color: #ffffff;
+    border: none;
+    padding: 5px 15px;
+}
+
+#settingsSaveBtn:hover {
+    background-color: #4a90e2;
+}
+
+#settingsCancelBtn {
+    background-color: #3a3a3a;
+    color: #d5d5d5;
+    border: 1px solid #444444;
+    padding: 5px 15px;
+}
+
+#settingsCancelBtn:hover {
+    background-color: #444444;
+}
+
+/* ============================================================
+   7. ОБЛАСТЬ ПРОКРУТКИ
+   ============================================================ */
+
+#pageScrollArea {
+    background-color: transparent;
+    border: none;
+}
+
+/* Скрываем рамку у внутреннего QWidget области прокрутки */
+#pageScrollArea > QWidget > QWidget {
+    background-color: transparent;
+}
+
+/* Контейнер карточек -- без фона */
+#cardsContainer {
+    background-color: transparent;
+}
+
+/* ============================================================
+   8. КАРТОЧКИ (PreviewCard)
+   ============================================================ */
+
+#previewCard {
+    background-color: #333333;
+    border: 2px solid #444444;
+    border-radius: 4px;
+}
+
+#previewCard:hover {
+    border-color: #00b7e0;
+    background-color: #3a3a3a;
+}
+
+/* Заголовок карточки */
+#cardTitle {
+    background: transparent;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #00b7e0;
+    margin-bottom: 4px;
+}
+
+/* Превью-текст карточки */
+#cardPreview {
+    background: transparent;
+    color: #888888;
+    font-size: 11px;
+}
+
+/* Кнопка-звёздочка на карточке */
+#cardRemoveBtn {
+    background: transparent;
+    border: none;
+}
+
+#cardRemoveBtn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+/* Заглушка ("История пуста", "Список пуст") */
+#emptyLabel {
+    color: #666666;
+    font-size: 14px;
+    background: transparent;
+}
+
+/* ============================================================
+   9. ЗАМЕТКИ (TipsPage)
+   ============================================================ */
+
+/* Поле для Markdown */
+#notesEditor {
+    background-color: #1f1f1f;
+    color: #d5d5d5;
+    border: 1px solid #444444;
+    border-radius: 3px;
+    padding: 8px;
+    font-family: monospace;
+    font-size: 13px;
+    selection-background-color: #00b7e0;
+    selection-color: #ffffff;
+}
+
+#notesEditor:focus {
+    border-color: #00b7e0;
+}
+
+/* Поле просмотра */
+#notesPreview {
+    background-color: #1f1f1f;
+    color: #d5d5d5;
+    border: 1px solid #444444;
+    border-radius: 3px;
+    padding: 8px;
+    selection-background-color: #00b7e0;
+    selection-color: #ffffff;
+}
+
+#notesPreview:focus {
+    border-color: #00b7e0;
+}
+
+/* ============================================================
+   10. ДИАЛОГИ И ЭЛЕМЕНТЫ ФОРМ
+   ============================================================ */
+
+/* Диалоговое окно */
+QDialog {
+    background-color: #2a2a2a;
+}
+
+/* Чекбокс */
+QCheckBox {
+    color: #d5d5d5;
+    spacing: 8px;
+    background: transparent;
+}
+
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #555555;
+    border-radius: 3px;
+    background-color: #1f1f1f;
+}
+
+QCheckBox::indicator:hover {
+    border-color: #00b7e0;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #00b7e0;
+    border-color: #00b7e0;
+}
+
+/* Спинбокс */
+QSpinBox {
+    background-color: #1f1f1f;
+    color: #d5d5d5;
+    border: 1px solid #444444;
+    border-radius: 3px;
+    padding: 4px 6px;
+}
+
+QSpinBox:focus {
+    border-color: #00b7e0;
+}
+
+/* Стрелки спинбокса */
+QSpinBox::up-button,
+QSpinBox::down-button {
+    background-color: #3a3a3a;
+    border: none;
+    width: 16px;
+}
+
+QSpinBox::up-button:hover,
+QSpinBox::down-button:hover {
+    background-color: #444444;
+}
+
+/* ============================================================
+   11. СКРОЛЛБАРЫ
+   ============================================================ */
+
+QScrollBar:vertical {
+    background: #2a2a2a;
+    width: 10px;
+    margin: 0;
+    border: none;
+}
+
+QScrollBar::handle:vertical {
+    background: #444444;
+    border-radius: 5px;
+    min-height: 30px;
+    margin: 2px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #555555;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0;
+    background: none;
+}
+
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+QScrollBar:horizontal {
+    background: #2a2a2a;
+    height: 10px;
+    margin: 0;
+    border: none;
+}
+
+QScrollBar::handle:horizontal {
+    background: #444444;
+    border-radius: 5px;
+    min-width: 30px;
+    margin: 2px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background: #555555;
+}
+
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    width: 0;
+    background: none;
+}
+
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal {
+    background: none;
+}
+
+/* ============================================================
+   12. ТУЛТИПЫ
+   ============================================================ */
+
+QToolTip {
+    background-color: #333333;
+    color: #d5d5d5;
+    border: 1px solid #555555;
+    border-radius: 3px;
+    padding: 4px 8px;
+    font-size: 12px;
+}

@@ -498,6 +498,25 @@ body.is-fullscreen .fullscreen-btn .icon-exit  { display: block; }
 body.is-saved .save-btn .icon-save  { display: none; }
 body.is-saved .save-btn .icon-saved { display: block; }
 
+/* Скроллбар страниц */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-page);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #444444;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555555;
+}
+
 /* ===== Акценты по страницам ===== */
 
 /* Главная страница */

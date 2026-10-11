@@ -115,7 +115,6 @@ class WikiPage(BasePage):
         separator = QFrame()
         separator.setObjectName("wikiHeaderSeparator")
         separator.setFrameShape(QFrame.HLine)
-        separator.setStyleSheet("background-color: #3c3c3c; height: 1px;")
         header_layout.addWidget(separator)
 
         self.layout.addWidget(self.header_widget)
@@ -126,6 +125,11 @@ class WikiPage(BasePage):
         self.loader.error.connect(self.on_image_error)
         self.loader.start()
 
+        # Обертка
+        self.browser_frame = QFrame()
+        self.browser_frame.setObjectName("wikiBrowserFrame")
+        browser_layout = QVBoxLayout(self.browser_frame)
+
         # Окно с контентом
         self.browser = QWebEngineView()
         self.browser_page = InterceptingPage(self.browser)
@@ -134,7 +138,13 @@ class WikiPage(BasePage):
         self.browser_page.on_external_link = lambda url: webbrowser.open(url.toString())
         self.browser.setPage(self.browser_page)
         self.browser.loadFinished.connect(self._on_page_loaded)
-        self.layout.addWidget(self.browser, 1)
+
+        # Обертывание
+        browser_layout.setContentsMargins(1, 1, 1, 1)   # ← 1px зазор между границей и браузером
+        browser_layout.setSpacing(0)
+        browser_layout.addWidget(self.browser)
+
+        self.layout.addWidget(self.browser_frame, 1)
 
 
         self.PAGE_ACTIONS_BTN = (
@@ -252,7 +262,7 @@ class WikiMenu(QWidget):
             "Necromancer",
             "Hunter",
             "Wizard",
-            "CampNPC",
+            "CampNPC"
         }
 
         self.pages_config = pages_config or {}

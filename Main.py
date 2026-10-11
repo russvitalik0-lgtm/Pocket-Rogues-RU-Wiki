@@ -11,6 +11,12 @@ from random import randint
 # Ставим флаг до QApplication для корректной работы приложения
 QApplication.setAttribute(Qt.AA_ShareOpenGLContexts)
 app = QApplication([])
+qss_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "themes", "dark.qss")
+try:
+    with open(qss_path, "r", encoding="utf-8") as f:
+        app.setStyleSheet(f.read())
+except FileNotFoundError:
+    print(f"QSS-файл не найден: {qss_path}")
 
 from pages.Wiki import WikiPage
 from pages.Latest import LatestPage

@@ -123,7 +123,7 @@ class LatestPage(BasePage):
         available_width = self.scroll_area.viewport().width()
 
         # Ширина карточки + отступ
-        card_width = 225
+        card_width = 250
         spacing = 10
 
         # Вычисляем кол-во колонок
@@ -175,7 +175,7 @@ class PreviewCard(QFrame):
         self.removable = removable
 
         # Фиксированный размер карточки
-        self.setFixedSize(225, 175)
+        self.setFixedSize(250, 195)
 
         # Создаем основной layout
         layout = QVBoxLayout(self)
