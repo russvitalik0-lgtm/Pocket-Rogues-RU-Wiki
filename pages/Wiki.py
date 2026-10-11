@@ -269,14 +269,6 @@ class WikiMenu(QWidget):
 
         self.menubar = QMenuBar()
         self.menubar.setObjectName("mainMenuBar")
-        self.menubar.setStyleSheet("""
-                QMenuBar {
-                font-size: 14px;  /* размер текста разделов */
-            }
-            QMenuBar::item {
-                margin-right: 15px;  /* отступ справа от каждого пункта */
-            }
-        """)
 
         layout = QVBoxLayout(self)
         layout.addWidget(self.menubar)

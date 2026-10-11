@@ -329,6 +329,12 @@ QPushButton:disabled {
     font-size: 14px;
     background: transparent;
 }
+#emptyContainer {
+    background: transparent;
+}
+#emptyLogo {
+    background: transparent;
+}
 
 /* ============================================================
    9. ЗАМЕТКИ (TipsPage)

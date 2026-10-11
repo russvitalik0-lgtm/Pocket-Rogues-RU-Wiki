@@ -71,6 +71,8 @@ class SavedPage(BasePage):
         """Вызывается, когда картинка успешно загружена"""
         self.image_label.setPixmap(pixmap)
         self.image_label.setText("")
+        if not self.saved_manager.saved_pages:
+            self.update_cards()
 
     def on_image_error(self):
         """Вызывается при ошибке"""
@@ -88,16 +90,13 @@ class SavedPage(BasePage):
         # Получаем список сохранённых страниц
         saved_pages = self.saved_manager.saved_pages
 
-        # Если список пуст
         if not saved_pages:
-            empty_label = QLabel(
-                "Список пуст.\n"
-                "Сохраняйте страницы кнопкой-звёздочкой слева, "
-                "и они появятся здесь."
+            empty_widget = self._make_empty_widget(
+                "Список пуст.\nСохраняйте страницы кнопкой-звёздочкой слева, и они появятся здесь.",
+                self.image_label.pixmap(),
+                (250, 125)
             )
-            empty_label.setObjectName("emptyLabel")
-            empty_label.setAlignment(Qt.AlignCenter)
-            self.grid_layout.addWidget(empty_label, 0, 0)
+            self.grid_layout.addWidget(empty_widget, 0, 0, 1, 1, Qt.AlignCenter)
             return
 
         # Вычисляем кол-во колонок

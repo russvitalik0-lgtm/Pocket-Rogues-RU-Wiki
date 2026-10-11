@@ -81,6 +81,8 @@ class LatestPage(BasePage):
         """Вызывается, когда картинка успешно загружена"""
         self.image_label.setPixmap(pixmap)
         self.image_label.setText("") # Убираем текст "Загрузка"
+        if not self.history_manager.recent_pages:
+            self.update_cards()
 
     def on_image_error(self):
         """Вызывается при ошибке"""
@@ -113,10 +115,12 @@ class LatestPage(BasePage):
 
         # Если история пуста
         if not recent_pages:
-            empty_label = QLabel("История пуста. \nПросматривайте страницы, и они появятся здесь.")
-            empty_label.setObjectName("emptyLabel")
-            empty_label.setAlignment(Qt.AlignCenter)
-            self.grid_layout.addWidget(empty_label, 0, 0)
+            empty_widget = self._make_empty_widget(
+                "История пуста.\nПросматривайте страницы, и они появятся здесь.",
+                self.image_label.pixmap(),
+                (250, 125)
+            )
+            self.grid_layout.addWidget(empty_widget, 0, 0, 1, 1, Qt.AlignCenter)
             return
 
         # Получаем ширину области для карточек

@@ -62,7 +62,6 @@ class BasePage(QWidget):
         """Добавляет заголовок страницы"""
         title = QLabel(text)
         title.setObjectName("pageTitle")
-        title.setStyleSheet("font-size: 18px; font-weight: bold;")
         self.layout.addWidget(title)
     
     def add_separator(self):
@@ -75,6 +74,38 @@ class BasePage(QWidget):
     def add_stretch(self):
         """Добавляет растягивающееся пространство внизу"""
         self.layout.addStretch()
+
+    def _make_empty_widget(self, text, logo_pixmap=None, logo_size=None):
+        """Создаёт заглушку: картинка (если есть) + текст"""
+        container = QWidget()
+        container.setObjectName("emptyContainer")
+        layout = QVBoxLayout(container)
+        layout.setAlignment(Qt.AlignCenter)
+        layout.setSpacing(15)
+
+        if logo_pixmap and not logo_pixmap.isNull():
+            logo = QLabel()
+            logo.setObjectName("emptyLogo")
+            logo.setAlignment(Qt.AlignCenter)
+            if logo_size is not None:
+                # Приводим к QSize (если передали кортеж)
+                if isinstance(logo_size, tuple):
+                    logo_size = QSize(*logo_size)
+                logo_pixmap = logo_pixmap.scaled(
+                    logo_size,
+                    Qt.KeepAspectRatio,
+                    Qt.SmoothTransformation
+                )
+
+            logo.setPixmap(logo_pixmap)
+            layout.addWidget(logo)
+
+        label = QLabel(text)
+        label.setObjectName("emptyLabel")
+        label.setAlignment(Qt.AlignCenter)
+        layout.addWidget(label)
+
+        return container
 
 def load_html(file_name):
     """Загружает HTML из папки WikiContent"""
