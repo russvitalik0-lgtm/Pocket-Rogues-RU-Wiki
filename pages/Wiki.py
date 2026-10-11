@@ -348,8 +348,7 @@ class WikiMenu(QWidget):
 
         ])
 
-        obsidiantower = location.addAction("Обсидиановая Башня")
-        obsidiantower.triggered.connect(lambda: self.on_section_clicked("Obsidian Tower"))
+        self.add_single_action(location, "Obsidian Tower", "Обсидиановая Башня") # Автоматизируем одиночное добавление
 
         # "Библиотека"
         library = self.add_menu_with_arrow("Библиотека")
@@ -387,8 +386,7 @@ class WikiMenu(QWidget):
             ("Builds", "Билды")
         ])
 
-        bestiary = library.addAction("Бестиарий") # Бестиарий добавляем без автоматизации, т.к. он один
-        bestiary.triggered.connect(lambda: self.on_section_clicked("Bestiary"))
+        self.add_single_action(library, "Bestiary", "Бестиарий") # Автоматизируем одиночное добавление
 
     # Функции для дизайна
     def add_menu_with_arrow(self, title):
@@ -427,6 +425,16 @@ class WikiMenu(QWidget):
             )
             if page_id.replace(' ', '') not in self.READY_PAGES:
                 action.setEnabled(False)
+
+    def add_single_action(self, menu_or_menubar, page_id, title):
+        """Добавляет одиночный пункт меню с проверкой READY_PAGES"""
+        action = menu_or_menubar.addAction(title)
+        action.triggered.connect(
+            lambda checked, pid=page_id: self.on_section_clicked(pid)
+        )
+        if page_id.replace(' ', '') not in self.READY_PAGES:
+            action.setEnabled(False)
+        return action
 
 def inject_page_actions(html, actions_html):
     """Вставляет контейнер кнопок сразу после открывающего тега <body ...>"""
