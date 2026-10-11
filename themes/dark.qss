@@ -48,19 +48,21 @@ QWidget {
 
 /* Список вкладок */
 #mainTabsList {
-    background-color: #2f2f2f;
-    border: none;
-    border-radius: 4px;
+    background-color: #262626;
+    border: 1px solid #3a3a3a;
+    border-radius: 6px;
     outline: none;
-    padding: 5px;
+    padding: 6px;
     font-size: 13px;
 }
 
 /* Отдельный пункт в списке */
 #mainTabsList::item {
+    background-color: #2f2f2f;
     padding: 8px 12px;
-    border-radius: 3px;
-    margin-bottom: 2px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    color: #d5d5d5;
 }
 
 /* Пункт при наведении */
