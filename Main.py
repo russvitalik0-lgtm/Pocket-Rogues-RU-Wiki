@@ -47,9 +47,12 @@ class MainWindow(QWidget):
 
         # Добавление панелей
         self.left_panel = QWidget()
+        self.left_panel.setObjectName("leftPanel")
+        left_panel_title = QLabel("- Вкладки -")
+        left_panel_title.setObjectName("leftPanelTitle")
         left_panel_inner = QVBoxLayout(self.left_panel)
         left_panel_inner.setContentsMargins(0, 0, 0, 0)
-        left_panel_inner.addWidget(QLabel("- Вкладки -"), alignment=Qt.AlignCenter)
+        left_panel_inner.addWidget(left_panel_title, alignment=Qt.AlignCenter)
         left_panel_inner.addWidget(self.list_widget)
         left_panel_inner.addStretch()
 
@@ -69,6 +72,7 @@ class MainWindow(QWidget):
         """Добавляет вкладки страниц"""
         # Основной список
         self.list_widget = QListWidget()
+        self.list_widget.setObjectName("mainTabsList")
         for item in ['Википедия', 'Недавние', 'Сохранённое', 'Заметки']:
             self.list_widget.addItem(item)
         self.list_widget.setFixedWidth(150)

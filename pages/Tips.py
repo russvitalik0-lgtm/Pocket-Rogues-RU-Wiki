@@ -12,9 +12,11 @@ class TipsPage(BasePage):
 
         self.add_title("Заметки")
         self.description = QLabel("Это описание")
+        self.description.setObjectName("pageDescription")
 
         # Создаем метку
         self.image_label = QLabel("Загрузка...")
+        self.image_label.setObjectName("pageLogo")
         self.image_label.setAlignment(Qt.AlignRight | Qt.AlignTop)
 
         # Размещаем
@@ -42,11 +44,13 @@ class TipsPage(BasePage):
 
         # Поле для Markdown
         self.md_edit = QTextEdit()
+        self.md_edit.setObjectName("notesEditor")
         self.md_edit.setPlaceholderText("Поле для записи Ваших заметок. Имеет поддержку Markdown и HTML.")
         self.md_edit.textChanged.connect(self.update_preview)
 
         # Поле для просмотра
         self.preview_edit = QTextBrowser()
+        self.preview_edit.setObjectName("notesPreview")
         self.preview_edit.setPlaceholderText("Поле для просмотра Ваших заметок в более красивом стиле. Отображает Markdown и HTML.")
 
         # Размещаем

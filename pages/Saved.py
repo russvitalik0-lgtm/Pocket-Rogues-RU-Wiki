@@ -20,10 +20,12 @@ class SavedPage(BasePage):
 
         # Метка для картинки
         self.image_label = QLabel("Загрузка...")
+        self.image_label.setObjectName("pageLogo")
         self.image_label.setAlignment(Qt.AlignRight | Qt.AlignTop)
 
         # Описание раздела
         self.description_label = QLabel("Страницы, которые вы сохранили")
+        self.description_label.setObjectName("pageDescription")
         self.description_label.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
 
         # Крепим виджеты
@@ -46,15 +48,16 @@ class SavedPage(BasePage):
 
         # Контейнер карточек
         self.cards_widget = QWidget()
+        self.cards_widget.setObjectName("cardsContainer")
         self.grid_layout = QGridLayout(self.cards_widget)
         self.grid_layout.setSpacing(10)
         self.grid_layout.setContentsMargins(0, 10, 0, 10)
 
         # Область прокрутки
         self.scroll_area = QScrollArea()
+        self.scroll_area.setObjectName("pageScrollArea")
         self.scroll_area.setWidgetResizable(True)
         self.scroll_area.setWidget(self.cards_widget)
-        self.scroll_area.setStyleSheet("QScrollArea { border: none; }")
 
         self.layout.addWidget(self.scroll_area, 1)
 
@@ -92,8 +95,8 @@ class SavedPage(BasePage):
                 "Сохраняйте страницы кнопкой-звёздочкой слева, "
                 "и они появятся здесь."
             )
+            empty_label.setObjectName("emptyLabel")
             empty_label.setAlignment(Qt.AlignCenter)
-            empty_label.setStyleSheet("color: #666; font-size: 14px;")
             self.grid_layout.addWidget(empty_label, 0, 0)
             return
 

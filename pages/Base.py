@@ -61,12 +61,14 @@ class BasePage(QWidget):
     def add_title(self, text):
         """Добавляет заголовок страницы"""
         title = QLabel(text)
+        title.setObjectName("pageTitle")
         title.setStyleSheet("font-size: 18px; font-weight: bold;")
         self.layout.addWidget(title)
     
     def add_separator(self):
         """Добавляет разделительную линию"""
         line = QFrame()
+        line.setObjectName("pageSeparator")
         line.setFrameShape(QFrame.HLine)
         line.setStyleSheet("background-color: #3c3c3c; height: 1px;")
         self.layout.addWidget(line)

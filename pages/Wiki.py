@@ -92,10 +92,12 @@ class WikiPage(BasePage):
 
         # Создаем метку
         self.image_label = QLabel("Загрузка...")
+        self.image_label.setObjectName("pageLogo")
         self.image_label.setAlignment(Qt.AlignRight | Qt.AlignTop)
 
         # Контейнер шапки
         self.header_widget = QWidget()
+        self.header_widget.setObjectName("wikiHeader")
         header_layout = QVBoxLayout(self.header_widget)
         header_layout.setContentsMargins(0, 0, 0, 0)
         header_layout.setSpacing(0)
@@ -111,6 +113,7 @@ class WikiPage(BasePage):
 
         # Разделитель - Делаем отдельный (иначе не попадет в контейнер)
         separator = QFrame()
+        separator.setObjectName("wikiHeaderSeparator")
         separator.setFrameShape(QFrame.HLine)
         separator.setStyleSheet("background-color: #3c3c3c; height: 1px;")
         header_layout.addWidget(separator)
@@ -239,6 +242,7 @@ class WikiMenu(QWidget):
 
     def __init__(self, parent=None, pages_config=None):
         super().__init__(parent)
+        self.setObjectName("wikiMenu")
 
         self.READY_PAGES = {
             "HomePage",
@@ -254,6 +258,7 @@ class WikiMenu(QWidget):
         self.pages_config = pages_config or {}
 
         self.menubar = QMenuBar()
+        self.menubar.setObjectName("mainMenuBar")
         self.menubar.setStyleSheet("""
                 QMenuBar {
                 font-size: 14px;  /* размер текста разделов */

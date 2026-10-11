@@ -23,12 +23,15 @@ class LatestPage(BasePage):
 
         # Создаем метку
         self.image_label = QLabel("Загрузка...")
+        self.image_label.setObjectName("pageLogo")
         self.image_label.setAlignment(Qt.AlignRight | Qt.AlignTop)
 
         self.description_label = QLabel("Недавно просмотренные страницы") # Создаем описание раздела
+        self.description_label.setObjectName("pageDescription")
         self.description_label.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
 
         self.settings_button = QPushButton("Настройки")
+        self.settings_button.setObjectName("settingsButton")
         self.settings_button.clicked.connect(self.show_settings)
     
         # Крепим виджеты
@@ -54,15 +57,16 @@ class LatestPage(BasePage):
 
         # Контейнер карточек
         self.cards_widget = QWidget()
+        self.cards_widget.setObjectName("cardsContainer")
         self.grid_layout = QGridLayout(self.cards_widget)
         self.grid_layout.setSpacing(10)
         self.grid_layout.setContentsMargins(0, 10, 0, 10)
 
         # Область прокрутки
         self.scroll_area = QScrollArea()
+        self.scroll_area.setObjectName("pageScrollArea")
         self.scroll_area.setWidgetResizable(True)
         self.scroll_area.setWidget(self.cards_widget)
-        self.scroll_area.setStyleSheet("QScrollArea { border: none; }")
 
         self.layout.addWidget(self.scroll_area, 1)
 
@@ -110,8 +114,8 @@ class LatestPage(BasePage):
         # Если история пуста
         if not recent_pages:
             empty_label = QLabel("История пуста. \nПросматривайте страницы, и они появятся здесь.")
+            empty_label.setObjectName("emptyLabel")
             empty_label.setAlignment(Qt.AlignCenter)
-            empty_label.setStyleSheet("color: #666; font-size: 14px;")
             self.grid_layout.addWidget(empty_label, 0, 0)
             return
 
@@ -164,6 +168,8 @@ class PreviewCard(QFrame):
     def __init__(self, page_id, title, preview_text, removable=False, parent=None):
         super().__init__(parent)
 
+        self.setObjectName("previewCard")
+
         # Сохраняем ID страницы
         self.page_id = page_id
         self.removable = removable
@@ -178,21 +184,18 @@ class PreviewCard(QFrame):
 
         # Заголовок (название страницы)
         self.title_label = QLabel(title)
-        self.title_label.setStyleSheet("font-weight: bold; font-size: 14px;")
+        self.title_label.setObjectName("cardTitle")
         self.title_label.setWordWrap(True)
 
         # Превью текста со страницы
         self.preview_label = QLabel(preview_text)
+        self.preview_label.setObjectName("cardPreview")
         self.preview_label.setWordWrap(True)
         self.preview_label.setTextInteractionFlags(Qt.NoTextInteraction)
-        self.preview_label.setStyleSheet("color: #888; font-size: 11px;")
 
         # Если removable - оставляем снизу место под звездочку
         if self.removable:
             self.preview_label.setContentsMargins(0, 0, 0, 0)
-            self.preview_label.setStyleSheet(
-                "color: #888; font-size: 11px; padding-bottom: 24px;"
-            )
 
         # Крепим к лайауту
         layout.addWidget(self.title_label)
@@ -202,9 +205,9 @@ class PreviewCard(QFrame):
         # Кнопка-звездочка
         if self.removable:
             self.remove_btn = QPushButton(self)
+            self.remove_btn.setObjectName("cardRemoveBtn")
             self.remove_btn.setFixedSize(24, 24)
             self.remove_btn.setCursor(Qt.PointingHandCursor)
-            self.remove_btn.setStyleSheet("""QPushButton { border: none; background: transparent; } QPushButton:hover { background: rgba(255, 255, 255, 0.1); border-radius: 4px;}""")
 
             # Иконка звездочки
             icon_path = os.path.join(
@@ -218,15 +221,6 @@ class PreviewCard(QFrame):
 
             # Ставим кнопку в правый нижний угол карточки (absolute)
             self.remove_btn.move(self.width() - 30, self.height() - 30)
-
-        self.setStyleSheet("""
-            QFrame {
-                border: 3px solid black;
-            }
-            QFrame:hover {
-                border-color: #666;
-            }
-        """)
 
     def mousePressEvent(self, event):
         """Обработка клика по карточке"""
@@ -255,6 +249,7 @@ class SettingsDialog(QDialog):
 
         # Чекбокс сохранения истории
         self.save_checkbox = QCheckBox("Сохранять историю просмотра")
+        self.save_checkbox.setObjectName("settingsCheckbox")
         self.save_checkbox.setChecked(history_manager.settings["save_history"]) # Устанавливаем значение из настроек
 
         # Поле для лимита
@@ -262,6 +257,7 @@ class SettingsDialog(QDialog):
         limit_label = QLabel("Лимит сохраненных страниц")
 
         self.limit_spinbox = QSpinBox()
+        self.limit_spinbox.setObjectName("settingsSpinbox")
         self.limit_spinbox.setRange(1, self.pages_count.send_pages_count()) # Устанавливаем диапазон
         self.limit_spinbox.setValue(history_manager.settings["limit"]) # Устанавлием значение из настроек
 
@@ -272,7 +268,9 @@ class SettingsDialog(QDialog):
         # Кнопки
         buttons_layout = QHBoxLayout()
         self.save_button = QPushButton("Сохранить")
+        self.save_button.setObjectName("settingsSaveBtn")
         self.cancel_button = QPushButton("Отмена")
+        self.cancel_button.setObjectName("settingsCancelBtn")
 
         # Подключаем их
         self.save_button.clicked.connect(self.accept) # Закрыть с "ОК"
