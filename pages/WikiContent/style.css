@@ -470,7 +470,7 @@ body.is-fullscreen .fullscreen-btn .icon-exit  { display: block; }
 
 /* Главная страница */
 body.page-home {
-    --accent-link: #1c3e79;
+    --accent-link: #153f88;
     --accent-link-hover: #3a6bc7;
     --quote-border: #1c3e79;
     --quote-bg: #1c3e790D;
