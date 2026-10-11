@@ -1,10 +1,14 @@
 # LatestPage
-from PyQt5.QtCore import Qt, pyqtSignal, QTimer
+from PyQt5.QtCore import Qt, pyqtSignal, QTimer, QSize
 from PyQt5.QtWidgets import *
+from PyQt5.QtGui import QIcon
+import os
+
 from .Base import BasePage
 from .Base import ImageLoader
 from .Base import get_page_preview
 from .Base import history_manager
+from .Base import saved_manager
 from .Wiki import WikiPage
 
 class LatestPage(BasePage):
@@ -155,12 +159,14 @@ class PreviewCard(QFrame):
 
     # Сигнал с ID страницы (будет срабатывать при клике)
     clicked = pyqtSignal(str)
+    remove_requested = pyqtSignal(str)
 
-    def __init__(self, page_id, title, preview_text, parent=None):
+    def __init__(self, page_id, title, preview_text, removable=False, parent=None):
         super().__init__(parent)
 
         # Сохраняем ID страницы
         self.page_id = page_id
+        self.removable = removable
 
         # Фиксированный размер карточки
         self.setFixedSize(225, 175)
@@ -181,10 +187,37 @@ class PreviewCard(QFrame):
         self.preview_label.setTextInteractionFlags(Qt.NoTextInteraction)
         self.preview_label.setStyleSheet("color: #888; font-size: 11px;")
 
+        # Если removable - оставляем снизу место под звездочку
+        if self.removable:
+            self.preview_label.setContentsMargins(0, 0, 0, 0)
+            self.preview_label.setStyleSheet(
+                "color: #888; font-size: 11px; padding-bottom: 24px;"
+            )
+
         # Крепим к лайауту
         layout.addWidget(self.title_label)
         layout.addWidget(self.preview_label)
         layout.addStretch()
+
+        # Кнопка-звездочка
+        if self.removable:
+            self.remove_btn = QPushButton(self)
+            self.remove_btn.setFixedSize(24, 24)
+            self.remove_btn.setCursor(Qt.PointingHandCursor)
+            self.remove_btn.setStyleSheet("""QPushButton { border: none; background: transparent; } QPushButton:hover { background: rgba(255, 255, 255, 0.1); border-radius: 4px;}""")
+
+            # Иконка звездочки
+            icon_path = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)),
+                "WikiContent", "WikiImages", "red_saved_icon.png"
+            )
+            self.remove_btn.setIcon(QIcon(icon_path))
+            self.remove_btn.setIconSize(QSize(32, 32))
+
+            self.remove_btn.clicked.connect(self._on_remove_clicked)
+
+            # Ставим кнопку в правый нижний угол карточки (absolute)
+            self.remove_btn.move(self.width() - 30, self.height() - 30)
 
         self.setStyleSheet("""
             QFrame {
@@ -199,6 +232,10 @@ class PreviewCard(QFrame):
         """Обработка клика по карточке"""
         if event.button() == Qt.LeftButton:
             self.clicked.emit(self.page_id) # Подаем сигнал clicked с ID страницы
+
+    def _on_remove_clicked(self):
+        """Клик по звёздочке - не открывать страницу, а запросить удаление"""
+        self.remove_requested.emit(self.page_id)
 
 class SettingsDialog(QDialog):
     """Диалог настроек истории"""

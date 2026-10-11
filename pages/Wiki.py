@@ -9,11 +9,13 @@ from .Base import BasePage
 from .Base import ImageLoader
 from .Base import load_html
 from .Base import history_manager
+from .Base import saved_manager
 from .link_interceptor import InterceptingPage
 
 
 class WikiPage(BasePage):
     fullscreen_requested = pyqtSignal()
+    save_toggle_requested = pyqtSignal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -83,6 +85,8 @@ class WikiPage(BasePage):
             value = page.replace(' ', '').lower() + '.html'
             self.pages_config[key] = value
 
+        saved_manager.saved_changed.connect(self._on_saved_changed)
+
         # Добавление разделов
         self.menu = WikiMenu(self, self.pages_config)
 
@@ -123,21 +127,29 @@ class WikiPage(BasePage):
         self.browser = QWebEngineView()
         self.browser_page = InterceptingPage(self.browser)
         self.browser_page.on_fullscreen_toggle = self.fullscreen_requested.emit
+        self.browser_page.on_save_toggle = self.save_toggle_requested.emit
         self.browser_page.on_external_link = lambda url: webbrowser.open(url.toString())
         self.browser.setPage(self.browser_page)
         self.browser.loadFinished.connect(self._on_page_loaded)
         self.layout.addWidget(self.browser, 1)
 
 
-        # Заготовка для фуллскрина
-        self.FULLSCREEN_BTN = (
-            '<button class="fullscreen-btn" '
-            'onclick="console.log(\'__FULLSCREEN_TOGGLE__\')">'
-            '<img draggable="false" src="WikiImages/fullscreen_icon_enter.png" class="icon-enter" alt="">'
-            '<img draggable="false" src="WikiImages/fullscreen_icon_exit.png" class="icon-exit" alt="">'
-            '</button>'
+        self.PAGE_ACTIONS_BTN = (
+            '<div class="page-actions">'
+                '<button class="action-btn fullscreen-btn" '
+                'onclick="console.log(\'__FULLSCREEN_TOGGLE__\')">'
+                    '<img draggable="false" src="WikiImages/fullscreen_icon_enter.png" class="icon-enter" alt="">'
+                    '<img draggable="false" src="WikiImages/fullscreen_icon_exit.png" class="icon-exit" alt="">'
+                '</button>'
+                '<button class="action-btn save-btn" '
+                'onclick="console.log(\'__SAVE_TOGGLE__\')">'
+                    '<img draggable="false" src="WikiImages/save_icon.png" class="icon-save" alt="">'
+                    '<img draggable="false" src="WikiImages/saved_icon.png" class="icon-saved" alt="">'
+                '</button>'
+            '</div>'
         )
 
+        self.current_page_id = None
         self.load_page("HomePage")
 
         # Подключаем сигналы от меню
@@ -146,10 +158,11 @@ class WikiPage(BasePage):
     def load_page(self, page_id):
         """Загружает HTML-файл в браузер"""
         if page_id in self.pages_config:
+            self.current_page_id = page_id
             file_name = self.pages_config[page_id]
             html_content = load_html(file_name)
 
-            html_content = inject_fullscreen_btn(html_content, self.FULLSCREEN_BTN)
+            html_content = inject_page_actions(html_content, self.PAGE_ACTIONS_BTN)
 
             current_dir = os.path.dirname(os.path.abspath(__file__))
             base_path = os.path.join(current_dir, "WikiContent")
@@ -190,12 +203,36 @@ class WikiPage(BasePage):
             f"document.body.classList.{action}('is-fullscreen')"
         )
 
+    def _update_save_icon(self):
+        """Обновляет is-saved на <body> в соответствии с состоянием saved_manager"""
+        if not self.current_page_id:
+            return
+        if saved_manager.is_saved(self.current_page_id):
+            js = "document.body.classList.add('is-saved')"
+        else:
+            js = "document.body.classList.remove('is-saved')"
+        self.browser_page.runJavaScript(js)
+
     def _on_page_loaded(self, ok):
-        """Восстанавливает класс is-fullscreen после загрузки страницы"""
+        """Восстанавливает классы is-saved и is-fullscreen после загрузки страницы"""
+        if not ok:
+            return
+
+        # Фуллскрин
         if ok and self.header_widget.isHidden():
             self.browser.page().runJavaScript(
                 "document.body.classList.add('is-fullscreen')"
             )
+
+        # Сохранение
+        if self.current_page_id and saved_manager.is_saved(self.current_page_id):
+            self.browser.page().runJavaScript(
+                "document.body.classList.add('is-saved')"
+            )
+
+    def _on_saved_changed(self):
+        """Вызывается, когда saved_manager сообщает об изменении списка сохранённых"""
+        self._update_save_icon()
 
 class WikiMenu(QWidget):
     section_changed = pyqtSignal(str) # Будем переключать страницы используя их текстовой ID
@@ -384,12 +421,12 @@ class WikiMenu(QWidget):
             if page_id.replace(' ', '') not in self.READY_PAGES:
                 action.setEnabled(False)
 
-def inject_fullscreen_btn(html, btn_html):
-    """Вставляет кнопку полноэкранного режима сразу после открывающего тега <body ...>"""
+def inject_page_actions(html, actions_html):
+    """Вставляет контейнер кнопок сразу после открывающего тега <body ...>"""
     idx_body = html.find("<body")
     if idx_body == -1:
         return html # На случай, если body нет
     idx_end = html.find(">", idx_body)
     if idx_end == -1:
         return html
-    return html[:idx_end + 1] + btn_html + html[idx_end +1:]
+    return html[:idx_end + 1] + actions_html + html[idx_end +1:]

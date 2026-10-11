@@ -15,7 +15,9 @@ app = QApplication([])
 from pages.Wiki import WikiPage
 from pages.Latest import LatestPage
 from pages.Tips import TipsPage
+from pages.Saved import SavedPage
 from pages.history_manager import HistoryManager
+from pages.Base import saved_manager
 
 # Создание и редакция окна и приложения
 class MainWindow(QWidget):
@@ -41,6 +43,7 @@ class MainWindow(QWidget):
 
         # Закрепляем страницы
         self.latest_page.page_opened.connect(self.open_wiki_page)
+        self.saved_page.page_opened.connect(self.open_wiki_page)
 
         # Добавление панелей
         self.left_panel = QWidget()
@@ -60,12 +63,13 @@ class MainWindow(QWidget):
 
         # Сигналы
         self.wiki_page.fullscreen_requested.connect(self.toggle_fullscreen)
+        self.wiki_page.save_toggle_requested.connect(self.toggle_save)
 
     def add_page(self):
         """Добавляет вкладки страниц"""
         # Основной список
         self.list_widget = QListWidget()
-        for item in ['Википедия', 'Недавние', 'Заметки']:
+        for item in ['Википедия', 'Недавние', 'Сохранённое', 'Заметки']:
             self.list_widget.addItem(item)
         self.list_widget.setFixedWidth(150)
         self.list_widget.setSpacing(5)
@@ -76,9 +80,11 @@ class MainWindow(QWidget):
         self.wiki_page = WikiPage()
         self.latest_page = LatestPage()
         self.tips_page = TipsPage()
+        self.saved_page = SavedPage()
         
         self.stacked.addWidget(self.wiki_page)
         self.stacked.addWidget(self.latest_page)
+        self.stacked.addWidget(self.saved_page)
         self.stacked.addWidget(self.tips_page)
 
     def switch_page(self, index):
@@ -100,6 +106,14 @@ class MainWindow(QWidget):
         else:
             self.left_panel.show()
             self.wiki_page.set_reading_mode(False)
+
+    def toggle_save(self):
+        """Переключает сохранение текущей страницы"""
+        page_id = self.wiki_page.current_page_id
+        if not page_id:
+            return
+        saved_manager.toggle(page_id)
+        self.wiki_page._update_save_icon()
 
 
 window = MainWindow()

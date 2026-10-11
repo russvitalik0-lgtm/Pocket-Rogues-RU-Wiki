@@ -7,9 +7,11 @@ import os
 import requests
 import re # Модуль для работы с регулярными выражениями. Удалит HTML-Теги из текста
 from .history_manager import HistoryManager
+from .saved_manager import SavedManager
 
 
 history_manager = HistoryManager()
+saved_manager = SavedManager()
 some_url = "https://static.wikia.nocookie.net/pocketrogues/images/e/e6/Site-logo.png/revision/latest?cb=20210610092016&path-prefix=ru"
 
 # Создаем поток для загрузки картинки, чтобы не морозить интерфейс
