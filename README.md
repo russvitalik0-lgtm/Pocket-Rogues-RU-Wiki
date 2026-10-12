@@ -50,8 +50,8 @@ python Main.py
 ## Зависимости
 
 - Python 3.10+
-- PyQt5
-- PyQtWebEngine
+- PyQt6=6.11.0
+- PyQt6-WebEngine=6.11.0
 - markdown
 - requests
 
