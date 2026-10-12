@@ -21,13 +21,15 @@ from pages.Wiki import WikiPage
 from pages.Latest import LatestPage
 from pages.Tips import TipsPage
 from pages.Saved import SavedPage
+from pages.Style import StylePage
 from pages.history_manager import HistoryManager
 from pages.Base import saved_manager
 
 # Создание и редакция окна и приложения
 class MainWindow(QWidget):
-    def __init__(self):
+    def __init__(self, theme_manager):
         super().__init__()
+        self.theme_manager = theme_manager
 
         # Меняем окно
         self.setWindowTitle('Pocket Rogues: RU-Wiki')
@@ -78,7 +80,7 @@ class MainWindow(QWidget):
         # Основной список
         self.list_widget = QListWidget()
         self.list_widget.setObjectName("mainTabsList")
-        for item in ['Википедия', 'Недавние', 'Сохранённое', 'Заметки']:
+        for item in ['Википедия', 'Недавние', 'Сохранённое', 'Заметки', 'Стилизация']:
             self.list_widget.addItem(item)
         self.list_widget.setFixedWidth(150)
         self.list_widget.setSpacing(5)
@@ -90,11 +92,13 @@ class MainWindow(QWidget):
         self.latest_page = LatestPage()
         self.tips_page = TipsPage()
         self.saved_page = SavedPage()
+        self.style_page = StylePage(self.theme_manager)
         
         self.stacked.addWidget(self.wiki_page)
         self.stacked.addWidget(self.latest_page)
         self.stacked.addWidget(self.saved_page)
         self.stacked.addWidget(self.tips_page)
+        self.stacked.addWidget(self.style_page)
 
     def switch_page(self, index):
         self.stacked.setCurrentIndex(index)
@@ -125,6 +129,6 @@ class MainWindow(QWidget):
         self.wiki_page._update_save_icon()
 
 
-window = MainWindow()
+window = MainWindow(theme_manager)
 window.show()
 sys.exit(app.exec())

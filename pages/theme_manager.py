@@ -8,6 +8,31 @@ class ThemeManager(QObject):
 
     theme_changed = pyqtSignal(str)
 
+    THEME_PALETTES = {
+        "dark": {
+            "display_name": "Тёмная",
+            "bg_window": "#2a2a2a",
+            "bg_panel": "#333333",
+            "bg_list": "#262626",
+            "bg_field": "#1f1f1f",
+            "accent": "#00b7e0",
+            "text": "#d5d5d5",
+            "text_heading": "#ffffff",
+            "border": "#444444",
+        },
+        "light": {
+            "display_name": "Светлая",
+            "bg_window": "#f0f0f0",
+            "bg_panel": "#e0e0e0",
+            "bg_list": "#d8d8d8",
+            "bg_field": "#ffffff",
+            "accent": "#007a9e",
+            "text": "#222222",
+            "text_heading": "#000000",
+            "border": "#cccccc",
+        },
+        # Сюда потом "dark-purple"
+    }
     # Доступные темы (совпадают с именами .qss файлов в themes/)
     AVAILABLE_THEMES = ["dark", "light"]
     DEFAULT_THEME = "dark"
