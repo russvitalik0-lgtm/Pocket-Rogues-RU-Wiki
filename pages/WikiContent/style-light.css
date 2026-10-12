@@ -1,22 +1,23 @@
 :root {
-    --bg-page: #1a1a1a;              /* Задний фон страницы */
-    --bg-content: #262626;           /* Задний фон поля с контентом */
-    --bg-table: #2d2d2d;             /* Задний фон таблиц */
-    --bg-table-head: #3a3a3a;        /* Задний фон заголовка */
-    --bg-hover: #333333;             /* Задний фон при наведении */
-    --text-main: #d5d5d5;            /* Основной цвет текста */
-    --text-muted: #a0a0a0;           /* Затемнённый текст */
-    --text-heading: #ffffff;         /* Цвет текста заголовка */
-    --accent-link: #00b7e0;          /* Цвет гиперссылок */
-    --accent-link-hover: #4a90e2;    /* Цвет гиперссылок при наведении */
-    --border-color: #666666;         /* Граница */
-    --border-table: #888888;         /* Граница таблиц */
-    --quote-border: #00b7e0;         /* Граница Примечаний */
-    --quote-bg: #00B7E00D;
-    --font-main: sans-serif;         /* Основной шрифт */
-    --bg-row-even: #2a2a2a;
-    --bg-row-odd: #2d2d2d;
-    --glow-color: #0085a3;
+    --bg-page: #f5f5f5;              /* Светло-серый фон страницы */
+    --bg-content: #ececec;           /* Фон поля с контентом */
+    --bg-table: #e8e8e8;             /* Фон таблиц */
+    --bg-table-head: #dddddd;        /* Фон заголовка */
+    --bg-hover: #d8d8d8;             /* Фон при наведении */
+    --text-main: #222222;            /* Основной текст */
+    --text-muted: #666666;           /* Затемнённый текст */
+    --text-heading: #000000;         /* Текст заголовков */
+    --accent-link: #0078a0;          /* Гиперссылки (дефолт, у страниц свои) */
+    --accent-link-hover: #0090bd;
+    --border-color: #c0c0c0;         /* Границы */
+    --border-table: #686868;         /* Границы таблиц */
+    --quote-border: #0078a0;
+    --quote-bg: #0078a010;
+    --font-main: sans-serif;
+    --bg-row-even: #e2e2e2;
+    --bg-row-odd: #ececec;
+    --glow-color: #00a0c8;
+    --hover-table: #b4b4b4;
 }
 
 body {
@@ -40,7 +41,7 @@ h1, h2, h3, h4 {
     font-weight: 600;
 }
 
-h1 { font-size: 2em; border-bottom: 2px solid var(--accent-link); margin-top: 0.4em;}
+h1 { font-size: 2em; border-bottom: 2px solid var(--accent-link); margin-top: 0.4em; }
 h2 { font-size: 1.6em; }
 h3 { font-size: 1.3em; border-bottom: none; }
 h4 { font-size: 1.1em; border-bottom: none; }
@@ -55,8 +56,8 @@ a:hover, .wiki-link:hover {
     text-decoration: underline;
 }
 
-strong { color: #ffffff; }
-em { color: #e0e0e0; }
+strong { color: var(--text-heading); }
+em { color: var(--text-main); }
 u { text-decoration-color: var(--text-muted); }
 
 .wiki-figure {
@@ -81,11 +82,11 @@ u { text-decoration-color: var(--text-muted); }
 }
 
 .wiki-img-placeholder {
-    background: #111;
+    background: #d0d0d0;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px dashed #555;
+    border: 1px dashed #999;
     position: relative;
 }
 
@@ -98,12 +99,12 @@ u { text-decoration-color: var(--text-muted); }
 
 .wiki-img-placeholder::after {
     content: attr(data-filename);
-    color: #666;
+    color: #888;
     font-size: 10px;
     text-align: center;
-    width: 100%;            /* Вся ширина контейнера */
+    width: 100%;
     padding: 0 4px;
-    box-sizing: border-box; /* Не будет прилипать к краям */
+    box-sizing: border-box;
 }
 
 .wiki-img-placeholder { height: 125px; width: 125px; }
@@ -150,13 +151,13 @@ figcaption {
 .wiki-toc li { margin: 4px 0; }
 .wiki-toc ol ol { margin-top: 4px; }
 
-.wiki-quote { /* Цитата */
+.wiki-quote {
     background: var(--bg-content);
     border-left: 4px solid var(--quote-border);
     margin: 15px 0;
     padding: 15px 20px;
     font-style: italic;
-    color: #ccc;
+    color: var(--text-main);
     border-radius: 0 4px 4px 0;
 }
 
@@ -218,12 +219,10 @@ figcaption {
     min-width: 180px;
 }
 
-/* Чётные первые ячейки */
 .sticky-first-col tr:nth-child(even) td:first-child {
     background: var(--bg-row-even);
 }
 
-/* Шапка — отдельно */
 .sticky-first-col thead th:first-child {
     background: var(--bg-table-head);
     z-index: 3;
@@ -239,7 +238,7 @@ figcaption {
 }
 
 .empty-cell {
-    color: #666;
+    color: #999;
     text-align: center;
     font-style: italic;
 }
@@ -278,14 +277,12 @@ figcaption {
 }
 
 .wiki-collapsible summary:hover {
-    background: #444;
+    background: var(--hover-table);
 }
 
 .wiki-collapsible-content {
     padding: 0;
 }
-
-
 
 ul, ol { padding-left: 25px; }
 li { margin-bottom: 6px; }
@@ -312,31 +309,28 @@ hr {
 .wiki-notes ul { margin: 5px 0; padding-left: 20px; }
 .wiki-notes li { margin-bottom: 4px; }
 
-.att-icon { width:32px; height: 32px; }
+.att-icon { width: 32px; height: 32px; }
 .att-icon--sm { width: 20px; height: 20px; }
 .skill-icon { width: 125px; height: 125px; }
 
-/* Скроллбар у таблиц */
-.wiki-table-wrap::-webkit-scrollbar { /* Полоса */
+.wiki-table-wrap::-webkit-scrollbar {
     height: 8px;
     width: 8px;
 }
 
-.wiki-table-wrap::-webkit-scrollbar-track { /* Дорожка */
-    background: #1a1a1a;
+.wiki-table-wrap::-webkit-scrollbar-track {
+    background: #e0e0e0;
     border-radius: 4px;
 }
 
-.wiki-table-wrap::-webkit-scrollbar-thumb { /* Ползунок */
-    background: #444;
+.wiki-table-wrap::-webkit-scrollbar-thumb {
+    background: #b0b0b0;
     border-radius: 4px;
 }
 
 .wiki-table-wrap::-webkit-scrollbar-thumb:hover {
-    background: #666;
+    background: #909090;
 }
-
-/* Центрирование */
 
 .text-center { text-align: center; }
 
@@ -359,7 +353,6 @@ hr {
 
 .wiki-content { overflow: hidden; }
 
-/* Инфобоки */
 .wiki-infobox {
     float: right;
     width: 300px;
@@ -422,7 +415,7 @@ hr {
     justify-content: space-between;
     align-items: center;
     padding: 5px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
 .wiki-infobox__row:last-child {
@@ -447,7 +440,6 @@ hr {
     margin-right: 8px;
 }
 
-/* Контейнер кнопок действий -- вертикальный стек слева от контента */
 .page-actions {
     position: fixed;
     top: 30px;
@@ -458,7 +450,6 @@ hr {
     z-index: 1000;
 }
 
-/* Общий стиль кнопок */
 .action-btn {
     display: block;
     width: 48px;
@@ -485,22 +476,20 @@ hr {
     height: 100%;
     object-fit: contain;
     -webkit-user-drag: none;
+    filter: invert(1);   /* белые иконки → чёрные для светлой темы */
 }
 .action-btn:focus {
     outline: none;
 }
 
-/* Фуллскрин: enter по умолчанию, exit в режиме чтения */
 .fullscreen-btn .icon-exit { display: none; }
 body.is-fullscreen .fullscreen-btn .icon-enter { display: none; }
 body.is-fullscreen .fullscreen-btn .icon-exit  { display: block; }
 
-/* Сохранение: пустая звезда по умолчанию, полная -- если сохранено */
 .save-btn .icon-saved { display: none; }
 body.is-saved .save-btn .icon-save  { display: none; }
 body.is-saved .save-btn .icon-saved { display: block; }
 
-/* Скроллбар страниц */
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -511,36 +500,45 @@ body.is-saved .save-btn .icon-saved { display: block; }
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #444444;
+    background: #b0b0b0;
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #555555;
+    background: #909090;
 }
 
 /* ===== Акценты по страницам ===== */
+/* Принцип: тот же hue, но ярче и насыщеннее, чем в тёмной теме */
 
 /* Главная страница */
 body.page-home {
-    --accent-link: #153f88;
-    --accent-link-hover: #3a6bc7;
-    --quote-border: #1c3e79;
-    --quote-bg: #1c3e790D;
+    --accent-link: #2a70d4;
+    --accent-link-hover: #1e5fb8;
+    --quote-border: #2a70d4;
+    --quote-bg: #2a70d410;
+    --bg-row-odd: #a0c0e8;
+    --bg-row-even: #90b0dc;
+    --bg-table-head: #b0ccf0;
+    --bg-table: #80a0cc;
+    --skill-icon-border: #80a8d8;
+    --border-color: #1e5fb8;
+    --hover-table: #90b0dc;
 }
 
 /* Некромант */
 body.page-necromancer {
-    --accent-link: #8a4fc7;
-    --accent-link-hover: #b06ee8;
-    --quote-border: #8a4fc7;
-    --quote-bg: #8a4fc70D;
-    --bg-row-odd: #2d2638;
-    --bg-row-even: #221d2b;
-    --bg-table-head: #3a2f4a;
-    --bg-table: #251f2f;
-    --skill-icon-border: #3a1e57;
-    --border-color: #4b2274;
+    --accent-link: #a93cf1; 
+    --accent-link-hover: #9222db;
+    --quote-border: #a93cf1;
+    --quote-bg: #934fcf10;
+    --bg-row-odd: #cc88f9;
+    --bg-row-even: #c277f3;
+    --bg-table-head: #d699ff;
+    --bg-table: #b180ec;
+    --skill-icon-border: #9f6ce2;
+    --border-color: #9d4ee0;
+    --hover-table: #c277f3;
 }
 
 body.page-necromancer .wiki-figure {
@@ -552,21 +550,26 @@ body.page-necromancer .skill-icon {
 }
 
 .necr-infobox {
-    background: #3d2a52;   /* тёмно-фиолетовый */
+    background: #8045ce;
 }
 
 /* Воин */
 body.page-warrior {
-    --accent-link: #8b2532;
-    --accent-link-hover: #b8394a;
-    --quote-border: #8b2532;
-    --quote-bg: #8b25320D;
-    --bg-row-odd: #2d1d1f;
-    --bg-row-even: #221618;
-    --bg-table-head: #3a2427;
-    --bg-table: #241a1c;
-    --skill-icon-border: #421219;
-    --border-color: #5a151f;
+    --accent-link: #c41e30;
+    --accent-link-hover: #a61b2b;
+    --quote-border: #c41e30;
+    --quote-bg: #c41e3010;
+    --bg-row-odd: #f0a8b0;
+    --bg-row-even: #e894a0;
+    --bg-table-head: #f5b8c0;
+    --bg-table: #e08898;
+    --skill-icon-border: #c87080;
+    --border-color: #a61b2b;
+    --hover-table: #e894a0;
+}
+
+.warrior-infobox {
+    background: #d05868;
 }
 
 body.page-warrior .wiki-figure {
@@ -577,22 +580,23 @@ body.page-warrior .skill-icon {
     border: 1px solid var(--skill-icon-border);
 }
 
-.warrior-infobox {
-    background: #2d1d1f;
-}
-
 /* Лучник */
 body.page-archer {
-    --accent-link: #2e8b57;
-    --accent-link-hover: #3cb371;
-    --quote-border: #2e8b57;
-    --quote-bg: #2e8b570D;
-    --bg-row-odd: #26382d;
-    --bg-row-even: #1d2b22;
-    --bg-table-head: #2f4a3a;
-    --bg-table: #1f2d24;
-    --skill-icon-border: #0e3a21;
-    --border-color: #135a32;
+    --accent-link: #23a05a;
+    --accent-link-hover: #1f8a4d;
+    --quote-border: #23a05a;
+    --quote-bg: #23a05a10;
+    --bg-row-odd: #98d8b0;
+    --bg-row-even: #88c8a0;
+    --bg-table-head: #a8e0bc;
+    --bg-table: #78b890;
+    --skill-icon-border: #60b880;
+    --border-color: #1f8a4d;
+    --hover-table: #88c8a0;
+}
+
+.archer-infobox {
+    background: #70a888;
 }
 
 body.page-archer .wiki-figure {
@@ -603,22 +607,23 @@ body.page-archer .skill-icon {
     border: 1px solid var(--skill-icon-border);
 }
 
-.archer-infobox {
-    background: #2a4a35;
-}
-
 /* Берсерк */
 body.page-berserker {
-    --accent-link: #c49a00;          /* Приглушённый тёмно-жёлтый */
-    --accent-link-hover: #e0b400;    /* Чуть светлее при наведении */
-    --quote-border: #c49a00;
-    --quote-bg: #c49a000D;
-    --bg-row-odd: #332d1a;           /* Тёмно-коричневый с желтинкой */
-    --bg-row-even: #292415;
-    --bg-table-head: #4a3f1a;
-    --bg-table: #2a2517;
-    --skill-icon-border: #493a05;
-    --border-color: #725b08;
+    --accent-link: #cfa000;
+    --accent-link-hover: #b08a00;
+    --quote-border: #cfa000;
+    --quote-bg: #cfa00010;
+    --bg-row-odd: #e8d888;
+    --bg-row-even: #dcc878;
+    --bg-table-head: #f0e098;
+    --bg-table: #ccb868;
+    --skill-icon-border: #d4b858;
+    --border-color: #b08a00;
+    --hover-table: #dcc878;
+}
+
+.berserker-infobox {
+    background: #b89838;
 }
 
 body.page-berserker .wiki-figure {
@@ -629,22 +634,23 @@ body.page-berserker .skill-icon {
     border: 1px solid var(--skill-icon-border);
 }
 
-.berserker-infobox {
-    background: #4a3a10;             /* Тёмный фон для заголовков инфобокса */
-}
-
 /* Охотник */
 body.page-hunter {
-    --accent-link: #b87333;          /* Медный/коричнево-оранжевый */
-    --accent-link-hover: #d4893f;    /* Чуть светлее при наведении */
-    --quote-border: #b87333;
-    --quote-bg: #b873330D;
-    --bg-table: #1a1510;             /* Очень тёмный коричневый (тусклее строк) */
-    --bg-row-odd: #2d2418;           /* Тёмно-коричневый */
-    --bg-row-even: #241e14;          /* Чуть темнее */
-    --bg-table-head: #3d2e1a;        /* Заголовок таблицы */
-    --skill-icon-border: #492a0d;
-    --border-color: #5c320c;
+    --accent-link: #c46824;
+    --accent-link-hover: #a85a1f;
+    --quote-border: #c46824;
+    --quote-bg: #c4682410;
+    --bg-row-odd: #e8b888;
+    --bg-row-even: #dca878;
+    --bg-table-head: #f0c098;
+    --bg-table: #cc9868;
+    --skill-icon-border: #d09858;
+    --border-color: #a85a1f;
+    --hover-table: #dca878;
+}
+
+.hunter-infobox {
+    background: #b87838;
 }
 
 body.page-hunter .wiki-figure {
@@ -655,26 +661,23 @@ body.page-hunter .skill-icon {
     border: 1px solid var(--skill-icon-border);
 }
 
-.hunter-infobox {
-    background: #3d2e1a;             /* Тёмный фон для заголовков инфобокса */
-}
-
 /* Маг */
 body.page-mage {
-    --accent-link: #006994;          /* Глубокий океанический синий */
-    --accent-link-hover: #0088b4;    /* Светлее при наведении */
-    --quote-border: #006994;
-    --quote-bg: #0069940D;
-    --skill-icon-border: #0d1b2a;    /* Очень темный океанический для рамок иконок */
-    --border-color: #1a335e;         /* Чуть светлее для границ */
-    --bg-table: #0f243f;             /* Почти черный с синим отливом (тусклее строк) */
-    --bg-row-odd: #1b263b;           /* Темно-океанический */
-    --bg-row-even: #152030;          /* Чуть темнее */
-    --bg-table-head: #243b55;        /* Заголовок таблицы */
+    --accent-link: #0088c8;
+    --accent-link-hover: #0078b0;
+    --quote-border: #0088c8;
+    --quote-bg: #0088c810;
+    --bg-row-odd: #88c0e0;
+    --bg-row-even: #78b0d4;
+    --bg-table-head: #98cce8;
+    --bg-table: #68a0c4;
+    --skill-icon-border: #60a0c8;
+    --border-color: #0078b0;
+    --hover-table: #78b0d4;
 }
 
 .mage-infobox {
-    background: #243b55;             /* Тёмный фон для заголовков инфобокса */
+    background: #6090b8;
 }
 
 body.page-mage .wiki-figure {
@@ -687,13 +690,17 @@ body.page-mage .skill-icon {
 
 /* Лагерная Обитель */
 body.page-camp {
-    --accent-link: #c96f2c;          /* тёплый оранжево-коричневый */
-    --accent-link-hover: #e08a45;    /* светлее */
-    --quote-border: #c96f2c;
-    --quote-bg: #c96f2c0D;
-    --bg-row-odd: #33261a;
-    --bg-row-even: #2a1f15;
-    --bg-table-head: #4a3520;
-    --bg-table: #251b10;
-    --border-color: #522f0c;
+    --accent-link: #e07428;
+    --accent-link-hover: #c8641f;
+    --quote-border: #e07428;
+    --quote-bg: #e0742810;
+    --bg-row-odd: #f0b888;
+    --bg-row-even: #e8a878;
+    --bg-table-head: #f5c098;
+    --bg-table: #d89868;
+    --skill-icon-border: #e0a058;
+    --border-color: #c8641f;
+    --hover-table: #e8a878;
 }
+
+/* Заглушка для остальных страниц (без page-*, если есть) */

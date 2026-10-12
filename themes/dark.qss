@@ -153,13 +153,6 @@ QMenu::separator {
     background-color: #2a2a2a;
 }
 
-/* Разделитель шапки */
-#wikiHeaderSeparator {
-    background-color: #00b7e0;
-    max-height: 1px;
-    border: none;
-}
-
 /* Логотип Pocket Rogues -- без фона, просто картинка */
 #pageLogo {
     background: transparent;

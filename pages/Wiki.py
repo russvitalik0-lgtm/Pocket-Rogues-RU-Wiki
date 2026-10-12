@@ -2,6 +2,7 @@
 from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QUrl
 from PyQt6.QtWidgets import *
 from PyQt6.QtWebEngineWidgets import QWebEngineView
+from PyQt6.QtGui import QColor
 import os
 import webbrowser
 
@@ -17,8 +18,9 @@ class WikiPage(BasePage):
     fullscreen_requested = pyqtSignal()
     save_toggle_requested = pyqtSignal()
 
-    def __init__(self, parent=None):
+    def __init__(self, theme_manager, parent=None):
         super().__init__(parent)
+        self.theme_manager = theme_manager
 
         # Используем переданный менеджер
         self.history_manager = history_manager
@@ -111,12 +113,6 @@ class WikiPage(BasePage):
         # Крепим к основному лайауту
         header_layout.addLayout(Hlayout)
 
-        # Разделитель - Делаем отдельный (иначе не попадет в контейнер)
-        separator = QFrame()
-        separator.setObjectName("wikiHeaderSeparator")
-        separator.setFrameShape(QFrame.Shape.HLine)
-        header_layout.addWidget(separator)
-
         self.layout.addWidget(self.header_widget)
 
         # Запуск загрузки картинки в отедльном потоке
@@ -138,6 +134,7 @@ class WikiPage(BasePage):
         self.browser_page.on_external_link = lambda url: webbrowser.open(url.toString())
         self.browser.setPage(self.browser_page)
         self.browser.loadFinished.connect(self._on_page_loaded)
+        self.theme_manager.theme_changed.connect(self.apply_page_theme)
 
         # Обертывание
         browser_layout.setContentsMargins(1, 1, 1, 1)   # ← 1px зазор между границей и браузером
@@ -180,6 +177,9 @@ class WikiPage(BasePage):
             current_dir = os.path.dirname(os.path.abspath(__file__))
             base_path = os.path.join(current_dir, "WikiContent")
             base_url = QUrl.fromLocalFile(base_path + os.sep)
+
+            theme_css = "style-light.css" if self.theme_manager.current_theme == "light" else "style-dark.css"
+            html_content = html_content.replace('href="style.css"', f'href="{theme_css}"')
 
             self.browser.setHtml(html_content, base_url)
 
@@ -246,6 +246,11 @@ class WikiPage(BasePage):
     def _on_saved_changed(self):
         """Вызывается, когда saved_manager сообщает об изменении списка сохранённых"""
         self._update_save_icon()
+
+    def apply_page_theme(self, theme_name):
+        """Перезагружает текущую страницу для применения новой темы CSS"""
+        if self.current_page_id:
+            self.load_page(self.current_page_id)
 
 class WikiMenu(QWidget):
     section_changed = pyqtSignal(str) # Будем переключать страницы используя их текстовой ID

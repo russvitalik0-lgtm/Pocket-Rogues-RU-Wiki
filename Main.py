@@ -88,7 +88,7 @@ class MainWindow(QWidget):
     
         # Стек страниц
         self.stacked = QStackedWidget()
-        self.wiki_page = WikiPage()
+        self.wiki_page = WikiPage(self.theme_manager)
         self.latest_page = LatestPage()
         self.tips_page = TipsPage()
         self.saved_page = SavedPage()
