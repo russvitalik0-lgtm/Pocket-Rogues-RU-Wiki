@@ -1,6 +1,6 @@
 # TipsPage
-from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtWidgets import *
+from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtWidgets import *
 from .Base import BasePage
 from .Base import ImageLoader
 import markdown
@@ -17,12 +17,12 @@ class TipsPage(BasePage):
         # Создаем метку
         self.image_label = QLabel("Загрузка...")
         self.image_label.setObjectName("pageLogo")
-        self.image_label.setAlignment(Qt.AlignRight | Qt.AlignTop)
+        self.image_label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
 
         # Размещаем
         Hlayout = QHBoxLayout()
-        Hlayout.addWidget(self.description, alignment = Qt.AlignLeft | Qt.AlignVCenter)
-        Hlayout.addWidget(self.image_label, alignment = Qt.AlignRight | Qt.AlignTop)
+        Hlayout.addWidget(self.description, alignment = Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
+        Hlayout.addWidget(self.image_label, alignment = Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
         Hlayout.setContentsMargins(0,0,0,0)
 
         # Крепим к основному лайауту

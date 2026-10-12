@@ -1,6 +1,6 @@
 # SavedPage
-from PyQt5.QtCore import Qt, pyqtSignal, QTimer
-from PyQt5.QtWidgets import *
+from PyQt6.QtCore import Qt, pyqtSignal, QTimer
+from PyQt6.QtWidgets import *
 from .Base import BasePage
 from .Base import ImageLoader
 from .Base import get_page_preview
@@ -21,18 +21,18 @@ class SavedPage(BasePage):
         # Метка для картинки
         self.image_label = QLabel("Загрузка...")
         self.image_label.setObjectName("pageLogo")
-        self.image_label.setAlignment(Qt.AlignRight | Qt.AlignTop)
+        self.image_label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
 
         # Описание раздела
         self.description_label = QLabel("Страницы, которые вы сохранили")
         self.description_label.setObjectName("pageDescription")
-        self.description_label.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+        self.description_label.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
 
         # Крепим виджеты
         Hlayout = QHBoxLayout()
         Hlayout.addWidget(self.description_label)
         Hlayout.addStretch()
-        Hlayout.addWidget(self.image_label, alignment=Qt.AlignRight | Qt.AlignTop)
+        Hlayout.addWidget(self.image_label, alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
         Hlayout.setContentsMargins(0, 0, 0, 0)
 
         self.layout.addLayout(Hlayout)
@@ -96,7 +96,7 @@ class SavedPage(BasePage):
                 self.image_label.pixmap(),
                 (250, 125)
             )
-            self.grid_layout.addWidget(empty_widget, 0, 0, 1, 1, Qt.AlignCenter)
+            self.grid_layout.addWidget(empty_widget, 0, 0, 1, 1, Qt.AlignmentFlag.AlignCenter)
             return
 
         # Вычисляем кол-во колонок
@@ -121,7 +121,7 @@ class SavedPage(BasePage):
 
             self.grid_layout.addWidget(card, row, col)
 
-        self.grid_layout.setAlignment(Qt.AlignCenter)
+        self.grid_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
     def on_card_clicked(self, page_id):
         """Обработка клика по карточке"""

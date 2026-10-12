@@ -1,7 +1,7 @@
 # Prototype for pages
-from PyQt5.QtCore import Qt, QThread, pyqtSignal, QSize
-from PyQt5.QtGui import QPixmap, QImage
-from PyQt5.QtWidgets import *
+from PyQt6.QtCore import Qt, QThread, pyqtSignal, QSize
+from PyQt6.QtGui import QPixmap, QImage
+from PyQt6.QtWidgets import *
 import sys
 import os
 import requests
@@ -42,8 +42,8 @@ class ImageLoader(QThread):
             fixed_size = QSize(150, 75)
             scaled_pixmap = pixmap.scaled(
                 fixed_size,
-                Qt.KeepAspectRatio,
-                Qt.SmoothTransformation
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation
             )
 
             self.finished.emit(scaled_pixmap)
@@ -68,7 +68,7 @@ class BasePage(QWidget):
         """Добавляет разделительную линию"""
         line = QFrame()
         line.setObjectName("pageSeparator")
-        line.setFrameShape(QFrame.HLine)
+        line.setFrameShape(QFrame.Shape.HLine)
         self.layout.addWidget(line)
     
     def add_stretch(self):
@@ -80,21 +80,21 @@ class BasePage(QWidget):
         container = QWidget()
         container.setObjectName("emptyContainer")
         layout = QVBoxLayout(container)
-        layout.setAlignment(Qt.AlignCenter)
+        layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.setSpacing(15)
 
         if logo_pixmap and not logo_pixmap.isNull():
             logo = QLabel()
             logo.setObjectName("emptyLogo")
-            logo.setAlignment(Qt.AlignCenter)
+            logo.setAlignment(Qt.AlignmentFlag.AlignCenter)
             if logo_size is not None:
                 # Приводим к QSize (если передали кортеж)
                 if isinstance(logo_size, tuple):
                     logo_size = QSize(*logo_size)
                 logo_pixmap = logo_pixmap.scaled(
                     logo_size,
-                    Qt.KeepAspectRatio,
-                    Qt.SmoothTransformation
+                    Qt.AspectRatioMode.KeepAspectRatio,
+                    Qt.TransformationMode.SmoothTransformation
                 )
 
             logo.setPixmap(logo_pixmap)
@@ -102,7 +102,7 @@ class BasePage(QWidget):
 
         label = QLabel(text)
         label.setObjectName("emptyLabel")
-        label.setAlignment(Qt.AlignCenter)
+        label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         layout.addWidget(label)
 
         return container

@@ -1,7 +1,7 @@
 # LatestPage
-from PyQt5.QtCore import Qt, pyqtSignal, QTimer, QSize
-from PyQt5.QtWidgets import *
-from PyQt5.QtGui import QIcon
+from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QSize
+from PyQt6.QtWidgets import *
+from PyQt6.QtGui import QIcon
 import os
 
 from .Base import BasePage
@@ -24,11 +24,11 @@ class LatestPage(BasePage):
         # Создаем метку
         self.image_label = QLabel("Загрузка...")
         self.image_label.setObjectName("pageLogo")
-        self.image_label.setAlignment(Qt.AlignRight | Qt.AlignTop)
+        self.image_label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
 
         self.description_label = QLabel("Недавно просмотренные страницы") # Создаем описание раздела
         self.description_label.setObjectName("pageDescription")
-        self.description_label.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+        self.description_label.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
 
         self.settings_button = QPushButton("Настройки")
         self.settings_button.setObjectName("settingsButton")
@@ -38,8 +38,8 @@ class LatestPage(BasePage):
         Hlayout = QHBoxLayout()
         Hlayout.addWidget(self.description_label)
         Hlayout.addStretch()
-        Hlayout.addWidget(self.settings_button, alignment=Qt.AlignRight | Qt.AlignBottom)
-        Hlayout.addWidget(self.image_label, alignment= Qt.AlignRight | Qt.AlignTop)
+        Hlayout.addWidget(self.settings_button, alignment=Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignBottom)
+        Hlayout.addWidget(self.image_label, alignment= Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
         Hlayout.setContentsMargins(0,0,0,0)
 
         # Крепим к основному лайауту
@@ -94,7 +94,7 @@ class LatestPage(BasePage):
         dialog = SettingsDialog(self.history_manager, self)
 
         # Если пользователь нажал "Сохранить"
-        if dialog.exec_() == QDialog.Accepted: # Показывает модальное окно и ждет закрытия
+        if dialog.exec() == QDialog.DialogCode.Accepted: # Показывает модальное окно и ждет закрытия
             settings = dialog.get_settings()
             self.history_manager.update_settings( # Обновляем настройки
                 settings["save_history"],
@@ -120,7 +120,7 @@ class LatestPage(BasePage):
                 self.image_label.pixmap(),
                 (250, 125)
             )
-            self.grid_layout.addWidget(empty_widget, 0, 0, 1, 1, Qt.AlignCenter)
+            self.grid_layout.addWidget(empty_widget, 0, 0, 1, 1, Qt.AlignmentFlag.AlignCenter)
             return
 
         # Получаем ширину области для карточек
@@ -149,7 +149,7 @@ class LatestPage(BasePage):
 
             self.grid_layout.addWidget(card, row, col)
 
-        self.grid_layout.setAlignment(Qt.AlignCenter)
+        self.grid_layout.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
     def on_card_clicked(self, page_id):
         """Обработка клика по карточке"""
@@ -195,7 +195,7 @@ class PreviewCard(QFrame):
         self.preview_label = QLabel(preview_text)
         self.preview_label.setObjectName("cardPreview")
         self.preview_label.setWordWrap(True)
-        self.preview_label.setTextInteractionFlags(Qt.NoTextInteraction)
+        self.preview_label.setTextInteractionFlags(Qt.TextInteractionFlag.NoTextInteraction)
 
         # Если removable - оставляем снизу место под звездочку
         if self.removable:
@@ -211,7 +211,7 @@ class PreviewCard(QFrame):
             self.remove_btn = QPushButton(self)
             self.remove_btn.setObjectName("cardRemoveBtn")
             self.remove_btn.setFixedSize(24, 24)
-            self.remove_btn.setCursor(Qt.PointingHandCursor)
+            self.remove_btn.setCursor(Qt.CursorShape.PointingHandCursor)
 
             # Иконка звездочки
             icon_path = os.path.join(
@@ -228,7 +228,7 @@ class PreviewCard(QFrame):
 
     def mousePressEvent(self, event):
         """Обработка клика по карточке"""
-        if event.button() == Qt.LeftButton:
+        if event.button() == Qt.MouseButton.LeftButton:
             self.clicked.emit(self.page_id) # Подаем сигнал clicked с ID страницы
 
     def _on_remove_clicked(self):

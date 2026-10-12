@@ -1,6 +1,6 @@
 # Перехватчик внешних ссылок в эмуляторе Вики (QWebEngineView)
-from PyQt5.QtWebEngineWidgets import QWebEnginePage
-from PyQt5.QtCore import QUrl
+from PyQt6.QtWebEngineCore import QWebEnginePage
+from PyQt6.QtCore import QUrl
 
 BLACK_LIST = [
     "pocketrogues.fandom.com",

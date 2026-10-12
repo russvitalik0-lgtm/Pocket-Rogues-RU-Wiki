@@ -2,17 +2,17 @@
 import sys
 import os
 import ctypes
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import *
+from PyQt6.QtCore import Qt
+from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import *
 import json
 from random import randint
 
 # Ставим флаг до QApplication для корректной работы приложения
-QApplication.setAttribute(Qt.AA_ShareOpenGLContexts)
+QApplication.setAttribute(Qt.ApplicationAttribute.AA_ShareOpenGLContexts)
 from pages.theme_manager import ThemeManager
 
-app = QApplication([])
+app = QApplication(sys.argv)
 
 theme_manager = ThemeManager(app)
 theme_manager.apply_current_theme()
@@ -57,7 +57,7 @@ class MainWindow(QWidget):
         left_panel_title.setObjectName("leftPanelTitle")
         left_panel_inner = QVBoxLayout(self.left_panel)
         left_panel_inner.setContentsMargins(0, 0, 0, 0)
-        left_panel_inner.addWidget(left_panel_title, alignment=Qt.AlignCenter)
+        left_panel_inner.addWidget(left_panel_title, alignment=Qt.AlignmentFlag.AlignCenter)
         left_panel_inner.addWidget(self.list_widget)
         left_panel_inner.addStretch()
 
@@ -127,4 +127,4 @@ class MainWindow(QWidget):
 
 window = MainWindow()
 window.show()
-sys.exit(app.exec_())
+sys.exit(app.exec())

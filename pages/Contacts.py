@@ -1,5 +1,5 @@
-from PyQt5.QtCore import Qt, pyqtSignal, QTimer
-from PyQt5.QtWidgets import *
+from PyQt6.QtCore import Qt, pyqtSignal, QTimer
+from PyQt6.QtWidgets import *
 from .Base import BasePage
 from .Base import ImageLoader
 
@@ -12,15 +12,15 @@ class ContactPage(BasePage):
 
         # Создаем метку
         self.image_label = QLabel("Загрузка...")
-        self.image_label.setAlignment(Qt.AlignRight | Qt.AlignTop)
+        self.image_label.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
 
         self.description_label = QLabel("Это описание") # Создаем описание раздела
-        self.description_label.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+        self.description_label.setAlignment(Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter)
     
         # Крепим виджеты
         Hlayout = QHBoxLayout()
         Hlayout.addWidget(self.description_label)
-        Hlayout.addWidget(self.image_label, alignment= Qt.AlignRight | Qt.AlignTop)
+        Hlayout.addWidget(self.image_label, alignment= Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignTop)
         Hlayout.setContentsMargins(0,0,0,0)
 
         # Крепим к основному лайауту

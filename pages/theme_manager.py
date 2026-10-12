@@ -1,7 +1,7 @@
 # theme_manager.py
 import json
 import os
-from PyQt5.QtCore import QObject, pyqtSignal
+from PyQt6.QtCore import QObject, pyqtSignal
 
 class ThemeManager(QObject):
     """Менеджер QSS-тем приложения"""

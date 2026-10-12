@@ -267,7 +267,7 @@ figcaption {
 .wiki-collapsible summary::-webkit-details-marker { display: none; }
 
 .wiki-collapsible summary::before {
-    content: '▶';
+    content: '►';
     font-size: 0.8em;
     margin-right: 10px;
     color: var(--accent-link);
@@ -284,6 +284,8 @@ figcaption {
 .wiki-collapsible-content {
     padding: 0;
 }
+
+
 
 ul, ol { padding-left: 25px; }
 li { margin-bottom: 6px; }
