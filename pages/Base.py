@@ -186,4 +186,25 @@ def get_page_preview(page_id):
     else:
         text = lines[0] if lines else ''
 
+    # 6.1 Умная обрезка по точке
+    MAX_LEN = 300
+    MIN_POINT = int(MAX_LEN * 0.5)
+
+    if len(text) > MAX_LEN:
+        # Ищем последнюю точку перед лимитом
+        chunk = text[:MAX_LEN]
+        last_dot = chunk.rfind('.')
+
+        if last_dot >= MIN_POINT:
+            # Точка близко к лимиту - обрезаем по ней
+            text = chunk[:last_dot + 1]
+        else:
+            # Если точки нет - обрезаем по пробелу
+            last_space = chunk.rfind(' ')
+            if last_space > MIN_POINT:
+                text = chunk[:last_space]
+            else:
+                text = chunk
+            text += '...'
+
     return text
