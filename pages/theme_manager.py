@@ -31,10 +31,20 @@ class ThemeManager(QObject):
             "text_heading": "#000000",
             "border": "#cccccc",
         },
-        # Сюда потом "dark-purple"
+        "dark-purple": {
+            "display_name": "Тёмно-фиолетовая",
+            "bg_window": "#2a2a2a",
+            "bg_panel": "#333333",
+            "bg_list": "#262626",
+            "bg_field": "#1f1f1f",
+            "accent": "#a855f7",
+            "text": "#d5d5d5",
+            "text_heading": "#ffffff",
+            "border": "#4a3a5c",
+        }
     }
     # Доступные темы (совпадают с именами .qss файлов в themes/)
-    AVAILABLE_THEMES = ["dark", "light"]
+    AVAILABLE_THEMES = ["dark", "light", "dark-purple"]
     DEFAULT_THEME = "dark"
 
     def __init__(self, app, parent=None):
