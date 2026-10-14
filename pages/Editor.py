@@ -7,6 +7,7 @@ from datetime import datetime
 from .Base import BasePage
 from .Base import ImageLoader
 from .theme_manager import ThemeManager
+from .Base import draft_manager
 
 WIKI_DIR = Path(__file__).parent / "WikiContent"
 
@@ -134,6 +135,11 @@ class EditorPage(BasePage):
         # Подписка на смену темы
         self.theme_manager.theme_changed.connect(self._on_theme_changed)
 
+        # --- Таймер для автосохранения черновика (делаем через debounce) ---
+        self.draft_timer = QTimer()
+        self.draft_timer.setSingleShot(True)
+        self.draft_timer.timeout.connect(self._auto_save_draft)
+
     def on_image_loaded(self, pixmap):
         """Вызывается, когда картинка успешно загружена"""
         self.image_label.setPixmap(pixmap)
@@ -183,6 +189,7 @@ class EditorPage(BasePage):
 
         self.html_editor.textChanged.connect(self._on_html_changed)
         self.css_editor.textChanged.connect(self._on_css_changed)
+        self._update_modified_indicator()
     
         return widget
 
@@ -237,11 +244,15 @@ class EditorPage(BasePage):
         """Сохранить только HTML"""
         if not self.current_page_id:
             return
-        path = WIKI_DIR / f"{self.current_page_id.lower()}.html"
+        original_name = f"{self.current_page_id.lower()}.html"
+        path = WIKI_DIR / original_name
+        
         self._backup_file(path)
 
         content = self.html_editor.toPlainText()
         path.write_text(content, encoding="utf-8")
+
+        draft_manager.delete_draft(original_name) # Удаление черновика
 
         self.saved_html = content
         self.is_html_modified = False
@@ -257,6 +268,8 @@ class EditorPage(BasePage):
             
         content = self.css_editor.toPlainText()
         path.write_text(content, encoding="utf-8")
+
+        draft_manager.delete_draft(css_file) # Удаляем черновик
 
         self.saved_css = content
         self.is_css_modified = False
@@ -275,6 +288,8 @@ class EditorPage(BasePage):
         if current is None:
             return
 
+        self._force_save_drafts()
+
         page_id = current.data(Qt.ItemDataRole.UserRole)
         if not page_id:
             return
@@ -291,44 +306,77 @@ class EditorPage(BasePage):
         """Загружает HTML указанной страницы в редактор"""
         from .Base import load_html
 
-        file_name = page_id.lower() + ".html"
+        original_name = f"{page_id.lower()}.html"
+        display_name = self.ready_pages.get(page_id, page_id)
+
+        # Сначала загружаем оригинал (нужен для saved_html)
         try:
-            html_content = load_html(file_name)
+            original_content = load_html(original_name)
         except Exception as e:
-            html_content = f"<!-- Ошибка загрузки: {e} -->"
+            original_content = f"<!-- Ошибка загрузки: {e} -->"
+
+        # Проверяем черновик
+        draft_content = self._ask_restore_draft(original_name, display_name, "HTML")
+
+        if draft_content is not None:
+            # Пользователь выбрал восстановление
+            html_content = draft_content
+        else:
+            html_content = original_content
 
         self.html_editor.setPlainText(html_content)
-        self.saved_html = html_content
-        self.is_html_modified = False
+        self.saved_html = original_content # Всегда оригинал
+        self.is_html_modified = (html_content != original_content) # Сравнение с оригиналом
 
     def _load_css_content(self):
         """Загружает CSS текущей темы в редактор"""
         css_file = "style-light.css" if self.theme_manager.current_theme == "light" else "style-dark.css"
-        path = WIKI_DIR / css_file
+        display_name = "Светлая тема" if self.theme_manager.current_theme == "light" else "Тёмная тема"
 
+        # Оригинал
+        path = WIKI_DIR / css_file
         try:
-            css_content = path.read_text(encoding="utf-8")
+            original_content = path.read_text(encoding="utf-8")
         except FileNotFoundError:
             css_content = f"/* Файл {css_file} не найден */"
 
+        # Проверяем черновик
+        draft_content = self._ask_restore_draft(css_file, display_name, "CSS")
+
+        if draft_content is not None:
+            css_content = draft_content
+        else: 
+            css_content = original_content
+
         self.css_editor.setPlainText(css_content)
-        self.saved_css = css_content
-        self.is_css_modified = False
+        self.saved_css = original_content # Всегда оригинал
+        self.is_css_modified = (css_content != original_content)
 
     def _update_modified_indicator(self):
-        """Обновляет метки несохранённых изменений"""
+        """Обновляет метки несохранённых изменений и черновиков"""
         # Метка у имени страниц в списке
-        if self.current_page_id:
-            for i in range(self.pages_list.count()):
-                item = self.pages_list.item(i)
-                page_id = item.data(Qt.ItemDataRole.UserRole)
-                if page_id == self.current_page_id:
-                    display_name = self.ready_pages.get(page_id, page_id)
-                    if self.is_html_modified or self.is_css_modified:
-                        item.setText(f"{display_name} *")
-                    else:
-                        item.setText(display_name)
-                    break
+        for i in range(self.pages_list.count()):
+            item = self.pages_list.item(i)
+            page_id = item.data(Qt.ItemDataRole.UserRole)
+            display_name = self.ready_pages.get(page_id, page_id)
+
+            # Если есть несохранённые изменения (для текущей страницы)
+            has_changes = (page_id == self.current_page_id and 
+                           (self.is_html_modified or self.is_css_modified))
+
+            # Если есть черновик на диске
+            original_name = f"{page_id.lower()}.html"
+            has_draft = draft_manager.has_draft(original_name)
+
+            # Формируем метку
+            marks = ""
+            if has_draft:
+                marks += " 📝"
+            if has_changes:
+                marks += " *"
+
+            item.setText(f"{display_name}{marks}")
+            
         has_any = self.is_html_modified or self.is_css_modified
         self.modified_state_changed.emit(has_any)
 
@@ -338,12 +386,34 @@ class EditorPage(BasePage):
         """Срабатывает при любом изменении в HTML редакторе"""
         current = self.html_editor.toPlainText()
         self.is_html_modified = (current != self.saved_html)
+
+        # Перезапускаем таймер автосохранения
+        if self.is_html_modified:
+            self.draft_timer.start(5000)
+        else:
+            # Пользователь вернул оригинал - удаляем черновик
+            if self.current_page_id:
+                original_name = f"{self.current_page_id.lower()}.html"
+                draft_manager.delete_draft(original_name)
+
+        # Обновление индикатора после всех операций
         self._update_modified_indicator()
 
     def _on_css_changed(self):
         """Срабатывает при любом изменении в CSS редакторе"""
         current = self.css_editor.toPlainText()
         self.is_css_modified = (current != self.saved_css)
+
+        # Перезапускаем таймер автосохранения
+        if self.is_css_modified:
+            self.draft_timer.start(5000)
+        else:
+            # Вернули оригинал - черновик больше не нужен
+            if self.current_page_id:
+                css_file = "style-light.css" if self.theme_manager.current_theme == "light" else "style-dark.css"
+                draft_manager.delete_draft(css_file)
+
+        # Обновление индикатора после всех операций
         self._update_modified_indicator()
 
     # Бэкапы
@@ -372,16 +442,111 @@ class EditorPage(BasePage):
         for old in existing[10:]:
             old.unlink()
 
-    # Открытие в Вики
-
     def _on_open_in_wiki(self):
+        """Открывает выбранную страницу в Вики"""
         if self.current_page_id:
             self.open_in_wiki_requested.emit(self.current_page_id)
 
     def _on_theme_changed(self, theme_name):
+        """Меняет .CSS-файл при изменении стилизации"""
         if not self.current_page_id:
             return
         if self.is_css_modified:
             return
-        self._load_css_content()
+
+        css_file = "style-light.css" if theme_name == "light" else "style-dark.css"
+        path = WIKI_DIR / css_file
+
+        try:
+            css_content = path.read_text(encoding="utf-8")
+        except FileNotFoundError:
+            css_content = f"/* Файл {css_file} не найден */"
+
+        self.css_editor.setPlainText(css_content)
+        self.saved_css = css_content
+        self.is_css_modified = False
         self._update_modified_indicator()
+
+    def _auto_save_draft(self):
+        """Автосохранение черновиков HTML и CSS (debounce-таймер)"""
+        if not self.current_page_id:
+            return
+
+        # Сохраняем черновик HTML, если есть изменения
+        if self.is_html_modified:
+            original_name = f"{self.current_page_id.lower()}.html"
+            content = self.html_editor.toPlainText()
+            draft_manager.save_draft(original_name, content)
+
+        # Сохраняем черновик CSS, если есть изменения
+        if self.is_css_modified:
+            css_file = "style-light.css" if self.theme_manager.current_theme == "light" else "style-dark.css"
+            content = self.css_editor.toPlainText()
+            draft_manager.save_draft(css_file, content)
+
+    def _force_save_drafts(self):
+        """
+        Принудительно сохраняет черновики (не дожидаясь debounce),
+        Вызывается переключением страницы или закрытием приложения
+        """
+        if not self.current_page_id:
+            return
+
+        if self.is_html_modified:
+            original_name = f"{self.current_page_id.lower()}.html"
+            content = self.html_editor.toPlainText()
+            draft_manager.save_draft(original_name, content)
+    
+        if self.is_css_modified:
+            css_file = "style-light.css" if self.theme_manager.current_theme == "light" else "style-dark.css"
+            content = self.css_editor.toPlainText()
+            draft_manager.save_draft(css_file, content)
+
+    def _ask_restore_draft(self, original_name, display_name, content_type):
+        """
+        Спрашивает пользователя о восстановлении черновика
+        --
+        original_name - имя файла ('necromancer.html')
+        display_name - человеко-читаемое ('Некромант')
+        content_type - 'HTML' или 'CSS' (для текста сообщения)
+        --
+        Возвращает: содержимое черновика (str) или None (загружать оригинал)
+        """
+
+        draft_content, saved_at = draft_manager.load_draft(original_name)
+        if draft_content is None:
+            return None
+
+        # Проверка: черновик совпадает с оригиналом - удаляем
+        original_path = WIKI_DIR / original_name
+        if original_path.exists():
+            original_content = original_path.read_text(encoding="utf-8")
+            if draft_content == original_content:
+                draft_manager.delete_draft(original_name)
+                return None
+
+        # Показываем диалог
+        saved_at_display = datetime.fromisoformat(saved_at).strftime("%d.%m.%Y %H:%M") # Форматируем ISO в человекочитаемый
+        msg = QMessageBox(self)
+        msg.setWindowTitle("Найден черновик")
+        msg.setIcon(QMessageBox.Icon.Question)
+        msg.setText(
+            f"Есть несохранённый черновик {content_type} для '{display_name}'.\n"
+            f"Сохранён: {saved_at_display}"
+        )
+        msg.setInformativeText("Что сделать?")
+
+        btn_restore = msg.addButton("Восстановить", QMessageBox.ButtonRole.AcceptRole)
+        btn_delete = msg.addButton("Удалить", QMessageBox.ButtonRole.DestructiveRole)
+        btn_original = msg.addButton("Оригинал", QMessageBox.ButtonRole.RejectRole)
+
+        msg.exec()
+
+        clicked = msg.clickedButton()
+        if clicked == btn_restore:
+            return draft_content
+        elif clicked == btn_delete:
+            draft_manager.delete_draft(original_name)
+            return None
+        else: # btn_original
+            return None

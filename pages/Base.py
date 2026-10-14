@@ -2,14 +2,17 @@
 from PyQt6.QtCore import Qt, QThread, pyqtSignal, QSize
 from PyQt6.QtGui import QPixmap, QImage
 from PyQt6.QtWidgets import *
-import sys
+from pathlib import Path
 import os
 import requests
 import re # Модуль для работы с регулярными выражениями. Удалит HTML-Теги из текста
 from .history_manager import HistoryManager
 from .saved_manager import SavedManager
+from .draft_manager import DraftManager
 
+WIKI_DIR = Path(__file__).parent / "WikiContent"
 
+draft_manager = DraftManager(WIKI_DIR)
 history_manager = HistoryManager()
 saved_manager = SavedManager()
 some_url = "https://static.wikia.nocookie.net/pocketrogues/images/e/e6/Site-logo.png/revision/latest?cb=20210610092016&path-prefix=ru"

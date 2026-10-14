@@ -145,4 +145,5 @@ class MainWindow(QWidget):
 
 window = MainWindow(theme_manager)
 window.show()
+app.aboutToQuit.connect(window.editor_page._force_save_drafts)
 sys.exit(app.exec())
