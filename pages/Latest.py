@@ -9,7 +9,7 @@ from .Base import ImageLoader
 from .Base import get_page_preview
 from .Base import history_manager
 from .Base import saved_manager
-from .Wiki import WikiPage
+from .Base import PAGES_LIST
 
 class LatestPage(BasePage):
     # Сигнал для перехода на страницу
@@ -241,9 +241,6 @@ class SettingsDialog(QDialog):
     def __init__(self, history_manager, parent=None):
         super().__init__(parent)
 
-        # Создаем экземпляр класса для получения кол-ва имеющихся страниц | Увы, может быть избыточным
-        self.pages_count = WikiPage()
-
         # Сохраняем ссылку на менеджер
         self.history_manager = history_manager
 
@@ -262,7 +259,7 @@ class SettingsDialog(QDialog):
 
         self.limit_spinbox = QSpinBox()
         self.limit_spinbox.setObjectName("settingsSpinbox")
-        self.limit_spinbox.setRange(1, self.pages_count.send_pages_count()) # Устанавливаем диапазон
+        self.limit_spinbox.setRange(1, len(PAGES_LIST)) # Устанавливаем диапазон
         self.limit_spinbox.setValue(history_manager.settings["limit"]) # Устанавлием значение из настроек
 
         limit_layout.addWidget(limit_label)

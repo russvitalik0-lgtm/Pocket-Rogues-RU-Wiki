@@ -11,6 +11,7 @@ from .Base import ImageLoader
 from .Base import load_html
 from .Base import history_manager
 from .Base import saved_manager
+from .Base import PAGES_LIST
 from .link_interceptor import InterceptingPage
 
 
@@ -28,59 +29,7 @@ class WikiPage(BasePage):
         self.add_title("Pocket Rogues RU-Wiki")
 
         # Автоматическое создание словаря для страниц с использованием списка в виде хранилища
-        self.pages_list = [ # Правильная последовательность страниц действительно важна | Пробелы допустимы, но прочие символы - нет.
-            "HomePage",
-            "Warrior",
-            "Archer",
-            "Wizard",
-            "Hunter",
-            "Berserker",
-            "Necromancer",
-            "CampNPC",
-            "UndergroundNPC",
-            "Weapons",
-            "Armor",
-            "Hat",
-            "Second Hand",
-            "Rings",
-            "Artefacts",
-            "Usable Items",
-            "Other Items",
-            "Passive Items",
-            "Materials",
-            "Effects",
-            "Fortress",
-            "Smithy",
-            "Shop",
-            "Characteristics",
-            "Containers And Chests",
-            "Interactive Objects",
-            "Traps",
-            "Game History",
-            "In Game Hints",
-            "Game Versions",
-            "Help",
-            "Tactics",
-            "Builds",
-            "Bestiary",
-            "Catacombs",
-            "Abandoned Prison",
-            "Adamantite Garden",
-            "Borderlands",
-            "Crypt of Emptiness",
-            "Burial Mound",
-            "Sunken Grotto",
-            "Prologue",
-            "Camp",
-            "The Treasury",
-            "Ambush",
-            "Abandoned Crypt",
-            "Rat Hole",
-            "Predatory Lair",
-            "Secret Sanctuary",
-            "Goblin Larder",
-            "Obsidian Tower"
-        ]
+        self.pages_list = PAGES_LIST
         self.pages_config = {}
         for page in self.pages_list: # Можно и через генератор словаря, но этот вариант более читаемый
             key = page.replace(' ', '')
