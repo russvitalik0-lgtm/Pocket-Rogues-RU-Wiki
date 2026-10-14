@@ -219,6 +219,13 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
-notes.md
-history_settings.json
-addons.json
+pages/notes.md
+pages/history_settings.json
+pages/addons.json
+pages/theme_settings.json
+pages/saved_pages.json
+
+pages/WikiContent/backups/
+
+pages/WikiContent/drafts/
+
