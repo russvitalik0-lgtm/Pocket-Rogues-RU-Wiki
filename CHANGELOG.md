@@ -35,6 +35,11 @@
 - Пути в `EditorPage` используют `pathlib` вместо `os.path`
 - Загрузка HTML в редакторе - **без** инъекции кнопок действий (использует чтение с диска, а не `load_html`)
 - `Tips.py`: `QTextEdit` заменён на `QPlainTextEdit` для корректной работы `QSyntaxHighlighter`
+- `SettingsDialog` избыточно создавал экземпляр `WikiPage` для подсчета страниц:
+    - Список страниц вынесен в константу **PAGES_LIST** (`Base.py`)
+    - `Wiki.py` использует **PAGES_LIST** вместо хардкода
+    - `SettingsDialog` использует **len(PAGES_LIST)** вместо экземпляра `WikiPage`
+    - Исправлена ошибка с обязательным theme_manager в `WikiPage`
 
 ## [v0.4-alpha] - 2026-10-13
 

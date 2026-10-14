@@ -58,11 +58,12 @@ class EditorPage(BasePage):
         self.is_html_modified = False
         self.is_css_modified = False
 
-        # ===== Верхняя панель кнопок (Сохранить, Открыть в Википедии) =====
+        # ===== Верхняя панель кнопок (Сохранить) =====
         top_bar = QHBoxLayout()
 
         self.save_btn = QToolButton()
         self.save_btn.setObjectName("editorSaveBtn")
+        self.save_btn.setMaximumWidth(40)
         self.save_btn.setText("Сохранить")
         self.save_btn.setPopupMode(QToolButton.ToolButtonPopupMode.MenuButtonPopup)
         self.save_btn.clicked.connect(self._save_all)
@@ -73,13 +74,8 @@ class EditorPage(BasePage):
         save_menu.addAction("Только CSS (Стилизация)", self._save_css)
         self.save_btn.setMenu(save_menu)
 
-        self.open_in_wiki_btn = QPushButton("Открыть в Вики")
-        self.open_in_wiki_btn.setObjectName("editorOpenWikiBtn")
-        self.open_in_wiki_btn.clicked.connect(self._on_open_in_wiki)
-
-        top_bar.addWidget(self.save_btn)
-        top_bar.addWidget(self.open_in_wiki_btn)
         top_bar.addStretch()
+        top_bar.addWidget(self.save_btn)
 
         self.layout.addLayout(top_bar)
 
@@ -88,12 +84,25 @@ class EditorPage(BasePage):
         content_layout.setContentsMargins(0, 10, 0, 0)
         content_layout.setSpacing(10)
 
+        # Лайаут (вспомогательный)
+        left_column = QVBoxLayout()
+        left_column.setContentsMargins(0, 0, 0, 0)
+        left_column.setSpacing(10)
+
+        self.open_in_wiki_btn = QPushButton("Открыть в Вики")
+        self.open_in_wiki_btn.setObjectName("editorOpenWikiBtn")
+        self.open_in_wiki_btn.setFixedWidth(220)
+        self.open_in_wiki_btn.clicked.connect(self._on_open_in_wiki)
+
         # Слева - список страниц
         self.pages_list = QListWidget()
         self.pages_list.setObjectName("editorPagesList")
         self.pages_list.setFixedWidth(220)
 
-        content_layout.addWidget(self.pages_list)
+        left_column.addWidget(self.pages_list)
+        left_column.addWidget(self.open_in_wiki_btn)
+
+        content_layout.addLayout(left_column)
 
         # Список готовых страниц (Временный TODO)
         self.ready_pages = {
@@ -163,6 +172,7 @@ class EditorPage(BasePage):
         self.reset_layout_btn = QPushButton("Сбросить панели")
         self.reset_layout_btn.setToolTip("Вернуть обе панели к 50/50")
         self.reset_layout_btn.clicked.connect(self._reset_splitter)
+        self.reset_layout_btn.setObjectName("reset_layout_btn")
         toolbar.addWidget(self.reset_layout_btn)
 
         toolbar.addStretch()
