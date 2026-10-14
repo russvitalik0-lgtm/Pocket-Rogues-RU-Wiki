@@ -22,6 +22,7 @@ from pages.Latest import LatestPage
 from pages.Tips import TipsPage
 from pages.Saved import SavedPage
 from pages.Style import StylePage
+from pages.Editor import EditorPage
 from pages.history_manager import HistoryManager
 from pages.Base import saved_manager
 
@@ -74,13 +75,15 @@ class MainWindow(QWidget):
         # Сигналы
         self.wiki_page.fullscreen_requested.connect(self.toggle_fullscreen)
         self.wiki_page.save_toggle_requested.connect(self.toggle_save)
+        self.editor_page.modified_state_changed.connect(self._on_editor_modified)
+        self.editor_page.open_in_wiki_requested.connect(self.open_wiki_page)
 
     def add_page(self):
         """Добавляет вкладки страниц"""
         # Основной список
         self.list_widget = QListWidget()
         self.list_widget.setObjectName("mainTabsList")
-        for item in ['Википедия', 'Недавние', 'Сохранённое', 'Заметки', 'Стилизация']:
+        for item in ['Википедия', 'Недавние', 'Сохранённое', 'Редактор', 'Заметки', 'Стилизация']:
             self.list_widget.addItem(item)
         self.list_widget.setFixedWidth(150)
         self.list_widget.setSpacing(5)
@@ -92,11 +95,13 @@ class MainWindow(QWidget):
         self.latest_page = LatestPage()
         self.tips_page = TipsPage()
         self.saved_page = SavedPage()
+        self.editor_page = EditorPage(self.theme_manager)
         self.style_page = StylePage(self.theme_manager)
         
         self.stacked.addWidget(self.wiki_page)
         self.stacked.addWidget(self.latest_page)
         self.stacked.addWidget(self.saved_page)
+        self.stacked.addWidget(self.editor_page)
         self.stacked.addWidget(self.tips_page)
         self.stacked.addWidget(self.style_page)
 
@@ -127,6 +132,15 @@ class MainWindow(QWidget):
             return
         saved_manager.toggle(page_id)
         self.wiki_page._update_save_icon()
+
+    def _on_editor_modified(self, has_changes):
+        # Индекс вкладки Редактор: 3 (0-индексация)
+        editor_index = 3
+        item = self.list_widget.item(editor_index)
+        if has_changes:
+            item.setText("Редактор *")
+        else:
+            item.setText("Редактор")
 
 
 window = MainWindow(theme_manager)
