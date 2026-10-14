@@ -8,6 +8,7 @@ from .Base import BasePage
 from .Base import ImageLoader
 from .theme_manager import ThemeManager
 from .Base import draft_manager
+from .syntax_highlighters import HtmlHighlighter, CssHighlighter
 
 WIKI_DIR = Path(__file__).parent / "WikiContent"
 
@@ -176,11 +177,13 @@ class EditorPage(BasePage):
         self.html_editor.setObjectName("htmlEditor")
         self.html_editor.setMinimumWidth(0)
         self.html_editor.setPlaceholderText("HTML текущей страницы...")
+        self.html_highlighter = HtmlHighlighter(self.html_editor.document())
 
         self.css_editor = QPlainTextEdit()
         self.css_editor.setObjectName("cssEditor")
         self.css_editor.setMinimumWidth(0)
         self.css_editor.setPlaceholderText("Общий CSS Вики...")
+        self.css_highlighter = CssHighlighter(self.css_editor.document())
 
         self.source_splitter.addWidget(self.html_editor)
         self.source_splitter.addWidget(self.css_editor)
