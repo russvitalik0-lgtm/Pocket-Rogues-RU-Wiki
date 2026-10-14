@@ -180,3 +180,104 @@ class CssHighlighter(QSyntaxHighlighter):
             while iterator.hasNext():
                 match = iterator.next()
                 self.setFormat(match.capturedStart(), match.capturedLength(), fmt)
+
+class MarkdownHighlighter(QSyntaxHighlighter):
+    """Подсветка синтаксиса Markdown в стиле VS Code (Dark+)"""
+
+    def __init__(self, document):
+        super().__init__(document)
+        self.rules = []
+
+        # --- Инлайн-код: `code` ---
+        code_format = QTextCharFormat()
+        code_format.setForeground(QColor("#ce9178"))
+        self.rules.append((
+            QRegularExpression(r"`[^`\n]+`"),
+            code_format
+        ))
+
+        # --- Заголовки: # H1 ... ###### H6 ---
+        heading_format = QTextCharFormat()
+        heading_format.setForeground(QColor("#569cd6"))
+        heading_format.setFontWeight(700)
+        self.rules.append((
+            QRegularExpression(r"^#{1,6}\s.+$"),
+            heading_format
+        ))
+
+        # --- Жирный: **text** или __text__ ---
+        bold_format = QTextCharFormat()
+        bold_format.setForeground(QColor("#569cd6"))
+        bold_format.setFontWeight(700)
+        self.rules.append((
+            QRegularExpression(r"\*\*[^\*\n]+\*\*"),
+            bold_format
+        ))
+        self.rules.append((
+            QRegularExpression(r"__[^_\n]+__"),
+            bold_format
+        ))
+
+        # --- Зачёркнутый: ~~text~~ ---
+        strike_format = QTextCharFormat()
+        strike_format.setForeground(QColor("#808080"))
+        strike_format.setFontStrikeOut(True)
+        self.rules.append((
+            QRegularExpression(r"~~[^~\n]+~~"),
+            strike_format
+        ))
+
+        # --- Курсив: *text* или _text_ (одинарные, после жирного и зачеркнутого) ---
+        italic_format = QTextCharFormat()
+        italic_format.setForeground(QColor("#c586c0"))
+        italic_format.setFontItalic(True)
+        self.rules.append((
+            QRegularExpression(r"(?<!\*)\*(?!\*)[^\*\n]+\*(?!\*)"),
+            italic_format
+        ))
+        self.rules.append((
+            QRegularExpression(r"(?<![_\w])_[^_\n]+_(?![_\w])"),
+            italic_format
+        ))
+
+        # --- Ссылки: [text](url) ---
+        link_format = QTextCharFormat()
+        link_format.setForeground(QColor("#569cd6"))
+        link_format.setFontUnderline(True)
+        self.rules.append((
+            QRegularExpression(r"\[[^\]\n]+\]\([^)\n]+\)"),
+            link_format
+        ))
+
+        # --- Маркеры списков: - , * , + , 1. ---
+        list_format = QTextCharFormat()
+        list_format.setForeground(QColor("#6796e6"))
+        self.rules.append((
+            QRegularExpression(r"^\s*([-*+]|\d+\.)\s"),
+            list_format
+        ))
+
+        # --- Цитаты: > text ---
+        quote_format = QTextCharFormat()
+        quote_format.setForeground(QColor("#6a9955"))
+        quote_format.setFontItalic(True)
+        self.rules.append((
+            QRegularExpression(r"^>\s.+$"),
+            quote_format
+        ))
+
+        # --- Разделители: --- , *** , ___ ---
+        hr_format = QTextCharFormat()
+        hr_format.setForeground(QColor("#808080"))
+        self.rules.append((
+            QRegularExpression(r"^(-{3,}|\*{3,}|_{3,})$"),
+            hr_format
+        ))
+    
+    def highlightBlock(self, text):
+        """Применяет правила подсветки к блоку текста"""
+        for pattern, fmt in self.rules:
+            iterator = pattern.globalMatch(text)
+            while iterator.hasNext():
+                match = iterator.next()
+                self.setFormat(match.capturedStart(), match.capturedLength(), fmt)

@@ -6,6 +6,8 @@ from .Base import ImageLoader
 import markdown
 import os
 
+from .syntax_highlighters import MarkdownHighlighter
+
 class TipsPage(BasePage):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -43,15 +45,16 @@ class TipsPage(BasePage):
         self.layout.addLayout(self.editors_layout, 1)
 
         # Поле для Markdown
-        self.md_edit = QTextEdit()
+        self.md_edit = QPlainTextEdit()
         self.md_edit.setObjectName("notesEditor")
-        self.md_edit.setPlaceholderText("Поле для записи Ваших заметок. Имеет поддержку Markdown и HTML.")
+        self.md_edit.setPlaceholderText("Поле для записи Ваших заметок. Имеет поддержку Markdown.")
         self.md_edit.textChanged.connect(self.update_preview)
+        self.md_highlighter = MarkdownHighlighter(self.md_edit.document())
 
         # Поле для просмотра
         self.preview_edit = QTextBrowser()
         self.preview_edit.setObjectName("notesPreview")
-        self.preview_edit.setPlaceholderText("Поле для просмотра Ваших заметок в более красивом стиле. Отображает Markdown и HTML.")
+        self.preview_edit.setPlaceholderText("Поле для просмотра Ваших заметок в более красивом стиле. Отображает Markdown.")
 
         # Размещаем
         self.editors_layout.addWidget(self.md_edit, 1)
