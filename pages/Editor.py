@@ -1,14 +1,22 @@
 # EditorPage
-from PyQt6.QtCore import Qt, pyqtSignal, QTimer
+from PyQt6.QtCore import Qt, pyqtSignal, QTimer, QUrl
+from PyQt6.QtWebEngineWidgets import QWebEngineView
+from PyQt6.QtGui import QColor
 from PyQt6.QtWidgets import *
 from pathlib import Path
 from datetime import datetime
+from bs4 import BeautifulSoup
+import webbrowser
+import os
+import re
 
 from .Base import BasePage
 from .Base import ImageLoader
 from .theme_manager import ThemeManager
 from .Base import draft_manager
 from .syntax_highlighters import HtmlHighlighter, CssHighlighter
+from .link_interceptor import InterceptingPage
+from .Base import load_html
 
 WIKI_DIR = Path(__file__).parent / "WikiContent"
 
@@ -20,6 +28,11 @@ class EditorPage(BasePage):
     def __init__(self, theme_manager, parent=None):
         super().__init__(parent)
         self.theme_manager = theme_manager
+        self._ui_ready = False
+        self.visual_ready = False
+        self.visual_page_id = None # для какой страницы уже готов VE
+        self._syncing_from_visual = False # Защита от цикла при синхронизации VE в SE (Автосохранение)
+        self._pending_save_after_sync = False
 
         self.add_title("Редактор")
         self.description_label = QLabel("Редактирование локальных HTML и CSS страниц")
@@ -123,8 +136,6 @@ class EditorPage(BasePage):
             item.setData(Qt.ItemDataRole.UserRole, page_id)
             self.pages_list.addItem(item)
 
-        self.pages_list.currentItemChanged.connect(self._on_page_selected)
-
         # Справа - область редактора (Source / Visual)
         self.editor_tabs = QTabWidget()
         self.editor_tabs.setObjectName("editorTabs")
@@ -149,6 +160,10 @@ class EditorPage(BasePage):
         self.draft_timer = QTimer()
         self.draft_timer.setSingleShot(True)
         self.draft_timer.timeout.connect(self._auto_save_draft)
+
+        # Подписка на изменение страницы
+        self._ui_ready = True
+        self.pages_list.currentItemChanged.connect(self._on_page_selected)
 
     def on_image_loaded(self, pixmap):
         """Вызывается, когда картинка успешно загружена"""
@@ -219,13 +234,28 @@ class EditorPage(BasePage):
         layout.addLayout(self.visual_toolbar)
 
         # --- Область предпросмотра ---
-        stub = QLabel("Visual Editor в разработке...")
-        stub.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        stub.setStyleSheet("color: #888; font-size: 14px;")
+        self.visual_view = QWebEngineView()
+        self.visual_page = InterceptingPage(self.visual_view)
+        self.visual_page.on_external_link = lambda url: webbrowser.open(url.toString())
+        self.visual_view.setPage(self.visual_page)
+        self.visual_page.on_visual_changed = self._on_visual_changed
+        self._apply_visual_background()
 
-        layout.addWidget(stub, 1)
+        # Подписка на загрузку и изменения страницы
+        self.visual_view.loadFinished.connect(self._on_visual_loaded)
+
+        layout.addWidget(self.visual_view, 1)
 
         return widget
+
+    def _apply_visual_background(self):
+        """Устанавливает фон QWebEngineView под текущую тему"""
+        theme = self.theme_manager.current_theme
+        if theme == "light":
+            color = QColor("#f0f0f0")
+        else:
+            color = QColor("#2a2a2a")
+        self.visual_page.setBackgroundColor(color)
 
     # Синхронизация Source <-> Visual
 
@@ -239,12 +269,126 @@ class EditorPage(BasePage):
             self._sync_visual_to_source()
 
     def _sync_source_to_visual(self):
-        """Передаёт HTML из SE в VE (TODO)"""
-        pass
+        """Передаёт HTML из SE в VE"""
+        if not self.current_page_id:
+            return
+
+        html_content = self.html_editor.toPlainText()
+        css_content = self.css_editor.toPlainText()
+
+        soup = BeautifulSoup(html_content, "html.parser")
+
+        # Заменяем <link rel="stylesheet"> на <style> с CSS из редактора
+        for link in soup.find_all("link", rel="stylesheet"):
+            style = soup.new_tag("style")
+            style.string = css_content
+            link.replace_with(style)
+
+        # Находим body, оборачиваем содержимое в редактируемый div
+        body = soup.body
+        if body:
+            wrapper = soup.new_tag("div", id="editor-content")
+            wrapper["contenteditable"] = "true"
+            for child in list(body.children):
+                wrapper.append(child.extract())
+            body.append(wrapper)
+
+        # Проверка ДО этого принта не должна стоять. Проверка ПОСЛЕ:
+        check = soup.find("div", id="editor-content")
+
+        # Инжектим CSS для рамок блочных элементов в head
+        head = soup.head 
+        if head:
+            editor_css = soup.new_tag("style")
+            editor_css.string = """
+            #editor-content {
+                outline: none !important;
+            }
+            #editor-content:focus {
+                outline: none !important;
+            }
+            .wiki-table, .wiki-quote, .wiki-infobox,
+            .wiki-collapsible, .wiki-figure {
+                outline: 1px dashed rgba(0, 183, 224, 0.35) !important;
+                outline-offset: 2px !important;
+            }
+            .wiki-table:hover, .wiki-quote:hover, .wiki-infobox:hover,
+            .wiki-collapsible:hover, .wiki-figure:hover {
+                outline-color: rgba(0, 183, 224, 0.85) !important;
+            }
+            """
+            head.append(editor_css)
+
+        base_url = QUrl.fromLocalFile(str(WIKI_DIR) + os.sep)
+        html_str = str(soup)
+        self.visual_ready = False
+        self.visual_view.setHtml(html_str, base_url)
+        self.visual_page_id = self.current_page_id
 
     def _sync_visual_to_source(self):
-        """Передаёт HTML из VE в SE (TODO)"""
-        pass
+        """Передаёт HTML из VE в SE"""
+        if not self.current_page_id:
+            return
+        if not self.visual_ready:
+            return
+        if self.visual_page_id != self.current_page_id:
+            return
+
+        js_code = """
+        (function() {
+            var el = document.getElementById('editor-content');
+            console.log('__JS_HAS_EL__', el !== null);
+            return el ? el.innerHTML : '';
+        })();
+        """
+        self.visual_view.page().runJavaScript(js_code, self._on_visual_html_received)
+
+    def _on_visual_html_received(self, inner_html):
+        """Callback от Visual: получаем innerHTML и обновляем html_editor"""
+        if not inner_html or not inner_html.strip():
+            return
+
+        html_content = self.html_editor.toPlainText()
+        soup = BeautifulSoup(html_content, "html.parser")
+        body = soup.body
+        if not body:
+            return
+
+        for child in list(body.children):
+            child.extract()
+
+        new_content = BeautifulSoup(inner_html, "html.parser")
+        source = new_content.body if new_content.body else new_content
+        for child in list(source.children):
+            body.append(child)
+
+        full_html = str(soup)
+
+        # Обновляем html_editor с флагом - чтобы не циклить
+        self._syncing_from_visual = True
+        self.html_editor.setPlainText(full_html)
+        self._syncing_from_visual = False
+
+        if getattr(self, "_pending_save_after_sync", False):
+            self._pending_save_after_sync = False
+            self._save_html()
+
+        # Сравниваем, нормализуя оригинал через тот же парсер
+        normalized_saved = str(BeautifulSoup(self.saved_html, "html.parser"))
+
+        if full_html == normalized_saved:
+            # Изменений нет
+            self.is_html_modified = False
+            if self.current_page_id:
+                original_name = f"{self.current_page_id.lower()}.html"
+                draft_manager.delete_draft(original_name)
+        else:
+            self.is_html_modified = True
+            if self.current_page_id:
+                original_name = f"{self.current_page_id.lower()}.html"
+                draft_manager.save_draft(original_name, full_html)
+
+        self._update_modified_indicator()
 
     # Сохранение
 
@@ -257,6 +401,12 @@ class EditorPage(BasePage):
         """Сохранить только HTML"""
         if not self.current_page_id:
             return
+
+        # Если открыт VE и есть несохранённые изменения - сначала синхронизируем:
+        if self.editor_tabs.currentIndex() == 0 and self.visual_ready:
+            # Синхронизация ассинхронна, но ждать придется. Проще: чтение innerHTML, однако runJavaScript тоже асинхронный. Просто вызовем функцию синхронизации и сохраним в callback
+            self._pending_save_after_sync = True # флаг
+            self._sync_visual_to_source()
         original_name = f"{self.current_page_id.lower()}.html"
         path = WIKI_DIR / original_name
         
@@ -288,6 +438,34 @@ class EditorPage(BasePage):
         self.is_css_modified = False
         self._update_modified_indicator()
 
+    def _on_visual_loaded(self, ok):
+        """Срабатывает при загрузке страницы в VISUAL EDITOR"""
+        if not ok:
+            self.visual_ready = False
+            return
+        self.visual_ready = True
+
+        # Отслеживаем изменения в VE
+        js = """
+        (function() {
+            var el = document.getElementById('editor-content');
+            if (!el) {
+                console.log('__VISUAL_TRACKER_NO_EL__');
+                return;
+            }
+            el.addEventListener('input', function() {
+                console.log('__VISUAL_CHANGED__');
+            });
+            console.log('__VISUAL_TRACKER_INSTALLED__');
+        })();
+        """
+        self.visual_view.page().runJavaScript(js)
+
+    def _on_visual_changed(self):
+        """Пользователь внес изменения в VE - перезапускаем debounce"""
+        if self.current_page_id:
+            self.draft_timer.start(5000)
+
     # Сброс панелей
     
     def _reset_splitter(self):
@@ -298,6 +476,8 @@ class EditorPage(BasePage):
     # Загрузка HTML и CSS
     def _on_page_selected(self, current, previous):
         """Срабатывает при выборе страницы в списке"""
+        if not self._ui_ready:
+            return
         if current is None:
             return
 
@@ -315,6 +495,12 @@ class EditorPage(BasePage):
         self._load_css_content()
         self._update_modified_indicator()
 
+        self.visual_ready = False
+        self.visual_page_id = None
+
+        if self.editor_tabs.currentIndex() == 0:
+            self._sync_source_to_visual()
+
     def _load_html_content(self, page_id):
         """Загружает HTML указанной страницы в редактор"""
         from .Base import load_html
@@ -323,10 +509,11 @@ class EditorPage(BasePage):
         display_name = self.ready_pages.get(page_id, page_id)
 
         # Сначала загружаем оригинал (нужен для saved_html)
+        path = WIKI_DIR / f"{page_id.lower()}.html"
         try:
-            original_content = load_html(original_name)
-        except Exception as e:
-            original_content = f"<!-- Ошибка загрузки: {e} -->"
+            original_content = path.read_text(encoding="utf-8")
+        except FileNotFoundError:
+            original_content = f"<!-- Файл {page_id.lower()}.html не найден -->"
 
         # Проверяем черновик
         draft_content = self._ask_restore_draft(original_name, display_name, "HTML")
@@ -351,7 +538,7 @@ class EditorPage(BasePage):
         try:
             original_content = path.read_text(encoding="utf-8")
         except FileNotFoundError:
-            css_content = f"/* Файл {css_file} не найден */"
+            original_content = f"/* Файл {css_file} не найден */"
 
         # Проверяем черновик
         draft_content = self._ask_restore_draft(css_file, display_name, "CSS")
@@ -397,6 +584,9 @@ class EditorPage(BasePage):
 
     def _on_html_changed(self):
         """Срабатывает при любом изменении в HTML редакторе"""
+        if self._syncing_from_visual: # Избавляемся от цикла
+            return
+
         current = self.html_editor.toPlainText()
         self.is_html_modified = (current != self.saved_html)
 
@@ -467,6 +657,8 @@ class EditorPage(BasePage):
         if self.is_css_modified:
             return
 
+        self._apply_visual_background() # Обновление фона QWebEngineView
+
         css_file = "style-light.css" if theme_name == "light" else "style-dark.css"
         path = WIKI_DIR / css_file
 
@@ -484,6 +676,17 @@ class EditorPage(BasePage):
         """Автосохранение черновиков HTML и CSS (debounce-таймер)"""
         if not self.current_page_id:
             return
+        if not self.current_page_id:
+            return
+
+        # Если открыт VE - сначала синхронизация в SE (что запишет черновик)
+        if self.editor_tabs.currentIndex() == 0 and self.visual_ready:
+            self._sync_visual_to_source()
+            # Дальше обновление html_editor произойдет само,
+            # что будет сохранено через _on_html_changed в черновик
+            return
+
+        # Для SE:
 
         # Сохраняем черновик HTML, если есть изменения
         if self.is_html_modified:
@@ -505,6 +708,12 @@ class EditorPage(BasePage):
         if not self.current_page_id:
             return
 
+        # Открыт VE - синхронизируем в SE (запишет черновик через textChanged)
+        if self.editor_tabs.currentIndex() == 0 and self.visual_ready:
+            self._sync_visual_to_source()
+            return
+
+        # SE сохраняем напрямую
         if self.is_html_modified:
             original_name = f"{self.current_page_id.lower()}.html"
             content = self.html_editor.toPlainText()

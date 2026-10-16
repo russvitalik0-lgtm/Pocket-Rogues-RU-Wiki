@@ -16,6 +16,7 @@ class InterceptingPage(QWebEnginePage):
         self.black_list = list(BLACK_LIST)
         self.on_fullscreen_toggle = None
         self.on_save_toggle = None
+        self.on_visual_changed = None
 
     def acceptNavigationRequest(self, url, type, isMainFrame): 
         if not self.block_external: # Если блокировка выключена: 
@@ -33,6 +34,10 @@ class InterceptingPage(QWebEnginePage):
         return False
 
     def javaScriptConsoleMessage(self, level, message, line, source):
+        if message == "__VISUAL_CHANGED__":
+            if self.on_visual_changed:
+                self.on_visual_changed()
+            return
         if message == "__FULLSCREEN_TOGGLE__":
             if self.on_fullscreen_toggle:
                 self.on_fullscreen_toggle()

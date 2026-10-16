@@ -54,6 +54,7 @@ python Main.py
 - PyQt6-WebEngine=6.11.0
 - markdown
 - requests
+- Beautiful Soup 4==4.15.0
 
 ## Структура проекта
 
