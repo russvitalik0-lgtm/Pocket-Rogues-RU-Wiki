@@ -117,7 +117,7 @@ class EditorPage(BasePage):
 
         content_layout.addLayout(left_column)
 
-        # Список готовых страниц (Временный TODO)
+        # Список готовых страниц (Временный)
         self.ready_pages = {
             "HomePage": "Главная",
             "Warrior": "Воин",
@@ -223,14 +223,141 @@ class EditorPage(BasePage):
 
 
     def _make_visual_tab(self):
-        """Создаёт содержимое вкладки Visual Editor"""
+        """Создаёт содержимое вкладки Visual Editor (TODO)"""
         widget = QWidget()
         layout = QVBoxLayout(widget)
         layout.setContentsMargins(10, 10, 10, 10)
 
         # --- Панель инструментов ---
         self.visual_toolbar = QHBoxLayout()
+
+        # - Группа 1: отмена/повтор
+        self.undo_btn = QToolButton()
+        self.undo_btn.setText("↶")
+        self.undo_btn.setToolTip("Отменить (Ctrl+Z)")
+        self.undo_btn.clicked.connect(lambda: self._exec_js("document.execCommand('undo')"))
+        self.visual_toolbar.addWidget(self.undo_btn)
+
+        self.redo_btn = QToolButton()
+        self.redo_btn.setText("↷")
+        self.redo_btn.setToolTip("Повторить (Ctrl+Y)")
+        self.redo_btn.clicked.connect(lambda: self._exec_js("document.execCommand('redo')"))
+        self.visual_toolbar.addWidget(self.redo_btn)
+
+        # Разделитель
+        self.visual_toolbar.addSpacing(7)
+        self.visual_toolbar.addWidget(QLabel('|'))
+        self.visual_toolbar.addSpacing(7)
+
+        # - Группа 2: Стиль параграфа
+        self.paragraph_style = QComboBox()
+        self.paragraph_style.addItems([
+            "Normal",
+            "Heading",
+            "Sub-heading 1",
+            "Sub-heading 2",
+            "Sub-heading 3",
+            "Sub-heading 4",
+            "Preformatted",
+        ])
+        self.paragraph_style.setToolTip("Стиль параграфа")
+        self.paragraph_style.setMinimumWidth(140)
+        self.paragraph_style.currentIndexChanged.connect(self._on_paragraph_style_changed)
+        self.visual_toolbar.addWidget(self.paragraph_style)
+
+        # Разделитель
+        self.visual_toolbar.addSpacing(7)
+        self.visual_toolbar.addWidget(QLabel('|'))
+        self.visual_toolbar.addSpacing(7)
+
+        # - Группа 3: B, I
+        self.bold_btn = QToolButton()
+        self.bold_btn.setText("B")
+        self.bold_btn.setStyleSheet("font-weight: bold;")
+        self.bold_btn.setToolTip("Жирный (Ctrl+B)")
+        self.bold_btn.clicked.connect(lambda: self._exec_js("document.execCommand('bold')"))
+        self.visual_toolbar.addWidget(self.bold_btn)
+
+        self.italic_btn = QToolButton()
+        self.italic_btn.setText("I")
+        self.italic_btn.setStyleSheet("font-style: italic;")
+        self.italic_btn.setToolTip("Курсив (Ctrl+I)")
+        self.italic_btn.clicked.connect(lambda: self._exec_js("document.execCommand('italic')"))
+        self.visual_toolbar.addWidget(self.italic_btn)
+
+        self.decorations_btn = QToolButton()
+        self.decorations_btn.setText("T")
+        self.decorations_btn.setToolTip("Текстовые декорации")
+        self.decorations_btn.setPopupMode(QToolButton.ToolButtonPopupMode.InstantPopup)
+
+        decorations_menu = QMenu(self.decorations_btn)
+        decorations_menu.addAction("Underline", lambda: self._exec_js("document.execCommand('underline')"))
+        decorations_menu.addAction("Strikethrough", lambda: self._exec_js("document.execCommand('strikeThrough')"))
+        decorations_menu.addAction("Superscript", lambda: self._exec_js("document.execCommand('superscript')"))
+        decorations_menu.addAction("Subscript", lambda: self._exec_js("document.execCommand('subscript')"))
+        decorations_menu.addAction("Clear formatting", lambda: self._exec_js("document.execCommand('removeFormat')"))
+
+        self.decorations_btn.setMenu(decorations_menu)
+        self.visual_toolbar.addWidget(self.decorations_btn)
+
+        # Разделитель
+        self.visual_toolbar.addSpacing(7)
+        self.visual_toolbar.addWidget(QLabel('|'))
+        self.visual_toolbar.addSpacing(7)
+
+        # - Группа 4: списки и Indent
+        self.ul_btn = QToolButton()
+        self.ul_btn.setText("• ≡")
+        self.ul_btn.setToolTip("Пунктированный список")
+        self.ul_btn.clicked.connect(lambda: self._exec_js("document.execCommand('insertUnorderedList')"))
+        self.visual_toolbar.addWidget(self.ul_btn)
+
+        self.ol_btn = QToolButton()
+        self.ol_btn.setText("1. ≡")
+        self.ol_btn.setToolTip("Нумерованный список")
+        self.ol_btn.clicked.connect(lambda: self._exec_js("document.execCommand('insertOrderedList')"))
+        self.visual_toolbar.addWidget(self.ol_btn)
+
+        self.list_indent = QToolButton()
+        self.list_indent.setText(">≡")
+        self.list_indent.setToolTip("Структура")
+        self.list_indent.setPopupMode(QToolButton.ToolButtonPopupMode.InstantPopup)
+
+        indentation_menu = QMenu(self.list_indent)
+        indentation_menu.addAction("Increase indentation", lambda: self._exec_js("document.execCommand('indent')"))
+        indentation_menu.addAction("Decrease indentation", lambda: self._exec_js("document.execCommand('outdent')"))
+
+        self.list_indent.setMenu(indentation_menu)
+        self.visual_toolbar.addWidget(self.list_indent)
+
+        # Разделитель
+        self.visual_toolbar.addSpacing(7)
+        self.visual_toolbar.addWidget(QLabel('|'))
+        self.visual_toolbar.addSpacing(7)
+
+        # - Группа 5: Вставка
+        self.link_btn = QToolButton()
+        self.link_btn.setText("🔗")
+        self.link_btn.setToolTip("Гиперссылка")
+        self.link_btn.clicked.connect(self._on_link_btn_clicked)
+        self.visual_toolbar.addWidget(self.link_btn)
+
+        self.image_btn = QToolButton()
+        self.image_btn.setText("")
+        self.image_btn.setToolTip("Вставка изображения")
+        self.image_btn.clicked.connect(self._on_image_btn_clicked)
+        self.visual_toolbar.addWidget(self.image_btn)
+
+        self.insert_btn = QToolButton()
+        self.insert_btn.setText("INSERT")
+        self.insert_btn.setToolTip("Вставить элемент")
+        self.insert_btn.setPopupMode(QToolButton.ToolButtonPopupMode.InstantPopup)
+        self._build_insert_menu()
+        self.visual_toolbar.addWidget(self.insert_btn)
+
+        # Отступ
         self.visual_toolbar.addStretch()
+
         layout.addLayout(self.visual_toolbar)
 
         # --- Область предпросмотра ---
@@ -368,10 +495,6 @@ class EditorPage(BasePage):
         self._syncing_from_visual = True
         self.html_editor.setPlainText(full_html)
         self._syncing_from_visual = False
-
-        if getattr(self, "_pending_save_after_sync", False):
-            self._pending_save_after_sync = False
-            self._save_html()
 
         # Сравниваем, нормализуя оригинал через тот же парсер
         normalized_saved = str(BeautifulSoup(self.saved_html, "html.parser"))
@@ -679,11 +802,9 @@ class EditorPage(BasePage):
         if not self.current_page_id:
             return
 
-        # Если открыт VE - сначала синхронизация в SE (что запишет черновик)
+        # Если открыт VE - сохраняем напрямую
         if self.editor_tabs.currentIndex() == 0 and self.visual_ready:
-            self._sync_visual_to_source()
-            # Дальше обновление html_editor произойдет само,
-            # что будет сохранено через _on_html_changed в черновик
+            self._save_visual_draft_async()
             return
 
         # Для SE:
@@ -708,9 +829,9 @@ class EditorPage(BasePage):
         if not self.current_page_id:
             return
 
-        # Открыт VE - синхронизируем в SE (запишет черновик через textChanged)
+        # Открыт VE - сохраняем напрямую из VE
         if self.editor_tabs.currentIndex() == 0 and self.visual_ready:
-            self._sync_visual_to_source()
+            self._save_visual_draft_async()
             return
 
         # SE сохраняем напрямую
@@ -772,3 +893,190 @@ class EditorPage(BasePage):
             return None
         else: # btn_original
             return None
+
+    def _save_visual_draft_async(self):
+        """Асинхронно сохраняет черновик из VE (для тек. страницы)"""
+        if not self.current_page_id or not self.visual_ready or self.visual_page_id != self.current_page_id:
+            return
+
+        # Запоминаем страницу
+        page_id = self.current_page_id
+
+        js_code = """
+        (function() {
+            var el = document.getElementById('editor-content');
+            return el ? el.innerHTML : '';
+        })();
+        """
+        self.visual_view.page().runJavaScript(
+            js_code,
+            lambda html: self._on_visual_draft_received(html, page_id)
+        )
+
+    def _on_visual_draft_received(self, inner_html, page_id):
+        """Callback: получает innerHTML и сохраняет черновик для указанной страницы"""
+        if not inner_html or not inner_html.strip():
+            return
+
+        # Собираем полный HTML
+        original_path = WIKI_DIR / f"{page_id.lower()}.html"
+        try:
+            original_content = original_path.read_text(encoding="utf-8")
+        except FileNotFoundError:
+            return
+
+        soup = BeautifulSoup(original_content, "html.parser")
+        body = soup.body
+        if not body:
+            return
+
+        for child in list(body.children):
+            child.extract()
+
+        new_content = BeautifulSoup(inner_html, "html.parser")
+        source = new_content.body if new_content.body else new_content
+        for child in list(source.children):
+            body.append(child)
+
+        full_html = str(soup)
+
+        normalized_saved = str(BeautifulSoup(original_content, "html.parser"))
+
+        # Сохраняем только если отличается
+        if full_html != normalized_saved:
+            draft_manager.save_draft(f"{page_id.lower()}.html", full_html)
+        else: # Удаляем
+            draft_manager.delete_draft(f"{page_id.lower()}.html")
+    
+
+    # --- VISUAL EDITOR: Панель инструментов ---
+    def _exec_js(self, js):
+        """Выполняет JS в VE"""
+        if not self.visual_ready:
+            return
+        self.visual_view.page().runJavaScript(js)
+
+    def _js_escape(self, html):
+        """Экранирует HTML для вставки в JS-строку"""
+        return html.replace("\\", "\\\\").replace("'", "\\'").replace("\n", "\\n")
+
+    def _insert_html(self, html):
+        """Вставляет HTML в позицию курсора в VE"""
+        escaped = self._js_escape(html)
+        js = f"document.execCommand('insertHTML', false, '<br>{escaped}<br>')"
+        self._exec_js(js)
+
+    def _on_paragraph_style_changed(self, index):
+        """Смена стиля параграфа через execCommand formatBlock"""
+        # Соответствие - индекс -> HTML-тег
+        tag_map = {
+            0: "p",
+            1: "h1",
+            2: "h2",
+            3: "h3",
+            4: "h4",
+            5: "h5",
+            6: "pre",
+        }
+        tag = tag_map.get(index)
+        if not tag:
+            return
+        self._exec_js(f"document.execCommand('formatBlock', false, '<{tag}>')")
+
+    def _on_link_btn_clicked(self):
+        """TODO"""
+        pass
+
+    def _on_image_btn_clicked(self):
+        """TODO"""
+        pass
+
+    def _build_insert_menu(self):
+        """Строит меню INSERT с элементами вставки"""
+        menu = QMenu(self.insert_btn)
+
+        # Заглушки (TODO)
+        menu.addAction("Table", lambda: self._not_implemented("Table"))
+        menu.addAction("Infobox", self._insert_infobox_template)
+        menu.addAction("Structured Quote", self._insert_quote_template)
+        menu.addAction("Comment", self._insert_comment)
+        menu.addAction("Code block", self._insert_code_block)
+        menu.addAction("Galerry", lambda: self._not_implemented("Gallery"))
+        menu.addAction("Math formula", lambda: self._not_implemented("Math formula"))
+
+        menu.addSeparator()
+
+        # Подменю Templates
+        templates_menu = menu.addMenu("Templates")
+        templates_menu.addAction("Notes", self._insert_wiki_notes)
+        templates_menu.addAction("Collapsible block", self._insert_collapsible)
+        templates_menu.addAction("Perks table", self._insert_perks_table)
+
+        self.insert_btn.setMenu(menu)
+
+    def _not_implemented(self, name):
+        """Заглушка для нереализованных пунктов"""
+        pass
+
+    # Заготовки шаблонов
+    def _insert_infobox_template(self):
+        html = '''<aside class="wiki-infobox">
+    <div class="wiki-infobox__title">Заголовок</div>
+    <div class="wiki-infobox__image"><img draggable="false" src="WikiImages/placeholder.png" alt=""></div>
+    <div class="wiki-infobox__caption">Подпись</div>
+    <div class="wiki-infobox__header">Характеристики</div>
+    <dl class="wiki-infobox__fields">
+    <div class="wiki-infobox__row"><dt>Поле:</dt><dd>Значение</dd></div>
+    <div class="wiki-infobox__row"><dt>Поле:</dt><dd>Значение</dd></div>
+    </dl>
+    </aside>'''
+        self._insert_html(html)
+
+
+    def _insert_quote_template(self):
+        html = '''<blockquote class="wiki-quote">
+    <p>Текст цитаты.</p>
+    <footer class="wiki-quote-attr">— Автор</footer>
+    </blockquote>'''
+        self._insert_html(html)
+
+
+    def _insert_comment(self):
+        self._insert_html("<!-- комментарий -->")
+
+
+    def _insert_code_block(self):
+        self._insert_html("<pre><code>код</code></pre>")
+
+    def _insert_wiki_notes(self):
+        html = '''<div class="wiki-notes">
+    <strong>Примечания:</strong>
+    <ul>
+    <li>Первый пункт</li>
+    <li>Второй пункт</li>
+    </ul>
+    </div>'''
+        self._insert_html(html)
+
+
+    def _insert_collapsible(self):
+        html = '''<details class="wiki-collapsible">
+    <summary>Заголовок</summary>
+    <div class="wiki-collapsible-content">
+    <p>Содержимое</p>
+    </div>
+    </details>'''
+        self._insert_html(html)
+
+
+    def _insert_perks_table(self):
+        html = '''<table class="wiki-table">
+    <thead>
+    <tr><th>Название</th><th>Описание</th></tr>
+    </thead>
+    <tbody>
+    <tr><td>Перк 1</td><td>Описание</td></tr>
+    <tr><td>Перк 2</td><td>Описание</td></tr>
+    </tbody>
+    </table>'''
+        self._insert_html(html)
