@@ -18,6 +18,8 @@ from .syntax_highlighters import HtmlHighlighter, CssHighlighter
 from .link_interceptor import InterceptingPage
 from .Base import load_html
 
+from .dialogs.link_dialog import LinkDialog
+
 WIKI_DIR = Path(__file__).parent / "WikiContent"
 
 class EditorPage(BasePage):
@@ -961,9 +963,15 @@ class EditorPage(BasePage):
         return html.replace("\\", "\\\\").replace("'", "\\'").replace("\n", "\\n")
 
     def _insert_html(self, html):
-        """Вставляет HTML в позицию курсора в VE"""
+        """Вставляет HTML в позицию курсора в VE с новой строки"""
         escaped = self._js_escape(html)
         js = f"document.execCommand('insertHTML', false, '<br>{escaped}<br>')"
+        self._exec_js(js)
+
+    def _insert_html_inline(self, html):
+        """Вставляет HTML в позицию курсора в VE"""
+        escaped = self._js_escape(html)
+        js = f"document.execCommand('insertHTML', false, '{escaped}')"
         self._exec_js(js)
 
     def _on_paragraph_style_changed(self, index):
@@ -983,9 +991,45 @@ class EditorPage(BasePage):
             return
         self._exec_js(f"document.execCommand('formatBlock', false, '<{tag}>')")
 
+    # Гиперссылка
     def _on_link_btn_clicked(self):
-        """TODO"""
-        pass
+        """Получаем выделенный текст из VE"""
+        self.visual_view.page().runJavaScript(
+            "window.getSelection().toString()",
+            self._on_link_selection_received
+        )
+
+    def _on_link_selection_received(self, selected_text):
+        """Получаем заголовки"""
+        js = """
+        (function() {
+            var headers = document.querySelectorAll('#editor-content h1[id], #editor-content h2[id], #editor-content h3[id], #editor-content h4[id]');
+            return Array.from(headers).map(function(h) {
+                return {id: h.id, text: h.textContent.trim()};
+            });
+        })();
+        """
+        self.visual_view.page().runJavaScript(
+            js,
+            lambda headers: self._open_link_dialog(selected_text, headers)
+        )
+
+    def _open_link_dialog(self, selected_text, headers):
+        """Открывает диалог с переданным списком заголовков"""
+        dialog = LinkDialog( # Предзаполнение если есть выделенный фрагмент текста
+            self,
+            selected_text=selected_text or "",
+            anchors=headers or []
+            )
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            url = dialog.get_url()
+            if url == "None":
+                self._exec_js("document.execCommand('unlink')")
+            else:
+                text = dialog.get_text()
+                # Вставляем ссылку
+                link_html = f'<a href="{url}">{text}</a>'
+                self._insert_html_inline(link_html)
 
     def _on_image_btn_clicked(self):
         """TODO"""

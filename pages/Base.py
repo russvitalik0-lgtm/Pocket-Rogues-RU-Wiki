@@ -6,65 +6,13 @@ from pathlib import Path
 import os
 import requests
 import re # Модуль для работы с регулярными выражениями. Удалит HTML-Теги из текста
+import json
 from .history_manager import HistoryManager
 from .saved_manager import SavedManager
 from .draft_manager import DraftManager
 
 WIKI_DIR = Path(__file__).parent / "WikiContent"
-
-PAGES_LIST = [ # Правильная последовательность страниц действительно важна | Пробелы допустимы, но прочие символы - нет.
-    "HomePage",
-    "Warrior",
-    "Archer",
-    "Wizard",
-    "Hunter",
-    "Berserker",
-    "Necromancer",
-    "CampNPC",
-    "UndergroundNPC",
-    "Weapons",
-    "Armor",
-    "Hat",
-    "Second Hand",
-    "Rings",
-    "Artefacts",
-    "Usable Items",
-    "Other Items",
-    "Passive Items",
-    "Materials",
-    "Effects",
-    "Fortress",
-    "Smithy",
-    "Shop",
-    "Characteristics",
-    "Containers And Chests",
-    "Interactive Objects",
-    "Traps",
-    "Game History",
-    "In Game Hints",
-    "Game Versions",
-    "Help",
-    "Tactics",
-    "Builds",
-    "Bestiary",
-    "Catacombs",
-    "Abandoned Prison",
-    "Adamantite Garden",
-    "Borderlands",
-    "Crypt of Emptiness",
-    "Burial Mound",
-    "Sunken Grotto",
-    "Prologue",
-    "Camp",
-    "The Treasury",
-    "Ambush",
-    "Abandoned Crypt",
-    "Rat Hole",
-    "Predatory Lair",
-    "Secret Sanctuary",
-    "Goblin Larder",
-    "Obsidian Tower"
-]
+PAGES_DATA_FILE = Path(__file__).parent / "pages_data.json" 
 
 draft_manager = DraftManager(WIKI_DIR)
 history_manager = HistoryManager()
@@ -265,3 +213,15 @@ def get_page_preview(page_id):
             text += '...'
 
     return text
+
+def load_pages_data():
+    """Загружает словари страниц из JSON"""
+    try:
+        with open(PAGES_DATA_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {"pages_list": {}, "ready_pages": {}}
+
+_pages_data = load_pages_data()
+PAGES_LIST = _pages_data.get("pages_list", {})
+READY_PAGES = _pages_data.get("ready_pages", {})

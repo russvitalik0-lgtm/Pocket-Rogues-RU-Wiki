@@ -11,7 +11,7 @@ from .Base import ImageLoader
 from .Base import load_html
 from .Base import history_manager
 from .Base import saved_manager
-from .Base import PAGES_LIST
+from .Base import PAGES_LIST, READY_PAGES
 from .link_interceptor import InterceptingPage
 
 
@@ -29,10 +29,10 @@ class WikiPage(BasePage):
         self.add_title("Pocket Rogues RU-Wiki")
 
         # Автоматическое создание словаря для страниц с использованием списка в виде хранилища
-        self.pages_list = PAGES_LIST
+        self.pages_list = list(PAGES_LIST.keys())
         self.pages_config = {}
         for page in self.pages_list: # Можно и через генератор словаря, но этот вариант более читаемый
-            key = page.replace(' ', '')
+            key = page.replace(' ', '') # Очистка ключей от пробелов "на всякий случай"
             value = page.replace(' ', '').lower() + '.html'
             self.pages_config[key] = value
 
@@ -208,17 +208,6 @@ class WikiMenu(QWidget):
         super().__init__(parent)
         self.setObjectName("wikiMenu")
 
-        self.READY_PAGES = {
-            "HomePage",
-            "Warrior",
-            "Archer",
-            "Berserker",
-            "Necromancer",
-            "Hunter",
-            "Wizard",
-            "CampNPC"
-        }
-
         self.pages_config = pages_config or {}
 
         self.menubar = QMenuBar()
@@ -377,7 +366,7 @@ class WikiMenu(QWidget):
             action.triggered.connect(
                 lambda checked, pid=page_id: self.on_section_clicked(pid)
             )
-            if page_id.replace(' ', '') not in self.READY_PAGES:
+            if page_id.replace(' ', '') not in READY_PAGES:
                 action.setEnabled(False)
 
     def add_single_action(self, menu_or_menubar, page_id, title):
@@ -386,7 +375,7 @@ class WikiMenu(QWidget):
         action.triggered.connect(
             lambda checked, pid=page_id: self.on_section_clicked(pid)
         )
-        if page_id.replace(' ', '') not in self.READY_PAGES:
+        if page_id.replace(' ', '') not in READY_PAGES:
             action.setEnabled(False)
         return action
 
