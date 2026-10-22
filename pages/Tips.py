@@ -1,5 +1,5 @@
 # TipsPage
-from PyQt6.QtCore import Qt, pyqtSignal
+from PyQt6.QtCore import Qt, pyqtSignal, QTimer
 from PyQt6.QtWidgets import *
 from .Base import BasePage
 from .Base import ImageLoader
@@ -44,11 +44,17 @@ class TipsPage(BasePage):
         self.editors_layout = QHBoxLayout()
         self.layout.addLayout(self.editors_layout, 1)
 
+        # debounce
+        self.preview_timer = QTimer()
+        self.preview_timer.setSingleShot(True)
+        self.preview_timer.timeout.connect(self._do_update_preview)
+
         # Поле для Markdown
         self.md_edit = QPlainTextEdit()
         self.md_edit.setObjectName("notesEditor")
         self.md_edit.setPlaceholderText("Поле для записи Ваших заметок. Имеет поддержку Markdown.")
-        self.md_edit.textChanged.connect(self.update_preview)
+        self.md_edit.textChanged.connect(self._on_md_text_changed)
+        self.md_edit.verticalScrollBar().valueChanged.connect(self._sync_scroll)
         self.md_highlighter = MarkdownHighlighter(self.md_edit.document())
 
         # Поле для просмотра
@@ -73,12 +79,19 @@ class TipsPage(BasePage):
         self.image_label.setText("Ошибка загрузки")
         self.image_label.setStyleSheet("color: red;")
 
-    def update_preview(self):
-        """Обновляет окно просмотра при изменении текста"""
+    def _do_update_preview(self):
+        """Фактическое обновление preview (вызывается по таймеру)"""
         # Конвертация MD в HTML
         html = markdown.markdown(self.md_edit.toPlainText())
         self.preview_edit.setHtml(html)
+
+        QTimer.singleShot(0, self._sync_scroll)
+
         self.save_notes()
+
+    def _on_md_text_changed(self):
+        """Перезапускает таймер обновления preview при каждом изменении"""
+        self.preview_timer.start(500)
 
     def save_notes(self):
         # Получаем путь к папке со скриптом
@@ -97,3 +110,20 @@ class TipsPage(BasePage):
                 self.md_edit.setPlainText(f.read())
         except FileNotFoundError:
             pass
+
+    def _sync_scroll(self):
+        """Синхронизирует скролл preview с md_edit по относительный позиции"""
+        src_bar = self.md_edit.verticalScrollBar()
+        dst_bar = self.preview_edit.verticalScrollBar()
+
+        src_max = src_bar.maximum()
+        dst_max = dst_bar.maximum()
+
+        if src_max == 0 or dst_max == 0:
+            return
+
+        # Относительная позиция (0.0 - 1.0)
+        ratio = src_bar.value() / src_max
+
+        # Устанавливаем в правом
+        dst_bar.setValue(int(ratio * dst_max))

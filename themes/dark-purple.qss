@@ -418,6 +418,18 @@ QSpinBox::down-button:hover {
     background-color: #444444;
 }
 
+QSpinBox::up-arrow {
+    image: url(themes/arrow_up.png);
+    width: 10px;
+    height: 10px;
+}
+
+QSpinBox::down-arrow {
+    image: url(themes/arrow_down.png);
+    width: 10px;
+    height: 10px;
+}
+
 /* ============================================================
    11. СКРОЛЛБАРЫ
    ============================================================ */

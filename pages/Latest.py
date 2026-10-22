@@ -44,7 +44,6 @@ class LatestPage(BasePage):
 
         # Крепим к основному лайауту
         self.layout.addLayout(Hlayout)
-        
 
         # Запуск загрузки картинки в отдельном потоке
         self.loader = ImageLoader()
@@ -216,7 +215,7 @@ class PreviewCard(QFrame):
             # Иконка звездочки
             icon_path = os.path.join(
                 os.path.dirname(os.path.abspath(__file__)),
-                "WikiContent", "WikiImages", "red_saved_icon.png"
+                "WikiContent", "WikiImages", "ui", "red_saved_icon.png"
             )
             self.remove_btn.setIcon(QIcon(icon_path))
             self.remove_btn.setIconSize(QSize(32, 32))

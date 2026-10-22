@@ -19,6 +19,7 @@ from .link_interceptor import InterceptingPage
 from .Base import load_html
 
 from .dialogs.link_dialog import LinkDialog
+from .dialogs.image_dialog import ImageDialog
 
 WIKI_DIR = Path(__file__).parent / "WikiContent"
 
@@ -1033,7 +1034,11 @@ class EditorPage(BasePage):
 
     def _on_image_btn_clicked(self):
         """TODO"""
-        pass
+        dialog = ImageDialog(self)
+        if dialog.exec() == QDialog.DialogCode.Accepted:
+            html = dialog.get_html()
+            if html:
+                self._insert_html(html)
 
     def _build_insert_menu(self):
         """Строит меню INSERT с элементами вставки"""
